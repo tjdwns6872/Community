@@ -29,7 +29,7 @@ public class UserController {
 	@PostMapping("/join")
 	public String join(@ModelAttribute UserDto userDto) {
 		userDao.join(userDto);
-		return "";
+		return "redirect:login";
 	}
 }
 

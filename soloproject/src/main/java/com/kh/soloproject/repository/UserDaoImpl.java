@@ -32,6 +32,6 @@ public class UserDaoImpl implements UserDao{
 		String pw = userDto.getUserPw();
 		String enc = encoder.encode(pw);
 		userDto.setUserPw(enc);
-		sqlSession.insert("");
+		sqlSession.insert("user.join", userDto);
 	}
 }

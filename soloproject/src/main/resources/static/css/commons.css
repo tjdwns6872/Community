@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+/*
+    container는 작은 화면의 외부 영역을 관리하는 도구
+    - 폭 조절과 가운데 배치를 할 수 있어야 한다.
+    - css에서는 계산식이 모든 브라우저에서 작동하지 않는다
+    - 미리 예상 가능한 크기를 준비해두면 편하게 쓸 수 있지 않을까?
+*/
+.container-500 { width:500px; margin:0 auto; }
+.container-550 { width:550px; margin:0 auto; }
+.container-600 { width:600px; margin:0 auto; }
+.container-650 { width:650px; margin:0 auto; }
+.container-700 { width:700px; margin:0 auto; }
+.container-750 { width:750px; margin:0 auto; }
+.container-800 { width:800px; margin:0 auto; }
+
+.w-100 {
+    width:100%;
+}
+.w-50 {
+    width:50%;
+}
+.w-33 {
+    width:33.3333%;
+}
+.w-25 {
+    width:25%;
+}
+.w-20 {
+    width:20%;
+}
