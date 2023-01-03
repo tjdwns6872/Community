@@ -1,16 +1,6 @@
 CREATE TABLE user_information (
 	user_id	varchar(20)	primary key check(regexp_like(user_id, '^[a-z0-9]{5,20}$')),
-	user_pw varchar2(200) not null check(
-        regexp_like(user_pw, '^[a-zA-Z0-9!@#$]{8,16}$')
-        and
-        regexp_like(user_pw, '[a-z]')
-        and
-        regexp_like(user_pw, '[A-Z]')
-        and
-        regexp_like(user_pw, '[0-9]')
-        and
-        regexp_like(user_pw, '[!@#$]')
-    ),
+	user_pw varchar2(200) not null,
 	user_name varchar2(21) not null check(regexp_like(user_name, '^[가-힣]{2,7}$')),
 	user_birth	date	not null,
 	user_gender char(6) not null check(user_gender in ('남자','여자')),
