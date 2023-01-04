@@ -37,4 +37,12 @@ public class UserDaoImpl implements UserDao{
 		userDto.setUserPw(enc);
 		sqlSession.insert("user.join", userDto);
 	}
+
+	@Override
+	public boolean login(UserDto userDto) {
+		UserDto findDto = sqlSession.selectOne("user.login", userDto.getUserId());
+		if(findDto == null) return false;
+		boolean judge = encoder.matches(userDto.getUserPw(), findDto.getUserPw());
+		return judge;
+	}
 }
