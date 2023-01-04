@@ -30,6 +30,9 @@ public class UserDaoImpl implements UserDao{
 	@Override
 	public void join(UserDto userDto) {
 		String pw = userDto.getUserPw();
+		if(userDto.getUserBlurb() == null) {
+			userDto.setUserBlurb("off");
+		}
 		String enc = encoder.encode(pw);
 		userDto.setUserPw(enc);
 		sqlSession.insert("user.join", userDto);
