@@ -3,6 +3,7 @@ package com.kh.soloproject.controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,6 +19,9 @@ public class UserController {
 	
 	@Autowired
 	private UserDao userDao;
+	
+	@Autowired
+	private PasswordEncoder encoder;
 
 	@GetMapping("/login")
 	public String login() {
@@ -26,10 +30,12 @@ public class UserController {
 	@PostMapping("/login")
 	public String login(@ModelAttribute UserDto userDto,
 			HttpSession session) {
-		boolean login = userDao.login(userDto);
-		if(login) {
-			session.setAttribute("login", userDto.getUserId());
-			session.setAttribute("rank", userDto.getUserRank());
+		UserDto findDto = userDao.login(userDto);
+		if(findDto == null) return "redirect:login?error";
+		boolean judge = encoder.matches(userDto.getUserPw(), findDto.getUserPw());
+		if(judge) {
+			session.setAttribute("login", findDto.getUserId());
+			session.setAttribute("rank", findDto.getUserRank());
 			return "redirect:/";
 		}else {
 			return "redirect:login?error";

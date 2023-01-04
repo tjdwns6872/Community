@@ -8,5 +8,5 @@ public interface UserDao {
 	List<UserDto> userList();
 	String userIdConfirm(String userId);
 	void join(UserDto userDto);
-	boolean login(UserDto userDto);
+	UserDto login(UserDto userDto);
 }
