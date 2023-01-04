@@ -7,8 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	아이디: ${sessionScope.login}
-	등급: ${sessionScope.rank}
-	<a href="${pageContext.request.contextPath}/user/logout">a</a>
+
 </body>
 </html>

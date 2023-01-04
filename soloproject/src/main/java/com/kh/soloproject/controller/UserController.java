@@ -51,6 +51,26 @@ public class UserController {
 		userDao.join(userDto);
 		return "redirect:login";
 	}
+	
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.removeAttribute("login");
+		session.removeAttribute("rank");
+		return "redirect:/";
+	}
+	
+	@GetMapping("/passwordFind")
+	public String passwordFind() {
+		return "user/passwordFind";
+	}
+	@PostMapping("/passwordFind")
+	public String passwordFind(@ModelAttribute UserDto userDto) {
+		if(userDao.passwordChange(userDto)) {			
+			return "redirect:logout";
+		}else {
+			return "redirect:passwordFind?error";
+		}
+	}
 }
 
 

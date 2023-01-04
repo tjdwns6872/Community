@@ -133,7 +133,7 @@
 <title>회원가입</title>
 </head>
 <body>
-	<div class="container-500">
+	<main class="container-500">
         <form class="mb-2" action="" method="post">
             <div class="row join-page">
                 <h1>이용약관</h1>
@@ -428,7 +428,7 @@ eXpert 서비스 및 eXpert 센터 가입 등록정보 : 신청일로부터 6개
                 </div>
             </div>
 		</form>
-	</div>
+	</main>
 </body>
 </html>
 

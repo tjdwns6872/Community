@@ -1,7 +1,5 @@
 package com.kh.soloproject.repository;
 
-import java.util.List;
-
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -17,11 +15,6 @@ public class UserDaoImpl implements UserDao{
 	
 	@Autowired
 	private PasswordEncoder encoder;
-	
-	@Override
-	public List<UserDto> userList() {
-		return sqlSession.selectList("user.selectList");
-	}
 
 	@Override
 	public String userIdConfirm(String userId) {
@@ -42,5 +35,9 @@ public class UserDaoImpl implements UserDao{
 	public UserDto login(UserDto userDto) {
 		UserDto findDto = sqlSession.selectOne("user.login", userDto.getUserId());
 		return findDto;
+	}
+	@Override
+	public boolean passwordChange(UserDto userDto) {
+		return sqlSession.update("user.passwordChange", userDto) > 0;
 	}
 }
