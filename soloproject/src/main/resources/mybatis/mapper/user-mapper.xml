@@ -14,10 +14,10 @@
 	<insert id="join" parameterType="UserDto">
 		insert into user_information(
 		user_id, user_pw, user_name, user_birth, user_gender,
-		user_email, user_tel, user_start_date
+		user_email, user_tel, user_blurb, user_start_date
 		)values(
 		#{userId}, #{userPw}, #{userName}, #{userBirth},
-		#{userGender}, #{userEmail}, #{userTel},
+		#{userGender}, #{userEmail}, #{userTel}, #{userBlurb},
 		sysdate
 		)
 	</insert>
