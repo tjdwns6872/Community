@@ -65,6 +65,7 @@ public class UserController {
 	}
 	@PostMapping("/passwordFind")
 	public String passwordFind(@ModelAttribute UserDto userDto) {
+		
 		if(userDao.passwordChange(userDto)) {			
 			return "redirect:logout";
 		}else {
