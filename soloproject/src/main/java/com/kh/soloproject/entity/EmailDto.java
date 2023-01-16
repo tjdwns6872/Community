@@ -10,6 +10,6 @@ import lombok.NoArgsConstructor;
 @Data @NoArgsConstructor @AllArgsConstructor @Builder
 public class EmailDto {
 	private String userEmail;
-	private String serial;
-	private Date when;
+	private String certSerial;
+	private Date certWhen;
 }
