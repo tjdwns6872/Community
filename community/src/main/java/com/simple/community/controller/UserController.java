@@ -1,0 +1,14 @@
+package com.simple.community.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/user")
+public class UserController {
+
+	@RequestMapping("join")
+	public String userJoin() {
+		return "user/join";
+	}
+}
