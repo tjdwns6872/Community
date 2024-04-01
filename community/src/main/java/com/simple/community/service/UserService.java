@@ -16,4 +16,8 @@ public class UserService {
 	public Map<String, Object> getOne(Map<String, Object> params){
 		return userMapper.getOne(params);
 	}
+	
+	public int userJoin(Map<String, Object> params){
+		return 0;
+	}
 }

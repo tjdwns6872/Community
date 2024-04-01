@@ -8,4 +8,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface UserMapper {
 	
 	Map<String, Object> getOne(Map<String, Object> params);
+	int userJoin(Map<String, Object> params);
 }
