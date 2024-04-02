@@ -24,6 +24,10 @@ function idCheck(){
 
 function join(){
 	//수정 예정
+	if($("#join_checkbox").val() == ""){
+		console.log("동의");
+		return;
+	}
 	if($("input[name=user_id]").val() == ""){
 		console.log("아이디를 입력하세요.");
 		return;
