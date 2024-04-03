@@ -15,9 +15,12 @@ function idCheck(){
 		type:"GET",
 		contentType: 'application/json',
 		dataType: 'json',
-		data:{"user_id": $("input[name=user_id]").val()},
+		data:{
+			"user_id": $("input[name=user_id]").val(),
+			"type": "check"
+		},
 		success:function(resp){
-			console.log(resp);
+			console.log(resp.result);
 		}
 	});
 }

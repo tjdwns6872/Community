@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.simple.community.commons.ShaUtil;
 import com.simple.community.mapper.UserMapper;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
@@ -18,8 +19,33 @@ public class UserService {
 	@Autowired
 	private UserMapper userMapper;
 	
-	public Map<String, Object> getOne(Map<String, Object> params){
-		return userMapper.getOne(params);
+	public Map<String, Object> getOne(Map<String, Object> params, HttpSession session){
+		Map<String, Object> map = userMapper.getOne(params);
+		if(params.get("type").equals("login")) {
+			params.put("map", map);
+			boolean result = login(params);
+			map.put("result", 0);
+			if(result) {
+				map.put("result", 1);
+				session.setAttribute("user_no", map.get("USER_NO"));
+			}
+		}
+		return map;
+	}
+	
+	public boolean login(Map<String, Object> params) {
+		boolean check = false;
+		try {
+			Map<String, Object> map = (Map<String, Object>) params.get("map");
+			String password = ShaUtil.sha256Encode(params.get("user_pw").toString());
+			if(map.get("USER_ID").equals(params.get("user_id")) && map.get("USER_PW").equals(password)) { 
+				check = true; 
+			}
+			 
+		}catch (Exception e) {
+			check = false;
+		}
+		return check;
 	}
 	
 	@Transactional

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.simple.community.service.UserService;
 
+import jakarta.servlet.http.HttpSession;
+
 @RestController
 @RequestMapping("/rest/user")
 public class RestUserController {
@@ -20,8 +22,8 @@ public class RestUserController {
 	private UserService userService;
 	
 	@GetMapping("/getOne")
-	public Map<String, Object> getOne(@RequestParam Map<String, Object> params){
-		return userService.getOne(params);
+	public Map<String, Object> getOne(@RequestParam Map<String, Object> params, HttpSession session){
+		return userService.getOne(params, session);
 	}
 	
 	@PutMapping("/join")
