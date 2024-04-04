@@ -5,6 +5,7 @@
 
 
 <mapper namespace="com.simple.community.mapper.UserMapper" >
+	<!--<select id="getOne" resultType="com.simple.community.entity.UserDto">-->
 	<select id="getOne" resultType="map">
 		SELECT 
 			USER_NO

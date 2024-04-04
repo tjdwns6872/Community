@@ -48,6 +48,10 @@ public class UserService {
 		return check;
 	}
 	
+	public void logout(HttpSession session) {
+		session.removeAttribute("user_no");
+	}
+	
 	@Transactional
 	public int userJoin(Map<String, Object> params){
 		log.info("\n\nparams: {}",params.toString());

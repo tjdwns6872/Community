@@ -30,4 +30,9 @@ public class RestUserController {
 	public int userJoin(@RequestBody Map<String, Object> params) {
 		return userService.userJoin(params);
 	}
+	
+	@GetMapping("/logout")
+	public void logout(HttpSession session) {
+		userService.logout(session);
+	}
 }
