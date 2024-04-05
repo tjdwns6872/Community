@@ -16,4 +16,9 @@ public class UserController {
 	public String userJoin() {
 		return "user/join";
 	}
+	
+	@RequestMapping("find")
+	public String find() {
+		return "user/find";
+	}
 }
