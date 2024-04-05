@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.simple.community.commons.EmailSendMessage;
 import com.simple.community.commons.ShaUtil;
 import com.simple.community.mapper.UserMapper;
 
@@ -18,6 +19,9 @@ public class UserService {
 
 	@Autowired
 	private UserMapper userMapper;
+	
+	@Autowired
+	private EmailSendMessage SendMessage;
 	
 	public Map<String, Object> getOne(Map<String, Object> params, HttpSession session){
 		Map<String, Object> map = userMapper.getOne(params);
@@ -50,6 +54,10 @@ public class UserService {
 	
 	public void logout(HttpSession session) {
 		session.removeAttribute("user_no");
+	}
+	
+	public void find() {
+		SendMessage.sendMessage(null);
 	}
 	
 	@Transactional
