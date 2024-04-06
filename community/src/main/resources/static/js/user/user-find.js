@@ -1,10 +1,11 @@
 $(function(){
-	$("#serial_btn").click(idFine);
+	$("#pw_serial_btn").click(pwFine);
 });
 
-function idFine(){
+function pwFine(){
 	var data = {
-		"userEmail":$("#id_find").find('#userEmail').val()
+		"userId":$("#pw_find").find('#userId').val(),
+		"userEmail":$("#pw_find").find('#userEmail').val()
 	}
 	var json = JSON.stringify(data);
 	

@@ -18,7 +18,7 @@ public class RestSerialController {
 	private EmailSerialService emailSerialService;
 	
 	@PutMapping("/insert")
-	public int inser(@RequestBody EmailDto emilDto) {
-		return emailSerialService.insert(emilDto);
+	public int inser(@RequestBody EmailDto emailDto) throws Exception {
+		return emailSerialService.insert(emailDto);
 	}
 }
