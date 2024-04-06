@@ -60,8 +60,6 @@ function join(){
 		return;
 	}
 	if($("input[name=userPw]").val() != $("#user_pw_check").val()){
-		console.log($("input[name=userPw]").val());
-		console.log($("input[name=user_pw_check]").val());
 		console.log("비밀번호 확인하세요.");
 		return;
 	}

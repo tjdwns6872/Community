@@ -16,7 +16,6 @@ import com.simple.community.entity.UserDto;
 import com.simple.community.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
-import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("/rest/user")
