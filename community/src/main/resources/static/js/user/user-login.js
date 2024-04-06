@@ -3,19 +3,19 @@ $(function(){
 });
 
 function idCheck(){
-	if($("input[name=user_id]").val() == ""){
+	if($("input[name=userId]").val() == ""){
 		//수정 예정
 		console.log("아이디 입력");
 		return;
 	}
-	if($("input[name=user_pw]").val() == ""){
+	if($("input[name=userPw]").val() == ""){
 		//수정 예정
 		console.log("비밀번호 입력");
 		return;
 	}
 	var data = {
-		"user_id": $("input[name=user_id]").val(),
-		"user_pw": $("input[name=user_pw]").val(),
+		"userId": $("input[name=userId]").val(),
+		"userPw": $("input[name=userPw]").val(),
 		"type": "login"
 	}
 	$.ajax({

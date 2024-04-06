@@ -6,7 +6,7 @@
 
 <mapper namespace="com.simple.community.mapper.UserMapper" >
 	<!--<select id="getOne" resultType="com.simple.community.entity.UserDto">-->
-	<select id="getOne" resultType="map">
+	<select id="getOne" resultType="com.simple.community.entity.UserDto">
 		SELECT 
 			USER_NO
 			,USER_ID
@@ -20,11 +20,11 @@
 			,USER_CHECK
 			FROM TP_USER
 			<where>
-				<if test="user_id != null and user_id != ''">
-					AND USER_ID = #{user_id}
+				<if test="userId != null and userId != ''">
+					AND USER_ID = #{userId}
 				</if>
-				<if test="user_no != null and user_no != ''">
-					AND USER_NO = #{user_no}
+				<if test="userNo != null and userNo != ''">
+					AND USER_NO = #{userNo}
 				</if>
 			</where>
 	</select>
@@ -45,12 +45,12 @@
 		)VALUES
 		(
 			USER_SEQ.NEXTVAL
-			,#{user_id}
-			,#{user_pw}
-			,#{user_name}
-			,#{user_email}
-			,#{user_phone}
-			,#{user_gender}
+			,#{userId}
+			,#{userPw}
+			,#{userName}
+			,#{userEmail}
+			,#{userPhone}
+			,#{userGender}
 			,0
 			,SYSDATE
 			,0

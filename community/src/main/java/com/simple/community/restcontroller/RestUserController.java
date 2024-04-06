@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,9 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.simple.community.entity.UserDto;
 import com.simple.community.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("/rest/user")
@@ -23,13 +26,13 @@ public class RestUserController {
 	private UserService userService;
 	
 	@GetMapping("/getOne")
-	public Map<String, Object> getOne(@RequestParam Map<String, Object> params, HttpSession session){
-		return userService.getOne(params, session);
+	public Map<String, Object> getOne(@ModelAttribute UserDto userDto, @RequestParam(name="type") String type, HttpSession session){
+		return userService.getOne(userDto, type, session);
 	}
 	
 	@PutMapping("/join")
-	public int userJoin(@RequestBody Map<String, Object> params) {
-		return userService.userJoin(params);
+	public int userJoin(@RequestBody UserDto userDto) {
+		return userService.userJoin(userDto);
 	}
 	
 	@GetMapping("/logout")

@@ -1,5 +1,6 @@
 package com.simple.community.service;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.simple.community.commons.EmailSendMessage;
 import com.simple.community.commons.ShaUtil;
+import com.simple.community.entity.UserDto;
 import com.simple.community.mapper.UserMapper;
 
 import jakarta.servlet.http.HttpSession;
@@ -23,26 +25,26 @@ public class UserService {
 	@Autowired
 	private EmailSendMessage SendMessage;
 	
-	public Map<String, Object> getOne(Map<String, Object> params, HttpSession session){
-		Map<String, Object> map = userMapper.getOne(params);
-		if(params.get("type").equals("login")) {
-			params.put("map", map);
-			boolean result = login(params);
-			map.put("result", 0);
+	public Map<String, Object> getOne(UserDto userDto, String type, HttpSession session){
+		log.info("\n\n\n{}\n\n\n", userDto.toString());
+		UserDto map = userMapper.getOne(userDto);
+		Map<String, Object> params = new HashMap<>();
+		if(type.equals("login")) {
+			boolean result = login(userDto, map.getUserPw(), map.getUserId());
+			params.put("result", 0);
 			if(result) {
-				map.put("result", 1);
-				session.setAttribute("user_no", map.get("USER_NO"));
+				params.put("result", 1);
+				session.setAttribute("user_no", map.getUserNo());
 			}
 		}
-		return map;
+		return params;
 	}
 	
-	public boolean login(Map<String, Object> params) {
+	public boolean login(UserDto userDto, String password, String id) {
 		boolean check = false;
 		try {
-			Map<String, Object> map = (Map<String, Object>) params.get("map");
-			String password = ShaUtil.sha256Encode(params.get("user_pw").toString());
-			if(map.get("USER_ID").equals(params.get("user_id")) && map.get("USER_PW").equals(password)) { 
+			String checkPw = ShaUtil.sha256Encode(userDto.getUserPw());
+			if(id.equals(userDto.getUserId()) && password.equals(checkPw)) { 
 				check = true; 
 			}
 			 
@@ -61,12 +63,11 @@ public class UserService {
 	}
 	
 	@Transactional
-	public int userJoin(Map<String, Object> params){
-		log.info("\n\nparams: {}",params.toString());
+	public int userJoin(UserDto userDto){
 		try {
-			String password = ShaUtil.sha256Encode(params.get("user_pw").toString());
-			params.put("user_pw", password);
-			int check = userMapper.userJoin(params);
+			String password = ShaUtil.sha256Encode(userDto.getUserPw());
+			userDto.setUserPw(password);
+			int check = userMapper.userJoin(userDto);
 			return check;
 		} catch (Exception e) {
 			return -1;
