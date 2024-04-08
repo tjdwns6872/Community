@@ -29,6 +29,25 @@
 			</where>
 	</select>
 	
+	<select id="userCheck">
+		SELECT COUNT(1)
+			FROM TP_USER
+			<where>
+				<if test="userNo != null and userNo != ''">
+					AND USER_NO = #{userNo}
+				</if>
+				<if test="userId != null and userId != ''">
+					AND USER_ID = #{userId}
+				</if>
+				<if test="userName != null and userName != ''">
+					AND USER_NAME = #{userName}
+				</if>
+				<if test="userEmail != null and userEmail != ''">
+					AND USER_EMAIL = #{userEmail}
+				</if>
+			</where>
+	</select>
+	
 	<insert id="userJoin">
 		INSERT INTO TP_USER
 		(

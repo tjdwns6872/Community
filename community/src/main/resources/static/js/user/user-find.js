@@ -1,14 +1,25 @@
 $(function(){
-	$("#pw_serial_btn").click(pwFine);
+	$(".serial_btn").click(find);
+	
+	$("input[name=find_btn]").change(function(){
+		if($(this).data("find") == "pw"){
+			$("#id_input").show();
+		}else{
+			$("#id_input").hide();
+		}
+	});
 });
 
-function pwFine(){
+function find(){
 	var data = {
-		"userId":$("#pw_find").find('#userId').val(),
-		"userEmail":$("#pw_find").find('#userEmail').val()
+		"userEmail":$("#find").find('#userEmail').val(),
+		"userName":$("#find").find('#userName').val(),
+		"type":$("input[name=find_btn]:checked").data("find")
+	}
+	if(data.type != undefined && data.type != "id"){
+		data['userId']= $("#find").find('#userId').val();
 	}
 	var json = JSON.stringify(data);
-	
 	$.ajax({
 		url:"/rest/serial/insert",
 		type:"PUT",
@@ -16,7 +27,11 @@ function pwFine(){
 		dataType: 'json',
 		data:json,
 		success:function(resp){
-			console.log(resp);
+			if(resp < 0){
+				console.log("존재하지 않은 회원");
+			}else{
+				console.log("인증코드 전송");
+			}
 		}
 	});
 	

@@ -8,16 +8,24 @@
 	<insert id="insertSerial">
 		INSERT INTO TP_EMAIL_SERIAL
 		(
-			USER_NO
+			SERIAL_NO
+			<if test="userId != null and userId != ''">
+				,USER_NO
+			</if>
 			,USER_EMAIL
 			,SERIAL
 			,REG_DATE
+			,DE_FLG
 		)VALUES
 		(
-			(SELECT USER_NO FROM TP_USER WHERE USER_ID = #{userId})
+			SERIAL_SEQ.NEXTVAL
+			<if test="userId != null and userId != ''">
+				,(SELECT USER_NO FROM TP_USER WHERE USER_ID = #{userId})
+			</if>
 			,#{userEmail}
 			,#{serial}
 			,SYSDATE
+			,0
 		)
 	</insert>
 </mapper>

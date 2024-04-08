@@ -7,6 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.simple.community.commons.AuthCode;
 import com.simple.community.commons.EmailSendMessage;
 import com.simple.community.entity.EmailDto;
+import com.simple.community.entity.UserDto;
 import com.simple.community.mapper.SerialMapper;
 
 import lombok.extern.slf4j.Slf4j;
@@ -20,24 +21,48 @@ public class EmailSerialService {
 	
 	@Autowired
 	private SerialMapper serialMapper;
+	
+	@Autowired
+	private UserService userService;
 
 	@Transactional
 	public int insert(EmailDto emailDto) throws Exception {
 		AuthCode authCode = new AuthCode();
 		String code = authCode.excuteGenerate();
 		emailDto.setSerial(code);
-		emailDto.setTitle("인증코드 테스트");
+		if(emailDto.getType() != "id") {
+			emailDto.setTitle("아이디 찾기 인증코드");
+		}else if(emailDto.getType() != "pw") {
+			emailDto.setTitle("비밀번호 찾기 인증코드");
+		}
+		int check = userCheck(emailDto);
+		
 		log.info("\n\n\n\n{}\n\n",emailDto.toString());
-		int cnt = serialMapper.insertSerial(emailDto);
-		int cnt1 = emailSendMessage.sendMessage(emailDto);
-		if(cnt <= 0) {
-			throw new Exception("DB 저장 실패");
-		}
-		if(cnt1 <= 0) {
-			throw new Exception("이메일 전송 실패");
+		if(check > 0) {
+			int cnt = serialMapper.insertSerial(emailDto);
+			int cnt1 = emailSendMessage.sendMessage(emailDto);
+			if(cnt <= 0) {
+				throw new Exception("DB 저장 실패");
+			}
+			if(cnt1 <= 0) {
+				throw new Exception("이메일 전송 실패");
+			}else {
+				return 1;
+			}
 		}else {
-			return 1;
+			return -1;
 		}
+	}
+	
+	public int userCheck(EmailDto emailDto) {
+		UserDto userDto = new UserDto();
+		if(emailDto.getType() != "pw") {
+			userDto.setUserId(emailDto.getUserId());
+		}
+		userDto.setUserEmail(emailDto.getUserEmail());
+		userDto.setUserName(emailDto.getUserName());
+		int cnt = userService.userCheck(userDto);
+		return cnt;
 	}
 }
 

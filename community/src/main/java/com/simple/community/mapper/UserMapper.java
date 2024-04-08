@@ -9,4 +9,5 @@ public interface UserMapper {
 	
 	UserDto getOne(UserDto userDto);
 	int userJoin(UserDto userDto);
+	int userCheck(UserDto userDto);
 }

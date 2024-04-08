@@ -62,6 +62,10 @@ public class UserService {
 		SendMessage.sendMessage(null);
 	}
 	
+	public int userCheck(UserDto userDto) {
+		return userMapper.userCheck(userDto);
+	}
+	
 	@Transactional
 	public int userJoin(UserDto userDto){
 		try {
