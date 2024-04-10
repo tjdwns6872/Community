@@ -15,9 +15,12 @@ $(function(){
 function check(){
 	var serial = $("input[name=serial]").val();
 	var serialNo = $("input[name=serialNo]").val();
+	
 	var data = {
 		"serialNo":serialNo,
-		"serial":serial
+		"serial":serial,
+		"userEmail":$("#find").find('#userEmail').val(),
+		"userName":$("#find").find('#userName').val()
 	}
 	$.ajax({
 		url:"/rest/serial/checkSerial",
