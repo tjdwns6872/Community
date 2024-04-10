@@ -47,11 +47,17 @@ public class EmailSerialService {
 			if(cnt1 <= 0) {
 				throw new Exception("이메일 전송 실패");
 			}else {
-				return 1;
+				int serialNo = emailDto.getSerialNo();
+				return serialNo;
 			}
 		}else {
 			return -1;
 		}
+	}
+	
+	public int checkSerial(EmailDto emailDto) {
+		log.info("\n\n\n{}\n", emailDto);
+		return serialMapper.checkSerial(emailDto);
 	}
 	
 	public int userCheck(EmailDto emailDto) {

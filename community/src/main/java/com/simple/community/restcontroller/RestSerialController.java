@@ -1,6 +1,8 @@
 package com.simple.community.restcontroller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,5 +22,10 @@ public class RestSerialController {
 	@PutMapping("/insert")
 	public int inser(@RequestBody EmailDto emailDto) throws Exception {
 		return emailSerialService.insert(emailDto);
+	}
+	
+	@GetMapping("/checkSerial")
+	public int checkSerial(@ModelAttribute EmailDto emailDto) {
+		return emailSerialService.checkSerial(emailDto);
 	}
 }

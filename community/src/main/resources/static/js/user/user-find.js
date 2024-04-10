@@ -8,7 +8,28 @@ $(function(){
 			$("#id_input").hide();
 		}
 	});
+	
+	$("#check_btn").click(check);
 });
+
+function check(){
+	var serial = $("input[name=serial]").val();
+	var serialNo = $("input[name=serialNo]").val();
+	var data = {
+		"serialNo":serialNo,
+		"serial":serial
+	}
+	$.ajax({
+		url:"/rest/serial/checkSerial",
+		type:"GET",
+		contentType: 'application/json',
+		dataType: 'json',
+		data:data,
+		success:function(resp){
+			console.log(resp);
+		}
+	});
+}
 
 function find(){
 	var data = {
@@ -30,10 +51,8 @@ function find(){
 			if(resp < 0){
 				console.log("존재하지 않은 회원");
 			}else{
-				console.log("인증코드 전송");
+				$("input[name=serialNo]").val(resp);
 			}
 		}
 	});
-	
-	console.log();
 }

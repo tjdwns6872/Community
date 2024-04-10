@@ -7,4 +7,5 @@ import com.simple.community.entity.EmailDto;
 @Mapper
 public interface SerialMapper {
 	int insertSerial(EmailDto emailDto);
+	int checkSerial(EmailDto emailDto);
 }

@@ -3,8 +3,32 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-
 <mapper namespace="com.simple.community.mapper.SerialMapper" >
+
+	<select id="checkSerial" resultType="int" parameterType="com.simple.community.entity.EmailDto">
+		SELECT COUNT(SERIAL)
+		FROM
+		TP_EMAIL_SERIAL
+		<where>
+			AND SERIAL_NO = #{serialNo}
+			AND SERIAL = #{serial}
+			AND DE_FLG = 0
+			<if test="userId != null and userId != ''">
+				AND USER_NO = (SELECT USER_NO FROM TP_USER WHERE USER_ID = #{userId})
+			</if>
+		</where>
+	</select>
+
+	<update id="deleteSerial">
+		UPDATE TP_EMAIL_SERIAL
+			<set>
+				DEE_FLG = 1
+			</set>
+			<where>
+				AND SERIAL_NO = #{serialNo}
+			</where>
+	</update>
+
 	<insert id="insertSerial">
 		INSERT INTO TP_EMAIL_SERIAL
 		(
@@ -27,5 +51,8 @@
 			,SYSDATE
 			,0
 		)
+		<selectKey keyProperty="serialNo" resultType="int" order="AFTER">
+       		SELECT SERIAL_SEQ.CURRVAL FROM DUAL
+  		</selectKey>
 	</insert>
 </mapper>
