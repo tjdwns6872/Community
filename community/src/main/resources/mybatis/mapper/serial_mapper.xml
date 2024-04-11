@@ -10,11 +10,18 @@
 		FROM
 		TP_EMAIL_SERIAL
 		<where>
-			AND SERIAL_NO = #{serialNo}
-			AND SERIAL = #{serial}
 			AND DE_FLG = 0
+			<if test="serialNo != null and serialNo != ''">
+				AND SERIAL_NO = #{serialNo}
+			</if>
+			<if test="serial != null and serial != ''">
+				AND SERIAL = #{serial}
+			</if>
 			<if test="userId != null and userId != ''">
 				AND USER_NO = (SELECT USER_NO FROM TP_USER WHERE USER_ID = #{userId})
+			</if>
+			<if test="userEmail != null and userEmail != ''">
+				AND USER_EMAIL = #{userEmail}
 			</if>
 		</where>
 	</select>
@@ -22,10 +29,18 @@
 	<update id="deleteSerial">
 		UPDATE TP_EMAIL_SERIAL
 			<set>
-				DEE_FLG = 1
+				DE_FLG = 1
 			</set>
 			<where>
-				AND SERIAL_NO = #{serialNo}
+				<if test="serialNo != null and serialNo != ''">
+					AND SERIAL_NO = #{serialNo}
+				</if>
+				<if test="userId != null and userId != ''">
+					AND USER_NO = (SELECT USER_NO FROM TP_USER WHERE USER_ID = #{userId})
+				</if>
+				<if test="userEmail != null and userEmail != ''">
+					AND USER_EMAIL = #{userEmail}
+				</if>
 			</where>
 	</update>
 

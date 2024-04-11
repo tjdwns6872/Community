@@ -8,4 +8,5 @@ import com.simple.community.entity.EmailDto;
 public interface SerialMapper {
 	int insertSerial(EmailDto emailDto);
 	int checkSerial(EmailDto emailDto);
+	int deleteSerial(EmailDto emailDto);
 }

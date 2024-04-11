@@ -40,6 +40,11 @@ public class UserService {
 		return params;
 	}
 	
+	public UserDto getOne(UserDto userDto){
+		UserDto map = userMapper.getOne(userDto);
+		return map;
+	}
+	
 	public boolean login(UserDto userDto, String password, String id) {
 		boolean check = false;
 		try {

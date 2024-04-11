@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.simple.community.entity.EmailDto;
+import com.simple.community.entity.UserDto;
 import com.simple.community.service.EmailSerialService;
 
 
@@ -22,6 +23,11 @@ public class RestSerialController {
 	@PutMapping("/insert")
 	public int inser(@RequestBody EmailDto emailDto) throws Exception {
 		return emailSerialService.insert(emailDto);
+	}
+	
+	@GetMapping("/findData")
+	public UserDto findData(EmailDto emailDto) {
+		return emailSerialService.findData(emailDto);
 	}
 	
 	@GetMapping("/checkSerial")

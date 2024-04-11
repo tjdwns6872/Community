@@ -35,10 +35,17 @@ public class EmailSerialService {
 		}else if(emailDto.getType() != "pw") {
 			emailDto.setTitle("비밀번호 찾기 인증코드");
 		}
-		int check = userCheck(emailDto);
+		int userCheck = userCheck(emailDto);
+		
+		EmailDto checkSerial = new EmailDto(); 
+		checkSerial.setUserEmail(emailDto.getUserEmail());
+		int  check = checkSerial(checkSerial);
+		if(check > 0) {
+			deleteSerial(checkSerial);
+		}
 		
 		log.info("\n\n\n\n{}\n\n",emailDto.toString());
-		if(check > 0) {
+		if(userCheck > 0) {
 			int cnt = serialMapper.insertSerial(emailDto);
 			int cnt1 = emailSendMessage.sendMessage(emailDto);
 			if(cnt <= 0) {
@@ -55,8 +62,24 @@ public class EmailSerialService {
 		}
 	}
 	
+	public UserDto findData(EmailDto emailDto) {
+		UserDto userDto = new UserDto();
+		int cnt = checkSerial(emailDto);
+		if(cnt > 0) {
+			userDto.setUserEmail(emailDto.getUserEmail());
+			userDto.setUserId(emailDto.getUserId());
+			deleteSerial(emailDto);
+			return userService.getOne(userDto);
+		}
+		return userDto;
+	}
+	
+	@Transactional
+	public int deleteSerial(EmailDto emailDto) {
+		return serialMapper.deleteSerial(emailDto);
+	}
+	
 	public int checkSerial(EmailDto emailDto) {
-		log.info("\n\n\n{}\n", emailDto);
 		return serialMapper.checkSerial(emailDto);
 	}
 	

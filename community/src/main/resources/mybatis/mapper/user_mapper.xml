@@ -26,6 +26,9 @@
 				<if test="userNo != null and userNo != ''">
 					AND USER_NO = #{userNo}
 				</if>
+				<if test="userEmail != null and userEmail != ''">
+					AND USER_EMAIL = #{userEmail}
+				</if>
 			</where>
 	</select>
 	

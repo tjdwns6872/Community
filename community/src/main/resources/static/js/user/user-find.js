@@ -15,15 +15,19 @@ $(function(){
 function check(){
 	var serial = $("input[name=serial]").val();
 	var serialNo = $("input[name=serialNo]").val();
+	var userEmail = $("#find").find('#userEmail').val();
+	var userId = $("#find").find('#userId').val();
+	var userName = $("#find").find('#userName').val();
 	
 	var data = {
 		"serialNo":serialNo,
 		"serial":serial,
-		"userEmail":$("#find").find('#userEmail').val(),
-		"userName":$("#find").find('#userName').val()
+		"userEmail":userEmail,
+		"userId":userId,
+		"userName":userName
 	}
 	$.ajax({
-		url:"/rest/serial/checkSerial",
+		url:"/rest/serial/findData",
 		type:"GET",
 		contentType: 'application/json',
 		dataType: 'json',
