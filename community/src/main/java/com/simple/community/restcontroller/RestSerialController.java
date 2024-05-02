@@ -26,7 +26,7 @@ public class RestSerialController {
 	}
 	
 	@GetMapping("/findData")
-	public UserDto findData(EmailDto emailDto) {
+	public UserDto findData(EmailDto emailDto) throws Exception {
 		return emailSerialService.findData(emailDto);
 	}
 	

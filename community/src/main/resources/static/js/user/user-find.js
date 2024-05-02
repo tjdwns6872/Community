@@ -19,12 +19,15 @@ function check(){
 	var userId = $("#find").find('#userId').val();
 	var userName = $("#find").find('#userName').val();
 	
+	var type = $("input[name=find_btn]:checked").data("find");
+	
 	var data = {
 		"serialNo":serialNo,
 		"serial":serial,
 		"userEmail":userEmail,
 		"userId":userId,
-		"userName":userName
+		"userName":userName,
+		"type": type
 	}
 	$.ajax({
 		url:"/rest/serial/findData",
@@ -33,7 +36,11 @@ function check(){
 		dataType: 'json',
 		data:data,
 		success:function(resp){
-			console.log(resp);
+			if(type == "id"){				
+				console.log(resp.userId);
+			}else if(type == "pw"){
+				console.log("초기비밀번호는"+resp.userPw);
+			}
 		}
 	});
 }

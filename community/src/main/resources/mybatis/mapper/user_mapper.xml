@@ -78,4 +78,15 @@
 			,0
 		)
 	</insert>
+	
+	<update id="changePw">
+		UPDATE TP_USER
+			<set>
+				USER_PW = #{userPw}
+			</set>
+			<where>
+				AND USER_NO = (SELECT USER_NO FROM TP_USER WHERE USER_ID = #{userId})
+				AND USER_ID = #{userId}
+			</where>
+	</update>
 </mapper>

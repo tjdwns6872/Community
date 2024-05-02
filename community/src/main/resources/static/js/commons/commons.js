@@ -1,6 +1,8 @@
 $(function(){
 	
 	$("#logout").click(logout);
+	
+	$("#mail").click(emailSend);
 });
 
 function logout(){
@@ -12,3 +14,15 @@ function logout(){
 		}
 	});
 }
+
+function emailSend(){
+	$.ajax({
+		url:"/rest/user/find",
+		type:"POST",
+		success:function(){
+		}
+	});
+}
+
+
+

@@ -6,6 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.simple.community.commons.AuthCode;
 import com.simple.community.commons.EmailSendMessage;
+import com.simple.community.commons.ShaUtil;
 import com.simple.community.entity.EmailDto;
 import com.simple.community.entity.UserDto;
 import com.simple.community.mapper.SerialMapper;
@@ -62,14 +63,24 @@ public class EmailSerialService {
 		}
 	}
 	
-	public UserDto findData(EmailDto emailDto) {
+	public UserDto findData(EmailDto emailDto) throws Exception {
 		UserDto userDto = new UserDto();
 		int cnt = checkSerial(emailDto);
 		if(cnt > 0) {
 			userDto.setUserEmail(emailDto.getUserEmail());
 			userDto.setUserId(emailDto.getUserId());
 			deleteSerial(emailDto);
-			return userService.getOne(userDto);
+			if(emailDto.getType().equals("pw")) {
+				int change = userService.changePw(userDto);
+				if(change < 1) {
+					throw new Exception("비밀번호 변경 실패");
+				}
+			}
+			userDto = userService.getOne(userDto);
+			String pw = ShaUtil.sha256Encode(userDto.getUserPw());
+			userDto.setUserPw(pw);
+			
+			return userDto;
 		}
 		return userDto;
 	}

@@ -70,4 +70,5 @@
        		SELECT SERIAL_SEQ.CURRVAL FROM DUAL
   		</selectKey>
 	</insert>
+	
 </mapper>
