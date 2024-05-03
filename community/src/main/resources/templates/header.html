@@ -13,7 +13,7 @@
 	</script>
         <nav>
         	헤더(wjqfc227)
-        	<span  th:text="${session.user_no}"></span>
+        	<span id="userNo"  th:text="${session.user_no}"></span>
         	<a href="/user/mypage" th:if="${session.user_no}">마이페이지</a>
         	<a href="/">홈으로</a>
         	<a href="#" id="logout">로그아웃</a>

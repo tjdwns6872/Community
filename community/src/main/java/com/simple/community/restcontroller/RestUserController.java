@@ -29,6 +29,11 @@ public class RestUserController {
 		return userService.getOne(userDto, type, session);
 	}
 	
+	@GetMapping("/getUserData")
+	public UserDto getOne(HttpSession session){
+		return userService.getOne(session);
+	}
+	
 	@PutMapping("/join")
 	public int userJoin(@RequestBody UserDto userDto) {
 		return userService.userJoin(userDto);

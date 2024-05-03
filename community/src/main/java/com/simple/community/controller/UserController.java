@@ -1,7 +1,10 @@
 package com.simple.community.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/user")
@@ -23,7 +26,8 @@ public class UserController {
 	}
 	
 	@RequestMapping("/mypage")
-	public String mypage() {
+	public String mypage(HttpSession session, Model model) {
+		model.addAttribute("user_no", session.getAttribute("user_no"));
 		return "user/mypage";
 	}
 }

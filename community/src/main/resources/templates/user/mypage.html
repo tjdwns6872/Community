@@ -2,10 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <title>마이페이지</title>
 <header th:include="header :: header"></header>
-<script type="text/javascript" src="../js/user/user-login.js"></script>
+<script type="text/javascript" src="../js/user/user-mypage.js"></script>
 <div class="main_container">
 	<div style="width: 100%; text-align: center">
 		마이페이지
+		<p th:text="${user_no}"></p>
 	</div>
 </div>
 <footer th:include="footer :: footer"></footer>

@@ -40,7 +40,8 @@ public class UserService {
 		return params;
 	}
 	
-	public UserDto getOne(UserDto userDto){
+	public UserDto getOne(HttpSession session){
+		UserDto userDto = new UserDto();
 		UserDto map = userMapper.getOne(userDto);
 		return map;
 	}
