@@ -12,10 +12,10 @@
 	<script>
 	</script>
         <nav>
-        	헤더
+        	헤더(wjqfc227)
         	<span  th:text="${session.user_no}"></span>
+        	<a href="/user/mypage" th:if="${session.user_no}">마이페이지</a>
         	<a href="/">홈으로</a>
-        	<span id="mail">메일 테스트</span>
         	<a href="#" id="logout">로그아웃</a>
         </nav>
     </header>

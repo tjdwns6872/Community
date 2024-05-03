@@ -7,18 +7,23 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/user")
 public class UserController {
 
-	@RequestMapping("login")
+	@RequestMapping("/login")
 	public String login() {
 		return "user/login";
 	}
 	
-	@RequestMapping("join")
+	@RequestMapping("/join")
 	public String userJoin() {
 		return "user/join";
 	}
 	
-	@RequestMapping("find")
+	@RequestMapping("/find")
 	public String find() {
 		return "user/find";
+	}
+	
+	@RequestMapping("/mypage")
+	public String mypage() {
+		return "user/mypage";
 	}
 }
