@@ -71,15 +71,13 @@ public class EmailSerialService {
 			userDto.setUserId(emailDto.getUserId());
 			deleteSerial(emailDto);
 			if(emailDto.getType().equals("pw")) {
-				int change = userService.changePw(userDto);
-				if(change < 1) {
+				String change = userService.changePw(userDto);
+				if(change == null) {
 					throw new Exception("비밀번호 변경 실패");
+				}else {
+					userDto.setUserPw(change);
 				}
 			}
-			userDto = userService.getOne(userDto);
-			String pw = ShaUtil.sha256Encode(userDto.getUserPw());
-			userDto.setUserPw(pw);
-			
 			return userDto;
 		}
 		return userDto;

@@ -45,11 +45,17 @@ public class UserService {
 		return map;
 	}
 	
-	public int changePw(UserDto userDto) {
+	public String changePw(UserDto userDto) {
 		String changePw = ShaUtil.randomString();
+		log.info("\n\n{}\n\n", changePw);
 		String pw = ShaUtil.sha256Encode(changePw);
 		userDto.setUserPw(pw);
-		return userMapper.changePw(userDto);
+		int cnt = userMapper.changePw(userDto);
+		if(cnt > 0) {			
+			return changePw;
+		}else {
+			return null;
+		}
 	}
 	
 	public boolean login(UserDto userDto, String password, String id) {
