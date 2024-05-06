@@ -20,6 +20,7 @@
 			,USER_CHECK
 			FROM TP_USER
 			<where>
+				AND USER_CHECK = 0
 				<if test="userId != null and userId != ''">
 					AND USER_ID = #{userId}
 				</if>
@@ -36,6 +37,7 @@
 		SELECT COUNT(1)
 			FROM TP_USER
 			<where>
+				AND USER_CHECK = 0
 				<if test="userNo != null and userNo != ''">
 					AND USER_NO = #{userNo}
 				</if>
@@ -78,6 +80,16 @@
 			,0
 		)
 	</insert>
+	
+	<update id="deleteUser">
+		UPDATE TP_USER
+			<set>
+				USER_CHECK = 1
+			</set>
+			<where>
+				AND USER_NO = #{userNo}
+			</where>
+	</update>
 	
 	<update id="changePw">
 		UPDATE TP_USER

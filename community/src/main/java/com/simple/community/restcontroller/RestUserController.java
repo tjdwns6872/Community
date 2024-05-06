@@ -48,5 +48,10 @@ public class RestUserController {
 	public void find() {
 		userService.find();
 	}
+	
+	@GetMapping("/delete")
+	public int deleteUser(@RequestParam Integer userNo, HttpSession session) {
+		return userService.deleteUser(userNo, session);
+	}
 }
 

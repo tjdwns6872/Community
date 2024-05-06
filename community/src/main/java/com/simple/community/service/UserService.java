@@ -59,6 +59,14 @@ public class UserService {
 		}
 	}
 	
+	public int deleteUser(Integer userNo, HttpSession session) {
+		int cnt = userMapper.deleteUser(userNo);
+		if(cnt > 0) {
+			session.removeAttribute("user_no");
+		}
+		return cnt;
+	}
+	
 	public boolean login(UserDto userDto, String password, String id) {
 		boolean check = false;
 		try {

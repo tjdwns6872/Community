@@ -6,7 +6,8 @@
 <div class="main_container">
 	<div style="width: 100%; text-align: center">
 		마이페이지
-		<p th:text="${user_no}"></p>
+		<p id="userNo" th:text="${user_no}"></p>
+		<button id="deleteUser">회원탈퇴</button>
 	</div>
 </div>
 <footer th:include="footer :: footer"></footer>
