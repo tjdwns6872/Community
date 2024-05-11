@@ -4,11 +4,15 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.simple.community.service.BoardService;
+
+import jakarta.servlet.http.HttpSession;
 
 @RestController
 @RequestMapping("/rest/board")
@@ -20,6 +24,11 @@ public class RestBoardController {
 	@GetMapping("/list")
 	public Map<String, Object> list(@RequestParam Map<String, Object> params){
 		return boardService.boardList(params);
+	}
+	
+	@PutMapping("/reg")
+	public int boardReg(@RequestBody Map<String, Object> params, HttpSession session) {
+		return boardService.boardReg(params, session);
 	}
 }
 

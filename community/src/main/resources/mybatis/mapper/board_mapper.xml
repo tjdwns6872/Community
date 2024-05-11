@@ -8,5 +8,31 @@
 	<select id="boardListCnt">
 		SELECT COUNT(1) FROM TP_BOARD WHERE DEL_FG=0
 	</select>
+	
+	<insert id="boardInsert">
+		INSERT INTO TP_BOARD(
+			BOARD_NO
+			,CATEGORY_NO
+			,USER_NO
+			,BOARD_TITLE
+			,BOARD_CONTENT
+			,REG_ID
+			,REG_DATE
+			,MOD_DATE
+			,MOD_ID
+			,DEL_FG
+		)VALUES(
+			BOARD_SEQ.NEXTVAL
+			,#{categoryNo}
+			,#{userNo}
+			,#{boardTitle}
+			,#{boardContent}
+			,#{userNo}
+			,SYSDATE
+			,SYSDATE
+			,#{userNo}
+			,'0'
+		)
+	</insert>
 
 </mapper>

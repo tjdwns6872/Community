@@ -5,9 +5,11 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.simple.community.mapper.BoardMapper;
 
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 
 @Service
@@ -21,9 +23,18 @@ public class BoardService {
 		Map<String, Object> result = new HashMap<>();
 		
 		Integer cnt = boardMapper.boardListCnt();
-		log.info("\n\n{}\n\n", cnt);
+		result.put("cnt", cnt);
 		
 		return result;
+	}
+	
+	@Transactional
+	public int boardReg(Map<String, Object> params, HttpSession session) {
+		
+		params.put("userNo", session.getAttribute("user_no"));
+		int cnt = boardMapper.boardInsert(params);
+		
+		return cnt;
 	}
 }
 

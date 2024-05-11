@@ -7,11 +7,13 @@
 	<div style="width: 100%; text-align: center">
 		게시물 등록
 	</div>
-	제목<input type="text" id="boardTitle" name="boardTitle">
-	카테고리<select id="categoryList">
-		<option>선택</option>
-	</select>
-	내용<textarea id="boardContent" name="boardContent"></textarea>
+	<form id="insertForm">
+		제목<input type="text" id="boardTitle" name="boardTitle">
+		카테고리<select id="categoryList" name=categoryNo></select>
+		내용<textarea id="boardContent" name="boardContent"></textarea>
+	</form>
+	<button id="insertBtn">등록</button>
+	<button id="listBtn">목록</button>
 </div>
 <footer th:include="footer :: footer"></footer>
 </html>
