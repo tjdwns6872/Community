@@ -20,6 +20,13 @@ function dataLoad(boardNo){
 
 function dataInfo(data){
 	console.log(data)
+	if(data.userNo == $("#userNo").text()){
+		$("#editBtn").show();
+		$("#deleteBtn").show();
+	}
+	$("#boardTitle").text(data.boardTitle);
+	$("#categoryName").text(data.categoryName);
+	$("#boardContent").html(data.boardContent);
 }
 
 

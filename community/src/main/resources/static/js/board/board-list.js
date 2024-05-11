@@ -4,12 +4,7 @@ $(function(){
 
 $(document).on("click", "#moveDetails", function(){
 	
-	if($("#userNo").text() != $(this).data("uno")){		
-		location.href="/board/details?boardNo="+$(this).data("no");
-	}else{
-		//console.log("수정칸");
-		location.href="/board/details?boardNo="+$(this).data("no");
-	}
+	location.href="/board/details?boardNo="+$(this).data("no");
 });
 
 function listLoad(page=0, keyword="", categroy=""){
@@ -37,7 +32,7 @@ function listData(data){
 		console.log(item);
 		html += "<td>"+item.boardNo+"</td>";
 		html += "<td>"+item.categoryName+"</td>";
-		html += "<td><a href='#' id='moveDetails' data-no="+item.boardNo+" data-uno="+item.userNo+">"+item.boardTitle+"</a></td>";
+		html += "<td><a href='#' id='moveDetails' data-no="+item.boardNo+">"+item.boardTitle+"</a></td>";
 		html += "<td>"+item.userId+"</td>";
 		html += "<td>"+item.modDate+"</td>";
 	});
