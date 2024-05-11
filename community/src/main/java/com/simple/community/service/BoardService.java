@@ -42,6 +42,10 @@ public class BoardService {
 		
 		return cnt;
 	}
+	
+	public BoardDto boardDetiles(Map<String, Object> params) {
+		return boardMapper.boardDetiles(params);
+	}
 }
 
 

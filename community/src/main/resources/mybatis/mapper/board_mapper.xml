@@ -14,6 +14,7 @@
 			TPB.BOARD_NO
 			,TPC.CATEGORY_NAME 
 			,TPB.BOARD_TITLE
+			,TPB.USER_NO
 			,TPU.USER_ID
 			,TPB.MOD_DATE
 			FROM TP_BOARD TPB
@@ -21,6 +22,24 @@
 			LEFT JOIN TP_USER TPU ON TPB.USER_NO = TPU.USER_NO
 			<where>
 				AND DEL_FG = 0
+			</where>
+	</select>
+	
+	<select id="boardDetiles" resultType="com.simple.community.entity.BoardDto">
+		SELECT
+			TPB.BOARD_NO
+			,TPC.CATEGORY_NAME
+			,TPB.CATEGORY_NO 
+			,TPB.BOARD_TITLE
+			,TPB.BOARD_CONTENT
+			,TPU.USER_ID
+			,TPB.MOD_DATE
+			FROM TP_BOARD TPB
+			LEFT JOIN TP_CATEGORY TPC ON TPB.CATEGORY_NO = TPC.CATEGORY_NO
+			LEFT JOIN TP_USER TPU ON TPB.USER_NO = TPU.USER_NO
+			<where>
+				AND DEL_FG = 0
+				AND BOARD_NO = #{boardNo}
 			</where>
 	</select>
 	

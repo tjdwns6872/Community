@@ -2,12 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <title>게시물 상세페이지</title>
 <header th:include="header :: header"></header>
-<script type="text/javascript" src="../js/board/board-reg.js"></script>
+<script type="text/javascript" src="../js/board/board-details.js"></script>
 <div class="main_container">
 	<div style="width: 100%; text-align: center">
 		게시물 상세
 	</div>
-	<form id="insertForm">
+	<span id="boardNo"  th:text="${params.boardNo}"></span>
+	<form id="ModForm">
 		제목<input type="text" id="boardTitle" name="boardTitle">
 		카테고리<select id="categoryList" name=categoryNo></select>
 		내용<textarea id="boardContent" name="boardContent"></textarea>

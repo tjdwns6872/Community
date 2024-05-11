@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.simple.community.entity.BoardDto;
 import com.simple.community.service.BoardService;
 
 import jakarta.servlet.http.HttpSession;
@@ -29,6 +30,11 @@ public class RestBoardController {
 	@PutMapping("/reg")
 	public int boardReg(@RequestBody Map<String, Object> params, HttpSession session) {
 		return boardService.boardReg(params, session);
+	}
+	
+	@GetMapping("/details")
+	public BoardDto details(@RequestParam Map<String, Object> params) {
+		return boardService.boardDetiles(params);
 	}
 }
 

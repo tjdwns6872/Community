@@ -24,8 +24,8 @@ function idCheck(){
 		contentType: 'application/json',
 		dataType: 'json',
 		data:data,
-		success:function(resp){
-			console.log(resp);
+		success:function(){
+			location.href="/";
 		}
 	});
 }
