@@ -16,7 +16,12 @@ $(function(){
 			dataType: 'json',
 			data:JSON.stringify(data),
 			success:function(resp){
-				console.log(resp);
+				if(resp > 0){
+					console.log("삭제 완료");
+					location.href="/board/list";
+				}else{
+					console.log("실패");
+				}
 			}
 		});
 	});
