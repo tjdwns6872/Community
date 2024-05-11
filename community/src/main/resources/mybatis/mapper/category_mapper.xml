@@ -5,8 +5,13 @@
 
 <mapper namespace="com.simple.community.mapper.CategoryMapper" >
 
-	<select id="categoryList" resultType="com.simple.community.entity.CategoryDto">
+	<select id="categoryList" resultType="com.simple.community.entity.CategoryDto" parameterType="Integer">
 		SELECT CATEGORY_NO, CATEGORY_NAME FROM TP_CATEGORY
+		<where>
+			<if test="userRank != 1">
+				AND CATEGORY_NAME NOT IN ('공지')
+			</if>
+		</where>
 	</select>
 
 </mapper>

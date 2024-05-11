@@ -9,5 +9,5 @@ import com.simple.community.entity.CategoryDto;
 @Mapper
 public interface CategoryMapper {
 
-	List<CategoryDto> categoryList();
+	List<CategoryDto> categoryList(Integer userRank);
 }

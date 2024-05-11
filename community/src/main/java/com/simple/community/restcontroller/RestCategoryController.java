@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.simple.community.service.CategoryService;
 
+import jakarta.servlet.http.HttpSession;
+
 @RestController
 @RequestMapping("/rest/category")
 public class RestCategoryController {
@@ -18,9 +20,9 @@ public class RestCategoryController {
 	private CategoryService categoryService;
 	
 	@GetMapping("/list")
-	public Map<String, Object> list(){
+	public Map<String, Object> list(HttpSession session){
 		Map<String, Object> result = new HashMap<>();
-		result.put("category", categoryService.categoryList());
+		result.put("category", categoryService.categoryList(session));
 		return result;
 	}
 
