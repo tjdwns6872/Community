@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.simple.community.commons.AuthCode;
 import com.simple.community.commons.EmailSendMessage;
-import com.simple.community.commons.ShaUtil;
 import com.simple.community.entity.EmailDto;
 import com.simple.community.entity.UserDto;
 import com.simple.community.mapper.SerialMapper;
