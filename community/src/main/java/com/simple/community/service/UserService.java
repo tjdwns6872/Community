@@ -35,6 +35,7 @@ public class UserService {
 			if(result) {
 				params.put("result", 1);
 				session.setAttribute("user_no", map.getUserNo());
+				session.setAttribute("user_rank", map.getUserRank());
 			}
 		}
 		return params;
