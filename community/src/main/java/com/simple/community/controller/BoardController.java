@@ -16,4 +16,10 @@ public class BoardController {
 	public String reg() {
 		return "board/registration";
 	}
+	
+	@RequestMapping("/details")
+	public String details() {
+		return "board/details";
+	}
+	
 }

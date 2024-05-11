@@ -1,12 +1,14 @@
 package com.simple.community.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.simple.community.entity.BoardDto;
 import com.simple.community.mapper.BoardMapper;
 
 import jakarta.servlet.http.HttpSession;
@@ -22,8 +24,12 @@ public class BoardService {
 	public Map<String, Object> boardList(Map<String, Object> params){
 		Map<String, Object> result = new HashMap<>();
 		
-		Integer cnt = boardMapper.boardListCnt();
+		Integer cnt = boardMapper.boardListCnt(params);
+		List<BoardDto> boardList = boardMapper.boardList(params);
 		result.put("cnt", cnt);
+		result.put("boardList", boardList);
+		
+		log.info("\n\n{}\n\n", result.toString());
 		
 		return result;
 	}

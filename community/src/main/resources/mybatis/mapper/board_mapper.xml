@@ -9,6 +9,21 @@
 		SELECT COUNT(1) FROM TP_BOARD WHERE DEL_FG=0
 	</select>
 	
+	<select id="boardList" resultType="com.simple.community.entity.BoardDto">
+		SELECT
+			TPB.BOARD_NO
+			,TPC.CATEGORY_NAME 
+			,TPB.BOARD_TITLE
+			,TPU.USER_ID
+			,TPB.MOD_DATE
+			FROM TP_BOARD TPB
+			LEFT JOIN TP_CATEGORY TPC ON TPB.CATEGORY_NO = TPC.CATEGORY_NO
+			LEFT JOIN TP_USER TPU ON TPB.USER_NO = TPU.USER_NO
+			<where>
+				AND DEL_FG = 0
+			</where>
+	</select>
+	
 	<insert id="boardInsert">
 		INSERT INTO TP_BOARD(
 			BOARD_NO

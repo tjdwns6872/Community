@@ -18,7 +18,9 @@ function boardInsert(){
 		contentType: 'application/json',
 		dataType: 'json',
 		success:function(resp){
-			console.log(resp);
+			if(resp > 0){
+				console.log("글 작성 성공");
+			}
 		}
 	});
 }

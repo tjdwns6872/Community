@@ -23,4 +23,7 @@ public class BoardDto {
 	
 	//카테고리
 	private String categoryName;
+	
+	//유저 아이디
+	private String userId;
 }
