@@ -1,5 +1,26 @@
 $(function(){
-	dataLoad($("#boardNo").text());
+	
+	var boardNo = $("#boardNo").text();
+	dataLoad(boardNo);
+	
+	$("#deleteBtn").click(function(){
+		
+		var data = {"boardNo":boardNo}
+		
+		console.log(data);
+		
+		$.ajax({
+			url:"/rest/board/delete",
+			type:"DELETE",
+			contentType: 'application/json',
+			dataType: 'json',
+			data:JSON.stringify(data),
+			success:function(resp){
+				console.log(resp);
+			}
+		});
+	});
+	
 });
 
 function dataLoad(boardNo){

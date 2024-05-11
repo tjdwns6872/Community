@@ -44,6 +44,16 @@
 			</where>
 	</select>
 	
+	<update id="boardDelete">
+		UPDATE TP_BOARD
+			<set>
+				DEL_FG = 1
+			</set>
+			<where>
+				AND BOARD_NO = #{boardNo}
+			</where>
+	</update>
+	
 	<insert id="boardInsert">
 		INSERT INTO TP_BOARD(
 			BOARD_NO

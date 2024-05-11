@@ -14,4 +14,5 @@ public interface BoardMapper {
 	List<BoardDto> boardList(Map<String, Object> params);
 	int boardInsert(Map<String, Object> params);
 	BoardDto boardDetiles(Map<String, Object> params);
+	int boardDelete(Map<String, Object> params);
 }

@@ -46,6 +46,12 @@ public class BoardService {
 	public BoardDto boardDetiles(Map<String, Object> params) {
 		return boardMapper.boardDetiles(params);
 	}
+	
+	@Transactional
+	public int boardDelete(Map<String, Object> params) {
+		log.info("\n\n{}\n\n", params.toString());
+		return boardMapper.boardDelete(params);
+	}
 }
 
 
