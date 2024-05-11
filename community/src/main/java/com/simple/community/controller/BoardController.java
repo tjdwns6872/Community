@@ -11,4 +11,9 @@ public class BoardController {
 	public String main() {
 		return "board/list";
 	}
+	
+	@RequestMapping("/reg")
+	public String reg() {
+		return "board/registration";
+	}
 }

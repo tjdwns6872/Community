@@ -14,6 +14,7 @@
         <nav>
         	헤더(wjqfc227)
         	<span id="userNo"  th:text="${session.user_no}"></span>
+        	<span id="userRank"  th:text="${session.user_rank}"></span>
         	<a href="/user/mypage" th:if="${session.user_no}">마이페이지</a>
         	<a href="/board/list">게시판</a>
         	<a href="/">홈으로</a>
