@@ -1,5 +1,7 @@
 package com.simple.community.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +14,7 @@ public class CategoryService {
 	@Autowired
 	private CategoryMapper categoryMapper;
 	
-	public CategoryDto categoryList() {
+	public List<CategoryDto> categoryList() {
 		return categoryMapper.categoryList();
 	}
 	
