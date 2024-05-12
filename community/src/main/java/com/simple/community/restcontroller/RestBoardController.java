@@ -42,6 +42,11 @@ public class RestBoardController {
 	public int delete(@RequestBody Map<String, Object> params, HttpSession session) {
 		return boardService.boardDelete(params, session);
 	}
+	
+	@PutMapping("/update")
+	public int update(@RequestBody Map<String, Object> params, HttpSession session) {
+		return boardService.boardUpdate(params, session);
+	}
 }
 
 

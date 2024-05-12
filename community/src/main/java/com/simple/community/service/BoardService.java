@@ -52,6 +52,15 @@ public class BoardService {
 		params.put("userNo", session.getAttribute("user_no"));
 		return boardMapper.boardDelete(params);
 	}
+	
+	@Transactional
+	public int boardUpdate(Map<String, Object> params, HttpSession session) {
+		params.put("userNo", session.getAttribute("user_no"));
+		int cnt = boardMapper.boardUpdate(params);
+		return cnt;
+	}
+	
+	
 }
 
 

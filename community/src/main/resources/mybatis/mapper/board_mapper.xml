@@ -25,6 +25,21 @@
 			</where>
 	</select>
 	
+	<update id="boardUpdate">
+		UPDATE TP_BOARD
+			<set>
+				CATEGORY_NO = #{categoryNo}
+				,BOARD_TITLE = #{boardTitle}
+				,BOARD_CONTENT = #{boardContent}
+				,MOD_ID = #{userNo}
+				,MOD_DATE = SYSDATE
+			</set>
+			<where>
+				AND DEL_FG = 0
+				AND BOARD_NO = #{boardNo}
+			</where>
+	</update>
+	
 	<select id="boardDetiles" resultType="com.simple.community.entity.BoardDto">
 		SELECT
 			TPB.BOARD_NO
