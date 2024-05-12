@@ -51,6 +51,7 @@
 			</set>
 			<where>
 				AND BOARD_NO = #{boardNo}
+				AND USER_NO = #{userNo}
 			</where>
 	</update>
 	

@@ -27,4 +27,10 @@ public class BoardController {
 		return "board/details";
 	}
 	
+	@RequestMapping("/edit")
+	public String edit(@RequestParam Map<String, Object> params, Model model) {
+		model.addAttribute("params", params);
+		return "board/edit";
+	}
+	
 }

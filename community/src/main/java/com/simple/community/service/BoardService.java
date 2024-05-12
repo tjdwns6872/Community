@@ -48,8 +48,8 @@ public class BoardService {
 	}
 	
 	@Transactional
-	public int boardDelete(Map<String, Object> params) {
-		log.info("\n\n{}\n\n", params.toString());
+	public int boardDelete(Map<String, Object> params, HttpSession session) {
+		params.put("userNo", session.getAttribute("user_no"));
 		return boardMapper.boardDelete(params);
 	}
 }

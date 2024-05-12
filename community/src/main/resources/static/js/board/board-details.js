@@ -3,11 +3,13 @@ $(function(){
 	var boardNo = $("#boardNo").text();
 	dataLoad(boardNo);
 	
+	$("#editBtn").click(function(){
+		location.href="/board/edit?boardNo="+boardNo;
+	});
+	
 	$("#deleteBtn").click(function(){
 		
 		var data = {"boardNo":boardNo}
-		
-		console.log(data);
 		
 		$.ajax({
 			url:"/rest/board/delete",
@@ -45,7 +47,6 @@ function dataLoad(boardNo){
 }
 
 function dataInfo(data){
-	console.log(data)
 	if(data.userNo == $("#userNo").text()){
 		$("#editBtn").show();
 		$("#deleteBtn").show();

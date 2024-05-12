@@ -39,8 +39,8 @@ public class RestBoardController {
 	}
 	
 	@DeleteMapping("/delete")
-	public int delete(@RequestBody Map<String, Object> params) {
-		return boardService.boardDelete(params);
+	public int delete(@RequestBody Map<String, Object> params, HttpSession session) {
+		return boardService.boardDelete(params, session);
 	}
 }
 

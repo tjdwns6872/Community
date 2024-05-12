@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<title>게시물 수정</title>
+<header th:include="header :: header"></header>
+<script type="text/javascript" src="../js/board/board-edit.js"></script>
+<div class="main_container">
+	<div style="width: 100%; text-align: center">
+		게시물 수정
+	</div>
+	<form id="insertForm">
+		제목<input type="text" id="boardTitle" name="boardTitle">
+		카테고리<select id="categoryList" name=categoryNo></select>
+		내용<textarea id="boardContent" name="boardContent"></textarea>
+	</form>
+	<button id="insertBtn">수정</button>
+	<button id="listBtn">목록</button>
+</div>
+<footer th:include="footer :: footer"></footer>
+</html>
