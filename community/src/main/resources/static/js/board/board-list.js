@@ -1,5 +1,20 @@
 $(function(){
 	listLoad();
+	
+	$.ajax({
+		url:"/rest/category/list",
+		type:"GET",
+		async: false,
+		success:function(resp){
+			categoryList(resp.category);
+		}
+	});
+	
+	$("#searchBtn").click(function(){
+		var keyword = $("input[name=keyword]").val();
+		var categroy = $("input[name=categroy]").val()
+		listLoad(1, keyword, categroy);
+	});
 });
 
 $(document).on("click", "#moveDetails", function(){
@@ -7,7 +22,7 @@ $(document).on("click", "#moveDetails", function(){
 	location.href="/board/details?boardNo="+$(this).data("no");
 });
 
-function listLoad(page=0, keyword="", categroy=""){
+function listLoad(page=1, keyword="", categroy=""){
 	
 	var data = {"page":page, "keyword":keyword, "categroy":categroy}
 	
@@ -18,6 +33,7 @@ function listLoad(page=0, keyword="", categroy=""){
 		dataType: 'json',
 		data:data,
 		success:function(resp){
+			paging(resp.paging, "listLoad");
 			listData(resp);
 		}
 	});
@@ -25,20 +41,30 @@ function listLoad(page=0, keyword="", categroy=""){
 
 function listData(data){
 	var list = data.boardList;
-	
-	
+	if(list.length > 0 && list != undefined){
+		$("#boardDataList").empty();		
+	}
 	var html = "";
 	$.each(list, function(index, item){
-		console.log(item);
+		html += "<tr>";
 		html += "<td>"+item.boardNo+"</td>";
 		html += "<td>"+item.categoryName+"</td>";
 		html += "<td><a href='#' id='moveDetails' data-no="+item.boardNo+">"+item.boardTitle+"</a></td>";
 		html += "<td>"+item.userId+"</td>";
 		html += "<td>"+item.modDate+"</td>";
+		html += "</tr>";
 	});
 	$("#boardDataList").html(html);
 }
 
+function categoryList(data){
+	var html = "";
+	html += "<option>전체</option>";
+	$.each(data, function(index, item){
+		html += "<option value="+item.categoryNo+">"+item.categoryName+"</option>";
+	});
+	$("#categoryList").html(html);
+}
 
 
 

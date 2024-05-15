@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.simple.community.commons.PagingInfo;
 import com.simple.community.entity.BoardDto;
 import com.simple.community.mapper.BoardMapper;
 
@@ -25,11 +26,17 @@ public class BoardService {
 		Map<String, Object> result = new HashMap<>();
 		
 		Integer cnt = boardMapper.boardListCnt(params);
+		PagingInfo pagination = new PagingInfo(Integer.parseInt(params.get("page").toString()));
+		pagination.setTotalRecordCount(cnt);
+		
+		params.put("firstRecordIndex", pagination.getFirstRecordIndex());
+		params.put("lastRecordIndex", pagination.getLastRecordIndex());
+		log.info("\n\n{}\n\n", params.toString());
 		List<BoardDto> boardList = boardMapper.boardList(params);
+		
 		result.put("cnt", cnt);
 		result.put("boardList", boardList);
-		
-		log.info("\n\n{}\n\n", result.toString());
+		result.put("paging", pagination);
 		
 		return result;
 	}

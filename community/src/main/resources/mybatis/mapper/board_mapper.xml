@@ -5,13 +5,30 @@
 
 <mapper namespace="com.simple.community.mapper.BoardMapper" >
 
+	<sql id="paging_start">
+		SELECT * FROM (
+	</sql>
+	<sql id="paging_end">
+		)
+		WHERE row_num BETWEEN #{firstRecordIndex} AND #{lastRecordIndex}
+	</sql>
+	
 	<select id="boardListCnt">
-		SELECT COUNT(1) FROM TP_BOARD WHERE DEL_FG=0
+		SELECT COUNT(1) FROM TP_BOARD 
+			WHERE DEL_FG=0
+			<if test="categoryNo != null and categoryNo != ''">
+				AND CATEGORY_NO = #{categoryNo}
+			</if>
+			<if test="keyword != null and keyword != ''">
+				AND BOARD_TITLE LIKE CONCAT('%', #{keyword}, '%')
+			</if>
 	</select>
 	
 	<select id="boardList" resultType="com.simple.community.entity.BoardDto">
+		<include refid="paging_start"></include>
 		SELECT
-			TPB.BOARD_NO
+			ROW_NUMBER() OVER(ORDER BY TPB.BOARD_NO DESC) AS ROW_NUM
+			,TPB.BOARD_NO
 			,TPC.CATEGORY_NAME 
 			,TPB.BOARD_TITLE
 			,TPB.USER_NO
@@ -22,7 +39,14 @@
 			LEFT JOIN TP_USER TPU ON TPB.USER_NO = TPU.USER_NO
 			<where>
 				AND DEL_FG = 0
+				<if test="categoryNo != null and categoryNo != ''">
+					AND CATEGORY_NO = #{categoryNo}
+				</if>
+				<if test="keyword != null and keyword != ''">
+					AND BOARD_TITLE LIKE CONCAT('%', #{keyword}, '%')
+				</if>
 			</where>
+		<include refid="paging_end"></include>
 	</select>
 	
 	<update id="boardUpdate">
