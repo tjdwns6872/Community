@@ -12,8 +12,8 @@ $(function(){
 	
 	$("#searchBtn").click(function(){
 		var keyword = $("input[name=keyword]").val();
-		var categroy = $("input[name=categroy]").val()
-		listLoad(1, keyword, categroy);
+		var category = $("select[name=category]").val()
+		listLoad(1, keyword, category);
 	});
 });
 
@@ -22,9 +22,9 @@ $(document).on("click", "#moveDetails", function(){
 	location.href="/board/details?boardNo="+$(this).data("no");
 });
 
-function listLoad(page=1, keyword="", categroy=""){
+function listLoad(page=1, keyword="", category=""){
 	
-	var data = {"page":page, "keyword":keyword, "categroy":categroy}
+	var data = {"page":page, "keyword":keyword, "category":category}
 	
 	$.ajax({
 		url:"/rest/board/list",
@@ -59,7 +59,7 @@ function listData(data){
 
 function categoryList(data){
 	var html = "";
-	html += "<option>전체</option>";
+	html += "<option value>전체</option>";
 	$.each(data, function(index, item){
 		html += "<option value="+item.categoryNo+">"+item.categoryName+"</option>";
 	});

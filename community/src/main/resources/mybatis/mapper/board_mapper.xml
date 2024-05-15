@@ -16,11 +16,11 @@
 	<select id="boardListCnt">
 		SELECT COUNT(1) FROM TP_BOARD 
 			WHERE DEL_FG=0
-			<if test="categoryNo != null and categoryNo != ''">
-				AND CATEGORY_NO = #{categoryNo}
+			<if test="category != null and category != ''">
+				AND CATEGORY_NO = #{category}
 			</if>
 			<if test="keyword != null and keyword != ''">
-				AND BOARD_TITLE LIKE CONCAT('%', #{keyword}, '%')
+				AND BOARD_TITLE LIKE '%'||#{keyword}||'%'
 			</if>
 	</select>
 	
@@ -39,11 +39,11 @@
 			LEFT JOIN TP_USER TPU ON TPB.USER_NO = TPU.USER_NO
 			<where>
 				AND DEL_FG = 0
-				<if test="categoryNo != null and categoryNo != ''">
-					AND CATEGORY_NO = #{categoryNo}
+				<if test="category != null and category != ''">
+					AND TPB.CATEGORY_NO = #{category}
 				</if>
 				<if test="keyword != null and keyword != ''">
-					AND BOARD_TITLE LIKE CONCAT('%', #{keyword}, '%')
+					AND TPB.BOARD_TITLE LIKE '%'||#{keyword}||'%'
 				</if>
 			</where>
 		<include refid="paging_end"></include>
