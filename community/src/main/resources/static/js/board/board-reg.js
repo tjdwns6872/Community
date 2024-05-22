@@ -7,15 +7,23 @@ $(function(){
 function boardInsert(){
 	var data = {};
 	var form = $("#insertForm").serializeArray();
+	var inputFile = $("input[name=boardFile]");
+	var files = inputFile[0].files;
+	var file = files[0];
+	var base64String = fileToBase64(file);
+	console.log(base64String);
+	data["uploadFile"] = base64String;
+	
 	$.each(form, function(){
 		data[this.name]= this.value;
 	});
 	
+	console.log(data);
 	$.ajax({
 		url:"/rest/board/reg",
 		type:"PUT",
 		data:JSON.stringify(data),
-		contentType: 'application/json',
+    	contentType: "application/json",
 		dataType: 'json',
 		success:function(resp){
 			if(resp > 0){
@@ -33,6 +41,17 @@ function listLoad(){
 			categoryList(resp.category);
 		}
 	});
+}
+
+function fileToBase64(file){
+	var reader = new FileReader();
+	var base64String;
+	reader.onload = function(e) {
+		base64String = e.target.result.split(',')[1];
+	};
+	reader.readAsDataURL(file);
+	console.log(base64String);
+	return base64String;
 }
 
 function categoryList(data){
