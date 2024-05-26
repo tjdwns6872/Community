@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.simple.community.commons.FileUtil;
 import com.simple.community.commons.PagingInfo;
 import com.simple.community.entity.BoardDto;
 import com.simple.community.mapper.BoardMapper;
@@ -21,6 +22,9 @@ public class BoardService {
 
 	@Autowired
 	private BoardMapper boardMapper;
+	
+	@Autowired
+	private FileUtil fileUtil;
 	
 	public Map<String, Object> boardList(Map<String, Object> params){
 		Map<String, Object> result = new HashMap<>();
@@ -43,10 +47,17 @@ public class BoardService {
 	
 	@Transactional
 	public int boardReg(Map<String, Object> params, HttpSession session) {
+		String base64File = params.get("uploadFile").toString();
+		String fileName = params.get("fileName").toString();
+		
+		int fileNo = fileUtil.fileChange(base64File, fileName, 1);
+		
+		log.info("\n\n{}\n\n", fileNo);
 		
 		params.put("userNo", session.getAttribute("user_no"));
-		int cnt = boardMapper.boardInsert(params);
-		
+		params.put("fileNo", fileNo);
+//		int cnt = boardMapper.boardInsert(params);
+		int cnt = 1;
 		return cnt;
 	}
 	

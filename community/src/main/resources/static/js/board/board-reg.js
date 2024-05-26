@@ -10,11 +10,13 @@ function boardInsert(){
 	var inputFile = $("input[name=boardFile]");
 	var files = inputFile[0].files;
 	var file = files[0];
+	data["fileName"] = file.name;
 	
 	var reader = new FileReader();
 	var base64String;
 	reader.onload = function(e) {
 		base64String = e.target.result.split(',')[1];
+		data["uploadFile"] = base64String;
 	};
 	reader.readAsDataURL(file);
 	
@@ -23,7 +25,6 @@ function boardInsert(){
 	});
 	
 	setTimeout(function() {
-		data["uploadFile"] = base64String;
 		insertAjax(data);
 	}, 200);
 }
