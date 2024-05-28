@@ -27,7 +27,6 @@ public class FileUtil {
 		byte[] data = DatatypeConverter.parseBase64Binary(base64String);
 		
 		String fileType = fileName.substring(fileName.indexOf("."));
-//		fileName = fileName.substring(0, fileName.indexOf("."));
 		
 		String fileId = UUID.randomUUID().toString();
 		
@@ -42,9 +41,13 @@ public class FileUtil {
 		params.put("fileId", fileId);
 		params.put("filePath", path);
 		
-		int fileNo = fileMapper.fileInsert(params);
-		
-		return fileNo;
+		int cnt = fileMapper.fileInsert(params);
+		log.info("\ncnt==>{}", cnt);
+		if(cnt > 0) {
+			return Integer.parseInt(params.get("fileNo").toString());
+		}else {
+			return cnt;			
+		}
 	}
 	
 	public static void fileUpload(File file, byte[] data) {

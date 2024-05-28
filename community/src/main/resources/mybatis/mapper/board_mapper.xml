@@ -74,12 +74,17 @@
 			,TPU.USER_ID
 			,TPB.MOD_DATE
 			,TPB.USER_NO
+			,TBF.BOARD_NO AS TBF_BOARD_NO
+			,TF.FILE_NO AS TBF_FILE_NO
+			,TF.FILE_NAME
 			FROM TP_BOARD TPB
 			LEFT JOIN TP_CATEGORY TPC ON TPB.CATEGORY_NO = TPC.CATEGORY_NO
 			LEFT JOIN TP_USER TPU ON TPB.USER_NO = TPU.USER_NO
+			LEFT JOIN TP_BOARD_FILE TBF ON TPB.BOARD_NO = TBF.BOARD_NO
+			LEFT JOIN TP_FILE TF ON TBF.FILE_NO = TF.FILE_NO
 			<where>
 				AND DEL_FG = 0
-				AND BOARD_NO = #{boardNo}
+				AND TPB.BOARD_NO = #{boardNo}
 			</where>
 	</select>
 	
@@ -118,6 +123,9 @@
 			,#{userNo}
 			,'0'
 		)
+		<selectKey keyProperty="boardNo" resultType="int" order="AFTER">
+       		SELECT BOARD_SEQ.CURRVAL FROM DUAL
+  		</selectKey>
 	</insert>
 
 </mapper>

@@ -26,4 +26,9 @@ public class BoardDto {
 	
 	//유저 아이디
 	private String userId;
+	
+	//파일 정보
+	private Integer fileNo;
+	private String fileName;
+	private String filePath;
 }

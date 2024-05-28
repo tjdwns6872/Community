@@ -23,8 +23,8 @@
 				,#{filePath}
 			)
 			<selectKey keyProperty="fileNo" resultType="int" order="AFTER">
-       		SELECT FILE_SEQ.CURRVAL FROM DUAL
-  		</selectKey>
+       			SELECT FILE_SEQ.CURRVAL FROM DUAL
+  			</selectKey>
 	</insert>
 
 </mapper>

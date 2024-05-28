@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.simple.community.commons.FileUtil;
 import com.simple.community.commons.PagingInfo;
 import com.simple.community.entity.BoardDto;
+import com.simple.community.mapper.BoardFileMapper;
 import com.simple.community.mapper.BoardMapper;
 
 import jakarta.servlet.http.HttpSession;
@@ -25,6 +26,9 @@ public class BoardService {
 	
 	@Autowired
 	private FileUtil fileUtil;
+	
+	@Autowired
+	private BoardFileMapper boardFileMapper;
 	
 	public Map<String, Object> boardList(Map<String, Object> params){
 		Map<String, Object> result = new HashMap<>();
@@ -56,8 +60,9 @@ public class BoardService {
 		
 		params.put("userNo", session.getAttribute("user_no"));
 		params.put("fileNo", fileNo);
-//		int cnt = boardMapper.boardInsert(params);
-		int cnt = 1;
+		int cnt = boardMapper.boardInsert(params);
+		boardFileMapper.boardFileInsert(params);
+		
 		return cnt;
 	}
 	
