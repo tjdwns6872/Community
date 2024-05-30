@@ -54,16 +54,6 @@ function listLoad(){
 	});
 }
 
-function fileToBase64(file){
-	var reader = new FileReader();
-	var base64String;
-	reader.onload = function(e) {
-		base64String = e.target.result.split(',')[1];
-	};
-	reader.readAsDataURL(file);
-	return base64String;
-}
-
 function categoryList(data){
 	var html = "";
 	html += "<option>선택</option>";

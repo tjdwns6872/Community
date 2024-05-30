@@ -47,6 +47,11 @@ public class RestBoardController {
 	public int update(@RequestBody Map<String, Object> params, HttpSession session) {
 		return boardService.boardUpdate(params, session);
 	}
+	
+	@PutMapping("/like")
+	public int likeUpdate(@RequestBody Map<String, Object> params, HttpSession session) {
+		return 1;
+	}
 }
 
 

@@ -7,6 +7,12 @@ $(function(){
 		location.href="/board/edit?boardNo="+boardNo;
 	});
 	
+	$("#listBtn").click(function(){
+		location.href="/board/list";
+	});
+	
+	$("#likeBtn").click(likeFunc);
+	
 	$("#deleteBtn").click(function(){
 		
 		var data = {"boardNo":boardNo}
@@ -29,6 +35,12 @@ $(function(){
 	});
 	
 });
+
+function likeFunc(){
+	var boardNo = $("#boardNo").text();
+	
+	console.log("좋아요 버튼 클릭");
+}
 
 function dataLoad(boardNo){
 	
