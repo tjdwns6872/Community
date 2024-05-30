@@ -75,8 +75,6 @@ function fileDownload(fileNo){
 		dataType: 'json',
 		data:data,
 		success:function(resp){
-			console.log(resp);
-			
 			base64ToFile(resp);
 		}
 	});
@@ -86,7 +84,6 @@ function base64ToFile(data){
 	var base64 = data.data;
 	
 	var byteString = atob(base64);
-	console.log(byteString);
 	
 	var byteNumbers = new Array(byteString.length);
 	for (var i = 0; i < byteString.length; i++) {
