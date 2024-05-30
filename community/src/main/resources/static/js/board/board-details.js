@@ -37,9 +37,21 @@ $(function(){
 });
 
 function likeFunc(){
+	var data = {}
 	var boardNo = $("#boardNo").text();
+	data["boardNo"] = boardNo;
 	
-	console.log("좋아요 버튼 클릭");
+	$.ajax({
+		url:"/rest/board/like",
+		type:"PUT",
+		data:JSON.stringify(data),
+		contentType: "application/json",
+		dataType: 'json',
+		success:function(resp){
+			//하트 버튼 색상 변경 예정
+			dataLoad(boardNo);
+		}
+	});
 }
 
 function dataLoad(boardNo){

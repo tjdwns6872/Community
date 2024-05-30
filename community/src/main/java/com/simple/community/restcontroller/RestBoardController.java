@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.simple.community.entity.BoardDto;
 import com.simple.community.service.BoardService;
+import com.simple.community.service.LikeService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -22,6 +23,9 @@ public class RestBoardController {
 
 	@Autowired
 	private BoardService boardService;
+	
+	@Autowired
+	private LikeService likeService;
 	
 	@GetMapping("/list")
 	public Map<String, Object> list(@RequestParam Map<String, Object> params){
@@ -50,7 +54,7 @@ public class RestBoardController {
 	
 	@PutMapping("/like")
 	public int likeUpdate(@RequestBody Map<String, Object> params, HttpSession session) {
-		return 1;
+		return likeService.likeUpdate(params, session);
 	}
 }
 

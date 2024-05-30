@@ -82,8 +82,6 @@ public class BoardService {
 		int cnt = boardMapper.boardUpdate(params);
 		return cnt;
 	}
-	
-	
 }
 
 

@@ -21,6 +21,9 @@ public class BoardDto {
 	private Date modDate;
 	private String delFg;
 	
+	//좋아요 수
+	private Integer likeCnt;
+	
 	//카테고리
 	private String categoryName;
 	
