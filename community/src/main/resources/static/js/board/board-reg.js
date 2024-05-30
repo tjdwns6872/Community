@@ -38,7 +38,7 @@ function insertAjax(data){
 		dataType: 'json',
 		success:function(resp){
 			if(resp > 0){
-				console.log("글 작성 성공");
+				console.log("글 작성 성공"+resp);
 			}
 		}
 	});

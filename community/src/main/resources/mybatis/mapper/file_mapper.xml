@@ -27,4 +27,15 @@
   			</selectKey>
 	</insert>
 
+	<select id="selectFile" resultType="com.simple.community.entity.FileDto" parameterType="map">
+		SELECT
+			FILE_NO
+			,FILE_NAME
+			,FILE_TYPE
+			,FILE_TIME
+			,FILE_ID
+			,FILE_PATH
+		FROM TP_FILE
+		WHERE FILE_NO = #{fileNo}
+	</select>
 </mapper>

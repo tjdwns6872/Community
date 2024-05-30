@@ -47,15 +47,20 @@ function dataLoad(boardNo){
 }
 
 function dataInfo(data){
-	console.log(data);
 	if(data.userNo == $("#userNo").text()){
 		$("#editBtn").show();
 		$("#deleteBtn").show();
 	}
-	$("#boardTitle").text(data.boardTitle);
-	$("#categoryName").text(data.categoryName);
-	$("#boardContent").html(data.boardContent);
-	$("#fileName").text(data.fileName);
+	console.log(data);
+	var html ="";
+	html += "<tr>";
+	html += "<td>"+data.boardTitle+"</td>";
+	html += "<td>"+data.categoryName+"</td>";
+	html += "<td>"+data.boardContent+"</td>";
+	html += "<td><a href='/rest/file/download?fileNo="+data.fileNo+"'>"+data.fileName+"</a></td>";
+	html += "</tr>";
+	
+	$("#boardDataDetails").html(html);
 }
 
 
