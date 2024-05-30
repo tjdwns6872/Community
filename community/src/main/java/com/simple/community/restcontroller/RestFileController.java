@@ -18,7 +18,7 @@ public class RestFileController {
 	private FileUtil fileUtil;
 	
 	@GetMapping("/download")
-	public void fileDownload(@RequestParam Map<String, Object> params) {
-		fileUtil.fileDownload(params);
+	public Map<String, Object> fileDownload(@RequestParam Map<String, Object> params) {
+		return fileUtil.fileDownload(params);
 	}
 }

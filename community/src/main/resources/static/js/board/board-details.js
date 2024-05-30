@@ -51,17 +51,62 @@ function dataInfo(data){
 		$("#editBtn").show();
 		$("#deleteBtn").show();
 	}
-	console.log(data);
+	
 	var html ="";
 	html += "<tr>";
 	html += "<td>"+data.boardTitle+"</td>";
 	html += "<td>"+data.categoryName+"</td>";
 	html += "<td>"+data.boardContent+"</td>";
-	html += "<td><a href='/rest/file/download?fileNo="+data.fileNo+"'>"+data.fileName+"</a></td>";
+	if(data.fileNo != null){		
+		html += "<td><a href='javascript:fileDownload("+data.fileNo+")'>"+data.fileName+"</a></td>";
+	}
 	html += "</tr>";
 	
 	$("#boardDataDetails").html(html);
 }
 
+function fileDownload(fileNo){
+	var data = {"fileNo":fileNo};
+	
+	$.ajax({
+		url:"/rest/file/download",
+		type:"GET",
+		contentType: 'application/json',
+		dataType: 'json',
+		data:data,
+		success:function(resp){
+			console.log(resp);
+			
+			base64ToFile(resp);
+		}
+	});
+}
+
+function base64ToFile(data){
+	var base64 = data.data;
+	
+	var byteString = atob(base64);
+	console.log(byteString);
+	
+	var byteNumbers = new Array(byteString.length);
+	for (var i = 0; i < byteString.length; i++) {
+        byteNumbers[i] = byteString.charCodeAt(i);
+    }
+    var byteArray = new Uint8Array(byteNumbers);
+   	var blob = new Blob([byteArray]);
+    	
+    var file = new File([blob], data.fileName);
+    
+    var url = URL.createObjectURL(file);
+
+    var a = document.createElement('a');
+    a.href = url;
+    a.download = file.name;
+    document.body.appendChild(a);
+    a.click();
+
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+}
 
 

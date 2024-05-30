@@ -2,20 +2,17 @@ package com.simple.community.commons;
 
 import java.io.BufferedOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-import java.net.MalformedURLException;
-import java.nio.file.Paths;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ResourceUtils;
 
 import com.simple.community.entity.FileDto;
 import com.simple.community.mapper.FileMapper;
@@ -41,7 +38,7 @@ public class FileUtil {
 		String fileId = UUID.randomUUID().toString();
 		
 		String path = PATH;
-		File file = new File(path+fileId+fileType);
+		File file = new File(path+fileId);
 		
 		fileUpload(file, data);
 		
@@ -68,23 +65,31 @@ public class FileUtil {
 		}
 	}
 	
-	public void fileDownload(Map<String, Object> params) {
+	public Map<String, Object> fileDownload(Map<String, Object> params) {
 		FileDto result = fileMapper.selectFile(params);
 		log.info("\n\n{}\n\n", result.toString());
-		String fileName = result.getFileName();
 		String fileId = result.getFileId();
 		String filePath = result.getFilePath()+fileId;
-		log.info("\n\n{}\n\n", filePath);
+		byte[] binary = getFileBinary(filePath);
 		
-		try {
-			Resource resource = new UrlResource(Paths.get(filePath).toUri());
-			log.info("\n\n{}\n\n", resource);
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
+		String base64data = Base64.getEncoder().encodeToString(binary);
+		log.info("\n\nbase64data ===> {}\n\n", base64data);
+		Map<String, Object> result1 = new HashMap<>();
+		result1.put("data", base64data);
+		result1.put("fileName", result.getFileName());
+		
+		return result1;
+	}
+	
+	private static byte[] getFileBinary(String filePath) {
+		File file = new File(filePath);
+		byte[] data = new byte[(int) file.length()];
+		try(FileInputStream stream = new FileInputStream(file)){
+			stream.read(data, 0, data.length);
+		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		log.info("\n\n{}\n\n", ResourceUtils.CLASSPATH_URL_PREFIX+"static/file/"+result.getFileId());
+		return data;
 	}
 }
 
