@@ -83,7 +83,7 @@ public class UserService {
 	}
 	
 	public void logout(HttpSession session) {
-		session.removeAttribute("user_no");
+		session.invalidate();
 	}
 	
 	public void find() {
