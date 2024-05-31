@@ -13,6 +13,7 @@ import com.simple.community.commons.PagingInfo;
 import com.simple.community.entity.BoardDto;
 import com.simple.community.mapper.BoardFileMapper;
 import com.simple.community.mapper.BoardMapper;
+import com.simple.community.mapper.ReplyMapper;
 
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
@@ -26,6 +27,9 @@ public class BoardService {
 	
 	@Autowired
 	private FileUtil fileUtil;
+	
+	@Autowired
+	private ReplyMapper replyMapper;
 	
 	@Autowired
 	private BoardFileMapper boardFileMapper;
@@ -66,8 +70,12 @@ public class BoardService {
 		return cnt;
 	}
 	
-	public BoardDto boardDetiles(Map<String, Object> params) {
-		return boardMapper.boardDetiles(params);
+	public Map<String, Object> boardDetiles(Map<String, Object> params) {
+		Map<String, Object> result = new HashMap<>();
+		result.put("data", boardMapper.boardDetiles(params));
+		result.put("reply", replyMapper.replyList(params));
+		
+		return result;
 	}
 	
 	@Transactional

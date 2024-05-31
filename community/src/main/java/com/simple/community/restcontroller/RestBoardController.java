@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.simple.community.entity.BoardDto;
 import com.simple.community.service.BoardService;
 import com.simple.community.service.LikeService;
 
@@ -38,7 +37,7 @@ public class RestBoardController {
 	}
 	
 	@GetMapping("/details")
-	public BoardDto details(@RequestParam Map<String, Object> params) {
+	public Map<String, Object> details(@RequestParam Map<String, Object> params) {
 		return boardService.boardDetiles(params);
 	}
 	

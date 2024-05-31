@@ -3,6 +3,7 @@
 <title>게시물 상세페이지</title>
 <header th:include="header :: header"></header>
 <script type="text/javascript" src="../js/board/board-details.js"></script>
+<script type="text/javascript" src="../js/board/board-reply.js"></script>
 <div class="main_container">
 	<div style="width: 100%; text-align: center">
 		게시물 상세
@@ -35,9 +36,11 @@
 					<th>작성일</th>
 				</tr>
 			</thead>
-			<tbody id="boardDataDetails">
+			<tbody id="replyDataList">
 			</tbody>
 		</table>
+		<input id="replyContent" name="replyContent" />
+		<button type="button" id="addReplyBtn">작성</button>
 	</div>
 </div>
 <footer th:include="footer :: footer"></footer>

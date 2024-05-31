@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.simple.community.mapper.ReplyMapper" >
+
+	<insert id="replyReg">
+		INSERT INTO TP_REPLY(
+			REPLY_NO
+			,BOARD_NO
+			,USER_NO
+			,REPLY_CONTENT
+			,REG_ID
+			,REG_DATE
+			,MOD_DATE
+			,MOD_ID
+			,UPPER_NO
+			,SEAT_NO
+			,DEL_FG
+		)VALUES(
+			REPLY_SEQ.NEXTVAL
+			,#{boardNo}
+			,#{userNo}
+			,#{replyContent}
+			,#{userNo}
+			,SYSDATE
+			,SYSDATE
+			,#{userNo}
+			<choose>
+				<when test="upperNo != null and upperNo != ''">
+					,#{upperNo}
+				</when>
+				<otherwise>
+					,'0'
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="seatNo != null and seatNo != ''">
+					,#{seatNo}
+				</when>
+				<otherwise>
+					,'0'
+				</otherwise>
+			</choose>
+			,'0'
+		)
+	</insert>
+	
+	<select id="replyList" resultType="com.simple.community.entity.ReplyDto" parameterType="map">
+		SELECT
+			TR.REPLY_NO
+			,TR.BOARD_NO
+			,TR.USER_NO
+			,TR.REPLY_CONTENT
+			,TR.MOD_ID
+			,TR.MOD_DATE
+			,TR.UPPER_NO
+			,TR.SEAT_NO
+			,TU.USER_ID
+		FROM TP_REPLY TR
+		LEFT JOIN TP_USER TU ON TR.USER_NO = TU.USER_NO
+		<where>
+			AND DEL_FG = 0
+			AND BOARD_NO = #{boardNo}
+		</where>
+	</select>
+	
+	<update id="replyDelete">
+		UPDATE TP_REPLY
+		<set>
+			DEL_FG = 1
+		</set>
+		<where>
+			AND REPLY_NO = #{replyNo}
+			AND USER_NO = #{userNo}
+		</where>
+	</update>
+	
+	<select id="replyDetiles" resultType="com.simple.community.entity.ReplyDto" parameterType="map">
+		SELECT * FROM TP_REPLY
+		<where>
+			AND REPLY_NO = #{replyNo}
+		</where>
+	</select>
+	
+</mapper>

@@ -70,7 +70,10 @@ function dataLoad(boardNo){
 	});
 }
 
-function dataInfo(data){
+function dataInfo(resp){
+	var data = resp.data;
+	var reply = resp.reply;
+	
 	if(data.userNo == $("#userNo").text()){
 		$("#editBtn").show();
 		$("#deleteBtn").show();
@@ -87,6 +90,7 @@ function dataInfo(data){
 	html += "</tr>";
 	
 	$("#boardDataDetails").html(html);
+	 replyList(reply);
 }
 
 function fileDownload(fileNo){
