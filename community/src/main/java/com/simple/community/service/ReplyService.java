@@ -38,6 +38,7 @@ public class ReplyService {
 	}
 	
 	public ReplyDto replyDetiles(Map<String, Object> params) {
+		log.info("\n\n{}\n", params);
 		return replyMapper.replyDetiles(params);
 	}
 }

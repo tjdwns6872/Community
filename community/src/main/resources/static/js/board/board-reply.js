@@ -2,7 +2,13 @@ $(function(){
 	
 	$("#addReplyBtn").click(replyFunc);
 	
+	
+	$(document).on("click", "#replyEditBtn", replyUpdate);
 });
+
+function replyUpdate(){
+	console.log("test");
+}
 
 function replyFunc(){
 	
@@ -43,9 +49,10 @@ function replyList(data){
 }
 
 function replyEdit(replyNo){
+	var boardNo = $("#boardNo").text();
+	dataLoad(boardNo);
 	
 	var data = {"replyNo":replyNo};
-	
 	$.ajax({
 		url:"/rest/reply/detile",
 		type:"GET",
@@ -53,18 +60,16 @@ function replyEdit(replyNo){
 		dataType: 'json',
 		data:data,
 		success:function(resp){
-			console.log(resp);
+			//데이터 가져오기
+			$("#reply_"+replyNo).empty();
+	
+			var html = "";
+			html += "<td><input type=text id=editText value='"+resp.replyContent+"'></td>";
+			html += "<td><button id=replyEditBtn>수정</button></td>";
+	
+			$("#reply_"+replyNo).html(html);
 		}
 	});
-	
-	//데이터 가져오기
-	$("#reply_"+replyNo).empty();
-	
-	var html = "";
-	html += "<td><input type=text id=editText></td>";
-	html += "<td><button>수정</button></td>";
-	
-	$("#reply_"+replyNo).html(html);
 }
 
 function replyDelete(replyNo){

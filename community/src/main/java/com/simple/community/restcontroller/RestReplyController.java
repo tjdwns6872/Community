@@ -40,7 +40,7 @@ public class RestReplyController {
 	}
 	
 	@GetMapping("/detile")
-	public ReplyDto replyDetiles(Map<String, Object> params) {
+	public ReplyDto replyDetiles(@RequestParam Map<String, Object> params) {
 		return replyService.replyDetiles(params);
 	}
 }

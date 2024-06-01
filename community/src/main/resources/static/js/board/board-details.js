@@ -64,6 +64,7 @@ function dataLoad(boardNo){
 		contentType: 'application/json',
 		dataType: 'json',
 		data:data,
+		async:false,
 		success:function(resp){
 			dataInfo(resp);
 		}
