@@ -66,6 +66,18 @@
 		</where>
 	</select>
 	
+	<update id="replyUpdate">
+		UPDATE TP_REPLY
+		<set>
+			REPLY_CONTENT = #{replyContent}
+			,MOD_DATE = SYSDATE
+			,MOD_ID = #{userNo}
+		</set>
+		<where>
+			AND REPLY_NO = #{replyNo}
+		</where>
+	</update>
+	
 	<update id="replyDelete">
 		UPDATE TP_REPLY
 		<set>

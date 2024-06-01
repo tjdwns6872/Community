@@ -41,6 +41,13 @@ public class ReplyService {
 		log.info("\n\n{}\n", params);
 		return replyMapper.replyDetiles(params);
 	}
+	
+	@Transactional
+	public Integer replyUpdate(Map<String, Object> params, HttpSession session) {
+		params.put("userNo", session.getAttribute("user_no"));
+		log.info("\n\n{}\n\n", params);
+		return replyMapper.replyUpdate(params);
+	}
 }
 
 

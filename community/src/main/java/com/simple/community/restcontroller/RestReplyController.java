@@ -43,6 +43,11 @@ public class RestReplyController {
 	public ReplyDto replyDetiles(@RequestParam Map<String, Object> params) {
 		return replyService.replyDetiles(params);
 	}
+	
+	@PutMapping("/update")
+	public Integer replyUpdate(@RequestBody Map<String, Object> params, HttpSession session) {
+		return replyService.replyUpdate(params, session);
+	}
 }
 
 

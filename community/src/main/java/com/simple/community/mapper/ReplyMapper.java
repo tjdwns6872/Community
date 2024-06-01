@@ -17,4 +17,6 @@ public interface ReplyMapper {
 	Integer replyDelete(Map<String, Object> params);
 	
 	ReplyDto replyDetiles(Map<String, Object> params);
+	
+	Integer replyUpdate(Map<String, Object> params);
 }

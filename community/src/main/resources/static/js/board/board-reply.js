@@ -7,7 +7,27 @@ $(function(){
 });
 
 function replyUpdate(){
-	console.log("test");
+	
+	var data = {}
+	var boardNo = $("#boardNo").text();
+	var replyContent = $("#editText").val();
+	var tr = $("#editText").parent().parent()[0];
+	var replyNo = tr.id.substring(tr.id.indexOf('_')+1, tr.id.length);
+
+	data['replyContent'] = replyContent;	
+	data['replyNo'] = replyNo;	
+	
+	$.ajax({
+		url:"/rest/reply/update",
+		type:"PUT",
+		data:JSON.stringify(data),
+		contentType: "application/json",
+		dataType: 'json',
+		success:function(resp){
+			console.log(resp);
+			dataLoad(boardNo);
+		}
+	});
 }
 
 function replyFunc(){
