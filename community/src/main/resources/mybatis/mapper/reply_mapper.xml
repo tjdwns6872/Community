@@ -10,19 +10,18 @@
 			REPLY_NO
 			,BOARD_NO
 			,USER_NO
-			,REPLY_CONTENT
 			,REG_ID
 			,REG_DATE
 			,MOD_DATE
 			,MOD_ID
 			,UPPER_NO
+			,REPLY_CONTENT
 			,SEAT_NO
 			,DEL_FG
 		)VALUES(
 			REPLY_SEQ.NEXTVAL
 			,#{boardNo}
 			,#{userNo}
-			,#{replyContent}
 			,#{userNo}
 			,SYSDATE
 			,SYSDATE
@@ -30,9 +29,11 @@
 			<choose>
 				<when test="upperNo != null and upperNo != ''">
 					,#{upperNo}
+					,#{replyContent2}
 				</when>
 				<otherwise>
 					,'0'
+					,#{replyContent}
 				</otherwise>
 			</choose>
 			<choose>

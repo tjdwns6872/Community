@@ -1,7 +1,10 @@
 $(function(){
 	
-	$("#addReplyBtn").click(replyFunc);
+	//$("#addReplyBtn").click(replyFunc(0));
 	
+	$("#addReplyBtn").click(function(){
+		replyFunc(0)
+	});
 	
 	$(document).on("click", "#replyEditBtn", replyUpdate);
 });
@@ -30,11 +33,24 @@ function replyUpdate(){
 	});
 }
 
-function replyFunc(){
+function reply2(upperNo){
+	var tr = $("#reply_"+upperNo);
+	
+	var html = "";
+	html += "<td><input type=text id=reply2Content value=''></td>";
+	html += "<td><button id=addReply2Btn onclick='replyFunc("+upperNo+")'>등록</button></td>";
+	tr.append(html);
+}
+
+function replyFunc(upperNo=0){
 	
 	var data = {};
 	var content = $("input[name=replyContent]").val();
 	var boardNo = $("#boardNo").text();
+	if(upperNo != 0){
+		data["upperNo"] = upperNo;
+		data["replyContent2"] = $("#reply2Content").val();
+	}
 	
 	data["replyContent"] = content;
 	data["boardNo"] = boardNo;
@@ -62,6 +78,7 @@ function replyList(data){
 		html += "<td>"+item.modDate+"</td>";
 		html += "<td><a href=javascript:replyDelete("+item.replyNo+")>삭제</a></td>"; //아이콘 넣을 예정
 		html += "<td><a href=javascript:replyEdit("+item.replyNo+")>수정</a></td>"; //아이콘 넣을 예정
+		html += "<td><a href=javascript:reply2("+item.replyNo+")>답글</a></td>"; //아이콘 넣을 예정
 		html += "</tr>";
 	});
 	
