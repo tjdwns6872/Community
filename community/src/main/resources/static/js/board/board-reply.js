@@ -133,13 +133,14 @@ function replyEdit(replyNo){
 		data:data,
 		success:function(resp){
 			//데이터 가져오기
-			$("#reply_"+replyNo).empty();
+			console.log(resp);
+			$("#reply"+(resp.seatNo+1)+"_"+replyNo).empty();
 	
 			var html = "";
 			html += "<td><input type=text id=editText value='"+resp.replyContent+"'></td>";
 			html += "<td><button id=replyEditBtn>수정</button></td>";
 	
-			$("#reply_"+replyNo).html(html);
+			$("#reply"+(resp.seatNo+1)+"_"+replyNo).html(html);
 		}
 	});
 }
