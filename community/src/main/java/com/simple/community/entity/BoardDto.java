@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Data @Builder @AllArgsConstructor @NoArgsConstructor
 public class BoardDto {
 
+	private Integer rowNum;
 	private Integer boardNo;
 	private Integer categoryNo;
 	private Integer userNo;

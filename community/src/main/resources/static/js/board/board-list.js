@@ -44,10 +44,11 @@ function listData(data){
 	if(list.length > 0 && list != undefined){
 		$("#boardDataList").empty();		
 	}
+	console.log(list);
 	var html = "";
 	$.each(list, function(index, item){
 		html += "<tr>";
-		html += "<td>"+item.boardNo+"</td>";
+		html += "<td>"+item.rowNum+"</td>";
 		html += "<td>"+item.categoryName+"</td>";
 		html += "<td><a href='#' id='moveDetails' data-no="+item.boardNo+">"+item.boardTitle+"</a></td>";
 		html += "<td>"+item.userId+"</td>";
