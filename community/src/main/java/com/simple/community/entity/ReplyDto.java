@@ -19,6 +19,7 @@ public class ReplyDto {
 	private Integer modId;
 	private Date modDate;
 	private Integer upperNo;
+	private Integer subupperNo;
 	private Integer seatNo;
 	private Integer delFg;
 

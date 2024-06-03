@@ -16,6 +16,7 @@
 			,MOD_ID
 			,UPPER_NO
 			,REPLY_CONTENT
+			,SUBUPPER_NO
 			,SEAT_NO
 			,DEL_FG
 		)VALUES(
@@ -34,6 +35,14 @@
 				<otherwise>
 					,'0'
 					,#{replyContent}
+				</otherwise>
+			</choose>
+			<choose>
+				<when test="subupperNo != null and subupperNo != ''">
+					,#{subupperNo}
+				</when>
+				<otherwise>
+					,'0'
 				</otherwise>
 			</choose>
 			<choose>
@@ -57,6 +66,7 @@
 			,TR.MOD_ID
 			,TR.MOD_DATE
 			,TR.UPPER_NO
+			,TR.SUBUPPER_NO
 			,TR.SEAT_NO
 			,TU.USER_ID
 		FROM TP_REPLY TR
@@ -65,6 +75,7 @@
 			AND DEL_FG = 0
 			AND BOARD_NO = #{boardNo}
 		</where>
+		ORDER BY REPLY_NO ASC
 	</select>
 	
 	<update id="replyUpdate">
