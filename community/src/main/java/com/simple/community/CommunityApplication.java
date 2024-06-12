@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableAutoConfiguration
 @ComponentScan
 @MapperScan("com.simple.community.mapper")
+@MapperScan("com.simple.community.admin.mapper")
 @EnableTransactionManagement
 public class CommunityApplication {
 
