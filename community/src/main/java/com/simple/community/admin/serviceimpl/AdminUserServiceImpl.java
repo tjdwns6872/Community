@@ -38,7 +38,7 @@ public class AdminUserServiceImpl implements AdminUserService{
 				if(check) {
 					ajaxResult.createSuccess(data);
 					session.setAttribute("userNo", data.getUserNo());
-					session.setAttribute("userNo", data.getUserRank());
+					session.setAttribute("userRank", data.getUserRank());
 				}
 			}
 		}catch (Exception e) {
