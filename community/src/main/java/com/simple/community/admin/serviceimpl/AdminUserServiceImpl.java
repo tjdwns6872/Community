@@ -51,15 +51,9 @@ public class AdminUserServiceImpl implements AdminUserService{
 	}
 	
 	public boolean login(UserDto userDto, String password, String id) {
-		boolean check = false;
-		try {
-			String checkPw = ShaUtil.sha256Encode(password);
-			if(id.equals(userDto.getUserId()) && checkPw.equals(userDto.getUserPw())) { 
-				check = true; 
-			}
-		}catch (Exception e) {
-			check = false;
-		}
+		String checkPw = ShaUtil.sha256Encode(password);
+		boolean check = id.equals(userDto.getUserId()) && checkPw.equals(userDto.getUserPw());
+		
 		return check;
 	}
 }
