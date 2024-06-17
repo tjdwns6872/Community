@@ -4,7 +4,33 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.simple.community.admin.mapper.AdminUserMapper" >
-	<select id="testSql" resultType="String">
-		SELECT SYSDATE FROM dual
+	<select id="getOne" resultType="com.simple.community.entity.UserDto">
+		SELECT 
+			USER_NO
+			,USER_ID
+			,USER_PW
+			,USER_NAME
+			,USER_EMAIL
+			,USER_PHONE
+			,USER_GENDER
+			,USER_RANK
+			,USER_START_DATE
+			,USER_CHECK
+			FROM TP_USER
+			<where>
+				AND USER_CHECK = 0
+				AND USER_RANK = 1
+				<if test="userId != null and userId != ''">
+					AND USER_ID = #{userId}
+				</if>
+				<if test="userNo != null and userNo != ''">
+					AND USER_NO = #{userNo}
+				</if>
+				<if test="userEmail != null and userEmail != ''">
+					AND USER_EMAIL = #{userEmail}
+				</if>
+			</where>
 	</select>
 </mapper>
+
+
