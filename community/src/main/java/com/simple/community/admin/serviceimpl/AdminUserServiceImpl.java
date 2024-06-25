@@ -34,7 +34,7 @@ public class AdminUserServiceImpl implements AdminUserService{
 			UserDto data = adminUserMapper.getOne(params);
 			ajaxResult.createError("아이디 혹은 비밀번호가 틀렸습니다.");
 			if(!Objects.isNull(data)) {
-				boolean check = login(data, params.get("password").toString(), params.get("userId").toString());
+				boolean check = login(data, params.get("userPw").toString(), params.get("userId").toString());
 				if(check) {
 					ajaxResult.createSuccess(data);
 					session.setAttribute("userNo", data.getUserNo());
