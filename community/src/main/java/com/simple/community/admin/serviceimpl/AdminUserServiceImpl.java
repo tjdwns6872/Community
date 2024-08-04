@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import org.mybatis.spring.MyBatisSystemException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,17 +31,23 @@ public class AdminUserServiceImpl implements AdminUserService{
 		
 		Map<String, Object> result = new HashMap<>();
 		HttpSession session = (HttpSession) params.get("session");
+		log.info("\nAdminUserService(params)===>{}", params.toString());
 		try {
 			UserDto data = adminUserMapper.getOne(params);
-			ajaxResult.createError("아이디 혹은 비밀번호가 틀렸습니다.");
 			if(!Objects.isNull(data)) {
 				boolean check = login(data, params.get("userPw").toString(), params.get("userId").toString());
 				if(check) {
-					ajaxResult.createSuccess(data);
+					Map<String, Object> sessionData = new HashMap<>();
 					session.setAttribute("userNo", data.getUserNo());
 					session.setAttribute("userRank", data.getUserRank());
+					log.info("\n\nuserNo====>{}",session.getAttribute("userNo"));
+					log.info("\n\nsession====>{}",session.getAttributeNames());
+					ajaxResult.createSuccess(data);
 				}
 			}
+		}catch(MyBatisSystemException e) {
+			log.error("{}", e);
+			ajaxResult.createError("아이디 혹은 비밀번호가 틀렸습니다.");
 		}catch (Exception e) {
 			//Exception 처리 조금 더 공부하고 진행
 			log.error("{}", e);
