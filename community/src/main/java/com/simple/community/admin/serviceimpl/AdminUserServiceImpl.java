@@ -30,18 +30,12 @@ public class AdminUserServiceImpl implements AdminUserService{
 	public Map<String, Object> getOne(Map<String, Object> params) {
 		
 		Map<String, Object> result = new HashMap<>();
-		HttpSession session = (HttpSession) params.get("session");
 		log.info("\nAdminUserService(params)===>{}", params.toString());
 		try {
 			UserDto data = adminUserMapper.getOne(params);
 			if(!Objects.isNull(data)) {
 				boolean check = login(data, params.get("userPw").toString(), params.get("userId").toString());
 				if(check) {
-					Map<String, Object> sessionData = new HashMap<>();
-					session.setAttribute("userNo", data.getUserNo());
-					session.setAttribute("userRank", data.getUserRank());
-					log.info("\n\nuserNo====>{}",session.getAttribute("userNo"));
-					log.info("\n\nsession====>{}",session.getAttributeNames());
 					ajaxResult.createSuccess(data);
 				}
 			}
@@ -63,4 +57,5 @@ public class AdminUserServiceImpl implements AdminUserService{
 		
 		return check;
 	}
+
 }

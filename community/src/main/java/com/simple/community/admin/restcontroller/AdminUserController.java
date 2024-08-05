@@ -23,8 +23,7 @@ public class AdminUserController {
 	private AdminUserService UserService;
 	
 	@GetMapping("/login")
-	public Map<String, Object> login(@RequestParam Map<String, Object> params, HttpSession session){
-		params.put("session", session);
+	public Map<String, Object> login(@RequestParam Map<String, Object> params){
 		return UserService.getOne(params);
 	}
 	
