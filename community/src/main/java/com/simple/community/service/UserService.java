@@ -43,6 +43,7 @@ public class UserService {
 	
 	public UserDto getOne(HttpSession session){
 		UserDto userDto = new UserDto();
+		userDto.setUserNo((int) session.getAttribute("user_no"));
 		UserDto map = userMapper.getOne(userDto);
 		return map;
 	}

@@ -8,7 +8,7 @@ function logout(){
 		url:"/rest/user/logout",
 		type:"GET",
 		success:function(){
-			location.reload();
+			location.href='/';
 		}
 	});
 }
