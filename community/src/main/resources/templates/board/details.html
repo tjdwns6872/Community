@@ -1,47 +1,47 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <title>게시물 상세페이지</title>
-<header th:include="header :: header"></header>
-<script type="text/javascript" src="../js/board/board-details.js"></script>
-<script type="text/javascript" src="../js/board/board-reply.js"></script>
 <div class="main_container">
-	<div style="width: 100%; text-align: center">
+	<header th:include="header :: header"></header>
+	<script type="text/javascript" src="../js/board/board-details.js"></script>
+	<script type="text/javascript" src="../js/board/board-reply.js"></script>
+	<div class="container">
 		게시물 상세
+		<span id="boardNo"  th:text="${params.boardNo}" style="display: none;"></span>
+		<div id="boardList">
+			<table>
+				<thead>
+					<tr>
+						<th>타이틀</th>
+						<th>카테고리</th>
+						<th>작성자</th>
+						<th>파일명</th>
+					</tr>
+				</thead>
+				<tbody id="boardDataDetails">
+				</tbody>
+			</table>
+		</div>
+		<span id="likeBtn">하트</span>
+		<button id="editBtn" style="display: none;">수정</button>
+		<button id="deleteBtn" style="display: none;">삭제</button>
+		<button id="listBtn">목록</button>
+		<div id="replyList">
+			<table>
+				<thead>
+					<tr>
+						<th>아이디</th>
+						<th>내용</th>
+						<th>작성일</th>
+					</tr>
+				</thead>
+				<tbody id="replyDataList">
+				</tbody>
+			</table>
+			<input id="replyContent" name="replyContent" />
+			<button type="button" id="addReplyBtn">작성</button>
+		</div>
 	</div>
-	<span id="boardNo"  th:text="${params.boardNo}" style="display: none;"></span>
-	<div id="boardList">
-		<table>
-			<thead>
-				<tr>
-					<th>타이틀</th>
-					<th>카테고리</th>
-					<th>작성자</th>
-					<th>파일명</th>
-				</tr>
-			</thead>
-			<tbody id="boardDataDetails">
-			</tbody>
-		</table>
-	</div>
-	<span id="likeBtn">하트</span>
-	<button id="editBtn" style="display: none;">수정</button>
-	<button id="deleteBtn" style="display: none;">삭제</button>
-	<button id="listBtn">목록</button>
-	<div id="replyList">
-		<table>
-			<thead>
-				<tr>
-					<th>아이디</th>
-					<th>내용</th>
-					<th>작성일</th>
-				</tr>
-			</thead>
-			<tbody id="replyDataList">
-			</tbody>
-		</table>
-		<input id="replyContent" name="replyContent" />
-		<button type="button" id="addReplyBtn">작성</button>
-	</div>
+	<footer th:include="footer :: footer"></footer>
 </div>
-<footer th:include="footer :: footer"></footer>
 </html>

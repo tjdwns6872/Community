@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <title>게시물 수정</title>
-<header th:include="header :: header"></header>
-<script type="text/javascript" src="../js/board/board-edit.js"></script>
 <div class="main_container">
-	<div style="width: 100%; text-align: center">
+	<header th:include="header :: header"></header>
+	<script type="text/javascript" src="../js/board/board-edit.js"></script>
+	<div class="container">
 		게시물 수정
+		<form id="updateForm">
+			<input type="hidden" id="boardNo" name="boardNo"  th:value="${params.boardNo}" >
+			제목<input type="text" id="boardTitle" name="boardTitle">
+			카테고리<select id="categoryList" name=categoryNo></select>
+			내용<textarea id="boardContent" name="boardContent"></textarea>
+		</form>
+		<button id="updateBtn">수정</button>
+		<button id="listBtn">목록</button>
 	</div>
-	<form id="updateForm">
-		<input type="hidden" id="boardNo" name="boardNo"  th:value="${params.boardNo}" >
-		제목<input type="text" id="boardTitle" name="boardTitle">
-		카테고리<select id="categoryList" name=categoryNo></select>
-		내용<textarea id="boardContent" name="boardContent"></textarea>
-	</form>
-	<button id="updateBtn">수정</button>
-	<button id="listBtn">목록</button>
+	<footer th:include="footer :: footer"></footer>
 </div>
-<footer th:include="footer :: footer"></footer>
 </html>

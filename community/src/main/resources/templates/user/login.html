@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <title>로그인</title>
-<header th:include="header :: header"></header>
-<script type="text/javascript" src="../js/user/user-login.js"></script>
 <div class="main_container">
-	<div style="width: 100%; text-align: center">
+	<header th:include="header :: header"></header>
+	<script type="text/javascript" src="../js/user/user-login.js"></script>
+	<div class="container">
 		<form id="login-form">
 			<label>아이디:<input type="text" name="userId" id="userId"></label>
 			<label>비밀번호:<input type="password" name="userPw" id="userPw"></label>
@@ -12,6 +12,6 @@
 		<button id="login_btn" class="btn">로그인</button>
 		<a href="/user/find">아이디/비밀번호 찾기</a>
 	</div>
+	<footer th:include="footer :: footer"></footer>
 </div>
-<footer th:include="footer :: footer"></footer>
 </html>

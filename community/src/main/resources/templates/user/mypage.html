@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <title>마이페이지</title>
-<header th:include="header :: header"></header>
-<script type="text/javascript" src="../js/user/user-mypage.js"></script>
 <div class="main_container">
-	<div style="width: 100%; text-align: center">
+	<header th:include="header :: header"></header>
+	<script type="text/javascript" src="../js/user/user-mypage.js"></script>
+	<div class="container">
 		마이페이지
 		<p id="userNo" th:text="${user_no}"></p>
 		<button id="deleteUser">회원탈퇴</button>
 	</div>
+	<footer th:include="footer :: footer"></footer>
 </div>
-<footer th:include="footer :: footer"></footer>
 </html>

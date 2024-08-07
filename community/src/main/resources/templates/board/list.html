@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <title>게시물 목록</title>
-<header th:include="header :: header"></header>
-<script type="text/javascript" src="../js/board/board-list.js"></script>
-<script type="text/javascript" src="../js/commons/paging.js"></script>
 <div class="main_container">
-	<div style="width: 100%; text-align: center">
-		게시물 목록
+	<header th:include="header :: header"></header>
+	<script type="text/javascript" src="../js/board/board-list.js"></script>
+	<script type="text/javascript" src="../js/commons/paging.js"></script>
+	<div class="container">
+			게시물 목록
+		<div id="searchDiv">
+			<select id="categoryList" name="category"></select>
+			<input type="text" name="keyword">
+			<button id="searchBtn">검색</button>
+		</div>
+		<div id="boardList">
+			<table>
+				<thead>
+					<tr>
+						<th>번호</th>
+						<th>카테고리</th>
+						<th>제목</th>
+						<th>작성자</th>
+						<th>날짜</th>
+					</tr>
+				</thead>
+				<tbody id="boardDataList">
+				</tbody>
+			</table>
+		</div>
+		<div class="pagination" id="paginDiv">
+		</div>
+		<a href="/board/reg">게시물 등록</a>
 	</div>
-	<div id="searchDiv">
-		<select id="categoryList" name="category"></select>
-		<input type="text" name="keyword">
-		<button id="searchBtn">검색</button>
-	</div>
-	<div id="boardList">
-		<table>
-			<thead>
-				<tr>
-					<th>번호</th>
-					<th>카테고리</th>
-					<th>제목</th>
-					<th>작성자</th>
-					<th>날짜</th>
-				</tr>
-			</thead>
-			<tbody id="boardDataList">
-			</tbody>
-		</table>
-	</div>
-	<div class="pagination" id="paginDiv">
-	</div>
-	<a href="/board/reg">게시물 등록</a>
 </div>
 <footer th:include="footer :: footer"></footer>
 </html>

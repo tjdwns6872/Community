@@ -6,40 +6,27 @@
 <body>
 	<div class="container">
     	<header>
-    	<link href="../css/commons.css" type="text/css" rel="stylesheet">
-		<script type="text/javascript" src="../js/jquery-3.7.1.min.js"></script>
-		<script type="text/javascript" src="../js/commons/commons.js"></script>
-		<script>
-		</script>
-      	<a href="/">
-        	<!-- <svg width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg> -->
-      	</a>
-      	<ul>
-        	<li><a href="/">Home</a></li>
-        	<li><a href="/board/list">board</a></li>
-      	</ul>
-
-      	<div>
-      		<th:block th:if="${session.user_no}">
-				<button type="button" onclick="location.href='/user/mypage'">마이페이지</button>
-				<button type="button" id="logout">로그아웃</button>
-			</th:block>
-			<th:block th:unless = "${session.user_no}">
-        		<button type="button" onclick="location.href='/user/login'">로그인</button>
-        		<button type="button" onclick="location.href='/user/join'">회원가입</button>
-			</th:block>
-      	</div>
-    </header>
+    		<link href="../css/commons.css" type="text/css" rel="stylesheet">
+			<script type="text/javascript" src="../js/jquery-3.7.1.min.js"></script>
+			<script type="text/javascript" src="../js/commons/commons.js"></script>
+      		<nav>
+      			<ul>
+      				<li><span>LOGO</span></li>
+        			<li><a href="/">Home</a></li>
+        			<li><a href="/board/list">board</a></li>
+        			<li><a href="/board/list">board</a></li>
+        			<li><a>wjqfc227</a></li>
+        			<li class='btn-li'>
+        				<th:block th:if="${session.user_no}">
+							<button type="button" onclick="location.href='/user/mypage'">마이페이지</button>
+							<button type="button" id="logout">로그아웃</button>
+						</th:block>
+						<th:block th:unless = "${session.user_no}">
+        					<button type="button" onclick="location.href='/user/login'">로그인</button>
+        					<button type="button" onclick="location.href='/user/join'">회원가입</button>
+						</th:block>
+        			</li>
+      			</ul>
+      		</nav>
+    	</header>
   	</div>
-	<!-- <header>
-        <nav>
-        	헤더(wjqfc227)
-        	<span id="userNo"  th:text="${session.user_no}"></span>
-        	<span id="userRank"  th:text="${session.user_rank}"></span>
-        	<a href="/user/mypage" th:if="${session.user_no}">마이페이지</a>
-        	<a href="/board/list">게시판</a>
-        	<a href="/">홈으로</a>
-        	<a href="#" id="logout">로그아웃</a>
-        </nav>
-    </header>-->
-    
