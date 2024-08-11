@@ -2,13 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <title>아이디/비밀번호찾기</title>
 <div class="main_container">
-	<header th:include="header :: header"></header>
+	<header th:include="header :: div"></header>
 	<script type="text/javascript" src="/js/user/user-find.js"></script>
-	<div style="width: 100%; text-align: center">
+	<div class="container">
 		<label>아이디찾기<input data-find="id" type="radio" id="find_btn"  name="find_btn" checked></label>
 		<label>비밀번호찾기<input data-find="pw" type="radio" id="find_btn" name="find_btn"></label>
 	</div>
-	<div id="find" style="width: 100%; text-align: center">
+	<div id="find" class="container">
 		<input type="hidden" id="serialNo" name="serialNo">
 		<label>이름:<input type="text" name="userName" id="userName"></label>
 		<label id="id_input" style="display: none;">아이디:<input type="text" name="userId" id="userId"></label>
@@ -23,6 +23,6 @@
 	<div id="pw_find">
 		<h2 id="pw_text"></h2>
 	</div>
-	<footer th:include="footer :: footer"></footer>
+	<footer th:include="footer :: div"></footer>
 </div>
 </html>

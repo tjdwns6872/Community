@@ -67,15 +67,17 @@ public class EmailSerialService {
 		int cnt = checkSerial(emailDto);
 		if(cnt > 0) {
 			userDto.setUserEmail(emailDto.getUserEmail());
-			userDto.setUserId(emailDto.getUserId());
 			deleteSerial(emailDto);
 			if(emailDto.getType().equals("pw")) {
+				userDto.setUserId(emailDto.getUserId());
 				String change = userService.changePw(userDto);
 				if(change == null) {
 					throw new Exception("비밀번호 변경 실패");
 				}else {
 					userDto.setUserPw(change);
 				}
+			}else {
+				userDto = (UserDto) userService.getOne(userDto, null, null).get("userData");
 			}
 			return userDto;
 		}

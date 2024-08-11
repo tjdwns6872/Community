@@ -29,7 +29,9 @@ public class UserService {
 		log.info("\n\n\n{}\n\n\n", userDto.toString());
 		UserDto map = userMapper.getOne(userDto);
 		Map<String, Object> params = new HashMap<>();
-		if(type.equals("login")) {
+		if(type == null || type.isBlank()) {
+			params.put("userData", map);
+		}else if(type.equals("login")) {
 			boolean result = login(userDto, map.getUserPw(), map.getUserId());
 			params.put("result", 0);
 			if(result) {
