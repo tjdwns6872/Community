@@ -55,17 +55,18 @@ public class BoardService {
 	
 	@Transactional
 	public int boardReg(Map<String, Object> params, HttpSession session) {
-		String base64File = params.get("uploadFile").toString();
-		String fileName = params.get("fileName").toString();
-		
-		int fileNo = fileUtil.fileChange(base64File, fileName, 1);
-		
-		log.info("\n\n{}\n\n", fileNo);
-		
+		log.info("\n\n\n{}", params.toString());
 		params.put("userNo", session.getAttribute("user_no"));
-		params.put("fileNo", fileNo);
 		int cnt = boardMapper.boardInsert(params);
-		boardFileMapper.boardFileInsert(params);
+
+		if(params.containsKey("uploadFile")) {			
+			String base64File = params.get("uploadFile").toString();
+			String fileName = params.get("fileName").toString();
+			
+			int fileNo = fileUtil.fileChange(base64File, fileName, 1);
+			params.put("fileNo", fileNo);
+			boardFileMapper.boardFileInsert(params);
+		}
 		
 		return cnt;
 	}
