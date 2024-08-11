@@ -53,6 +53,7 @@ function dataLoad(boardNo){
 }
 
 function dataInfo(data){
+	var data = data.data;
 	$("#boardTitle").val(data.boardTitle);
 	$("#categoryName").val(data.categoryName);
 	$("#boardContent").html(data.boardContent);
