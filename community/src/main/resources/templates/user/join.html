@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <title>회원가입</title>
-<div class="main_container">
-	<header th:include="header :: div"></header>
+<body>
+	<header th:include="header :: body"></header>
 	<script type="text/javascript" src="/js/user/user-join.js"></script>
-	<div class="container">
+	<main>
 		<h3>회원가입</h3>
 		<div id="data-container">
 			<label><input id="join_checkbox" type="checkbox">동의합니다.</label>
@@ -21,7 +21,7 @@
 			</form>
 			<button id="join_btn" class="btn">가입하기</button>
 		</div>
-	</div>
-	<footer th:include="footer :: div"></footer>
-</div>
+	</main>
+	<footer th:include="footer :: body"></footer>
+</body>
 </html>

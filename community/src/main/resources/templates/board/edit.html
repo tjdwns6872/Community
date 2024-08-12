@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <title>게시물 수정</title>
-<div class="main_container">
-	<header th:include="header :: div"></header>
+<body>
+	<header th:include="header :: body"></header>
 	<script type="text/javascript" src="/js/board/board-edit.js"></script>
-	<div class="container">
+	<main>
 		게시물 수정
 		<form id="updateForm">
 			<input type="hidden" id="boardNo" name="boardNo"  th:value="${params.boardNo}" >
@@ -14,7 +14,7 @@
 		</form>
 		<button id="updateBtn">수정</button>
 		<button id="listBtn">목록</button>
-	</div>
-	<footer th:include="footer :: div"></footer>
-</div>
+	</main>
+	<footer th:include="footer :: body"></footer>
+</body>
 </html>

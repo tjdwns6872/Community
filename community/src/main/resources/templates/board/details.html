@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <title>게시물 상세페이지</title>
-<div class="main_container">
-	<header th:include="header :: div"></header>
+<body>
+	<header th:include="header :: body"></header>
 	<script type="text/javascript" src="/js/board/board-details.js"></script>
 	<script type="text/javascript" src="/js/board/board-reply.js"></script>
-	<div class="container">
+	<main>
 		게시물 상세
 		<span id="boardNo"  th:text="${params.boardNo}" style="display: none;"></span>
 		<div id="boardList">
@@ -41,7 +41,7 @@
 			<input id="replyContent" name="replyContent" />
 			<button type="button" id="addReplyBtn">작성</button>
 		</div>
-	</div>
-	<footer th:include="footer :: div"></footer>
-</div>
+	</main>
+	<footer th:include="footer :: body"></footer>
+</body>
 </html>

@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <title>아이디/비밀번호찾기</title>
-<div class="main_container">
-	<header th:include="header :: div"></header>
+<body>
+	<header th:include="header :: body"></header>
 	<script type="text/javascript" src="/js/user/user-find.js"></script>
-	<div class="container">
+	<main>
 		<label>아이디찾기<input data-find="id" type="radio" id="find_btn"  name="find_btn" checked></label>
 		<label>비밀번호찾기<input data-find="pw" type="radio" id="find_btn" name="find_btn"></label>
-	</div>
-	<div id="find" class="container">
-		<input type="hidden" id="serialNo" name="serialNo">
-		<label>이름:<input type="text" name="userName" id="userName"></label>
-		<label id="id_input" style="display: none;">아이디:<input type="text" name="userId" id="userId"></label>
-		<label>이메일:<input type="text" name="userEmail" id="userEmail"></label>
-		<button class="serial_btn">인증번호 받기</button>
-		<label>인증번호:<input type="text" name="serial" id="serial"></label>
-		<button class="btn" id="check_btn">확인</button>
-	</div>
-	<div id="id_find">
-		<h2 id="id_text"></h2>
-	</div>
-	<div id="pw_find">
-		<h2 id="pw_text"></h2>
-	</div>
-	<footer th:include="footer :: div"></footer>
-</div>
+		<div id="find">
+			<input type="hidden" id="serialNo" name="serialNo">
+			<label>이름:<input type="text" name="userName" id="userName"></label>
+			<label id="id_input" style="display: none;">아이디:<input type="text" name="userId" id="userId"></label>
+			<label>이메일:<input type="text" name="userEmail" id="userEmail"></label>
+			<button class="serial_btn">인증번호 받기</button>
+			<label>인증번호:<input type="text" name="serial" id="serial"></label>
+			<button class="btn" id="check_btn">확인</button>
+		</div>
+		<div id="id_find">
+			<h2 id="id_text"></h2>
+		</div>
+		<div id="pw_find">
+			<h2 id="pw_text"></h2>
+		</div>
+	</main>
+	<footer th:include="footer :: body"></footer>
+</body>
 </html>
