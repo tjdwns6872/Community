@@ -1,11 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <title>메인</title>
-<div class="main_container">
-	<header th:include="header :: div"></header>
-		<div class="container">
-			메인화면
-		</div>
-	<footer th:include="footer :: div"></footer>
-</div>
+<body>
+	<header th:include="header :: body"></header>
+	<main>
+		<section class="intro">
+			<h1>Welcome to MyWebsite</h1>
+			<p>Your one-stop solution for all your needs.</p>
+		</section>
+		<section class="services">
+			<div class="service-card">
+				<h2>Service One</h2>
+				<p>High-quality service to meet your expectations.</p>
+			</div>
+			<div class="service-card">
+				<h2>Service Two</h2>
+				<p>Reliable and efficient solutions for your business.</p>
+			</div>
+			<div class="service-card">
+				<h2>Service Three</h2>
+				<p>Innovative approaches to drive your success.</p>
+			</div>
+		</section>
+	</main>
+<footer th:include="footer :: body"></footer>
+</body>
 </html>

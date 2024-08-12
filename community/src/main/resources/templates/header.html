@@ -4,28 +4,29 @@
 <meta charset="UTF-8">
 </head>
 <body>
-	<div>
-		<span id="userNo" style="display: none;" th:text="${session.user_no}"></span>
-		<link href="/css/commons.css" type="text/css" rel="stylesheet">
-		<script type="text/javascript" src="/js/jquery-3.7.1.min.js"></script>
-		<script type="text/javascript" src="/js/commons/commons.js"></script>
-      	<nav>
-      		<ul>
-      			<li><a href="/">LOGO</a></li>
-        		<li><a href="/">Home</a></li>
-        		<li><a href="/board/list">Board</a></li>
-        		<li><a href="https://perfect-angora-dd5.notion.site/f2e6374ea9d747379e847dd96be089c1?v=942acb80c5984c72b0fbbc3fe2b96971&pvs=4">Notion</a></li>
-        		<li><a>bhdhz03w</a></li>
-        		<li class='btn-li'>
-        			<th:block th:if="${session.user_no}">
-						<button type="button" onclick="location.href='/user/mypage'">마이페이지</button>
-						<button type="button" id="logout">로그아웃</button>
-					</th:block>
-					<th:block th:unless = "${session.user_no}">
-        				<button type="button" onclick="location.href='/user/login'">로그인</button>
-        				<button type="button" onclick="location.href='/user/join'">회원가입</button>
-					</th:block>
-        		</li>
-      		</ul>
-      	</nav>
-      </div>
+	<span id="userNo" style="display: none;" th:text="${session.user_no}"></span>
+	<link href="/css/commons.css" type="text/css" rel="stylesheet">
+	<script type="text/javascript" src="/js/jquery-3.7.1.min.js"></script>
+	<script type="text/javascript" src="/js/commons/commons.js"></script>
+    <div class="logo">
+    	<a href="/">MyWebsite</a>
+    </div>
+    <nav class="nav-links">
+		<ul>
+        	<li><a href="/">Home</a></li>
+        	<li><a href="/board/list">Board</a></li>
+        	<li><a href="https://perfect-angora-dd5.notion.site/f2e6374ea9d747379e847dd96be089c1?v=942acb80c5984c72b0fbbc3fe2b96971&pvs=4">Notion</a></li>
+        	<li><a>bhdhz03w</a></li>
+      	</ul>
+	</nav>
+	<div class="login">
+		<th:block th:if="${session.user_no}">
+			<button type="button" onclick="location.href='/user/mypage'">마이페이지</button>
+			<button type="button" id="logout">로그아웃</button>
+		</th:block>
+		<th:block th:unless = "${session.user_no}">
+        	<button type="button" onclick="location.href='/user/login'">로그인</button>
+        	<button type="button" onclick="location.href='/user/join'">회원가입</button>
+		</th:block>
+	</div>
+</body>
