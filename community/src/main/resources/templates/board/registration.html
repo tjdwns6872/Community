@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <title>게시물 등록</title>
-<div class="main_container">
-	<header th:include="header :: div"></header>
+<body>
+	<header th:include="header :: body"></header>
 	<script type="text/javascript" src="/js/board/board-reg.js"></script>
 	<script type="text/javascript" src="/js/commons/file.js"></script>
-	<div class="container">
+	<main>
 		게시물 등록
 		<form id="insertForm"  name="insertForm" entype="multipart/form-data">
 			제목<input type="text" id="boardTitle" name="boardTitle">
@@ -15,7 +15,7 @@
 		</form>
 		<button id="insertBtn">등록</button>
 		<button id="listBtn">목록</button>
-	</div>
-</div>
-<footer th:include="footer :: div"></footer>
+	</main>
+</body>
+<footer th:include="footer :: body"></footer>
 </html>
