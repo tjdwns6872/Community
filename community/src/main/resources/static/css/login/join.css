@@ -1,0 +1,104 @@
+/* 회원가입 폼 스타일 */
+.signup-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.signup-container h2 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.signup-form .form-group {
+    margin-bottom: 20px;
+}
+
+.signup-form label {
+    display: block;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.signup-form input[type="text"],
+.signup-form input[type="password"],
+.signup-form input[type="email"],
+.signup-form input[type="tel"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.signup-form .checkbox-container {
+    display: flex;
+    align-items: center;
+}
+
+.signup-form .checkbox-container input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.signup-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: #fff;
+    text-align: center;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.signup-button:hover {
+    background-color: #218838;
+}
+
+/* 개인정보 처리방침 동의창 스타일 */
+.privacy-agreement {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.privacy-agreement h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.privacy-agreement p {
+    font-size: 14px;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.privacy-agreement .checkbox-container {
+    display: flex;
+    align-items: center;
+}
+
+.privacy-agreement .checkbox-container input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+/* 성별 선택 옵션 스타일 */
+.gender-options {
+    display: flex;
+    gap: 20px;
+}
+
+.gender-options label {
+    font-size: 14px;
+    color: #333;
+}
