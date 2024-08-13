@@ -39,6 +39,8 @@ public class UserService {
 				session.setAttribute("user_no", map.getUserNo());
 				session.setAttribute("user_rank", map.getUserRank());
 			}
+		}else if(type.equals("check")) {
+			params.put("userData", map);
 		}
 		return params;
 	}
