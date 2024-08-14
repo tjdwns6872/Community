@@ -8,11 +8,11 @@
 	<main>
 		<div class="signup-container">
 			<!-- 정보처리 관련 동의창 -->
-        	<div class="privacy-agreement">
+        	<div class="privacy-agreement" id="privacy">
             	<h3>개인정보 처리방침 동의</h3>
             	<p>회원가입을 위해 개인정보 처리방침에 동의해 주세요.</p>
             	<label class="checkbox-container">
-                	<input type="checkbox" id="join_checkbox" name="privacy" required>
+                	<input type="checkbox" id="join_checkbox" name="privacy" value="1" required>
                 	<span class="checkmark"></span>
                 	개인정보 처리방침에 동의합니다.
             	</label>
@@ -38,8 +38,9 @@
             	<div class="form-group">
                 	<label for="userName">이름</label>
                 	<input type="text" id="userName" name="userName" required>
+            		<span class="error-message" id="userName-error"></span>
             	</div>
-            	<div class="form-group">
+            	<div class="form-group" id="gender-agreement">
                 	<label for="gender">성별</label>
                 	<div class="gender-options">
                     	<label>
@@ -49,6 +50,7 @@
                         	<input type="radio" name="userGender" value="2" required> 여성
                     	</label>
                 	</div>
+                	<span class="error-message" id="userGender-error"></span>
             	</div>
             	<div class="form-group">
                 	<label for="userEmail">이메일</label>
