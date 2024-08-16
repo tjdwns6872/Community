@@ -57,6 +57,7 @@
     border-radius: 4px;
     font-size: 16px;
     cursor: pointer;
+    margin-top: 10px;
 }
 
 .signup-button:hover {
@@ -101,6 +102,42 @@
 
 .gender-options label {
     font-size: 14px;
+    color: #333;
+}
+
+/* 전화번호 입력창 스타일 */
+.phone-input-group {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.phone-input-group input[type="tel"] {
+    width: 110px;
+    text-align: center;
+}
+
+.hyphen {
+    color: #333;
+}
+
+/* 이메일 입력창 스타일 */
+.email-input-group {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.email-input-group input[type="text"] {
+    width: calc(50% - 12px);
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.email-input-group .at-symbol {
+    font-size: 16px;
     color: #333;
 }
 

@@ -54,11 +54,25 @@
             	</div>
             	<div class="form-group">
                 	<label for="userEmail">이메일</label>
-                	<input type="email" id="userEmail" name="userEmail" required>
+                	<input type="hidden" id="userEmail" name="userEmail" required>
+                	<div class="email-input-group" id="email-input-group">
+                    	<input type="text" id="email-user" name="email-user" placeholder="example" required>
+                    	<span class="at-symbol">@</span>
+                    	<input type="text" id="email-domain" name="email-domain" placeholder="domain.com" required>
+                	</div>
+                	<span class="error-message" id="userEmail-error"></span>
             	</div>
             	<div class="form-group">
                 	<label for="userPhone">전화번호</label>
-                	<input type="tel" id="userPhone" name="userPhone" required>
+                	<input  type="hidden" id="userPhone" name="userPhone" required>
+                	<div class="phone-input-group" id="phone-input-group">
+                    	<input type="tel" id="phone1" maxlength="3" required>
+                    	<span class="hyphen">-</span>
+                    	<input type="tel" id="phone2" maxlength="4" required>
+                    	<span class="hyphen">-</span>
+                    	<input type="tel" id="phone3" maxlength="4" required>
+                	</div>
+                	<span class="error-message" id="userPhone-error"></span>
             	</div>
 				<button type="button" id="join_btn" class="signup-button">회원가입</button>
 			</form>

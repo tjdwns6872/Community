@@ -75,11 +75,12 @@ function nameCheck(){
 	$('#userName-error').fadeOut();
 	if($("input[name=userName]").val() == ""){
 		$("#userName-error").text("이름을 입력하세요.").fadeIn();
-	}else if(reg.test($("input[name=userName]").val())){
+	}else if(!reg.test($("input[name=userName]").val())){
 		$("#userName-error").text("한글만 입력하세요.").fadeIn();
 	}else{
 		result = 0;
 	}
+	return result
 }
 
 function genderCheck(){
@@ -93,11 +94,36 @@ function genderCheck(){
 	return result;
 }
 
-function emailCheck(){
-	
-}
 function phoneCheck(){
-	
+	var reg = /^01([0|1|6|7|8|9])([0-9]{3,4})([0-9]{4})$/;
+	var phone ="";
+	var result = 1;
+	$("#userPhone-error").fadeOut();
+	phone += $("#phone1").val()
+	phone += $("#phone2").val();
+	phone += $("#phone3").val();
+	console.log(reg.test(phone))
+	if(!reg.test(phone)){
+		$("#userPhone-error").text("잘못된 형식의 전화번호입니다.").fadeIn();
+	}else{
+		result = 0;
+	}
+	return result;
+}
+function emailCheck(){
+	var reg = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+	var email = "";
+	var result = 1;
+	$("#userEmail-error").fadeOut();
+	email += $("#email-user").val();
+	email += "@";
+	email += $("#email-domain").val();
+	if(!reg.test(email)){
+		$("#userEmail-error").text("잘못된 형식의 이메일입니다.").fadeIn();
+	}else{
+		result = 0;
+	}
+	return result;
 }
 
 function join(){
@@ -121,14 +147,16 @@ function join(){
 		$("input[name=userName]").focus();
 		return;
 	}
-	if($("input[name=userEmail]").val() == ""){
-		return;
-	}
-	if($("input[name=userPhone]").val() == ""){
-		return;
-	}
 	if(genderCheck() == 1){
 		$("#gender-agreement").attr("tabindex", -1).focus();
+		return;
+	}
+	if(emailCheck() == 0){
+		$("#email-input-group").attr("tabindex", -1).focus();
+		return;
+	}
+	if(phoneCheck() == 1){
+		$("#phone-input-group").attr("tabindex", -1).focus();
 		return;
 	}
 	
@@ -140,7 +168,7 @@ function join(){
 	
 	var json = JSON.stringify(object);
 		
-	/*$.ajax({
+	$.ajax({
 		url:"/rest/user/join",
 		type:"PUT",
 		contentType: 'application/json',
@@ -149,7 +177,7 @@ function join(){
 		success:function(resp){
 			console.log(resp);
 		}
-	});*/
+	});
 }
 
 
