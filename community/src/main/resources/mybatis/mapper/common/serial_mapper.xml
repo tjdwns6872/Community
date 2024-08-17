@@ -6,11 +6,12 @@
 <mapper namespace="com.simple.community.mapper.SerialMapper" >
 
 	<select id="checkSerial" resultType="int" parameterType="com.simple.community.entity.EmailDto">
-		SELECT COUNT(SERIAL)
+		SELECT NVL(SERIAL_NO, 0) AS SERIAL_NO
 		FROM
 		TP_EMAIL_SERIAL
 		<where>
 			AND DE_FLG = 0
+			AND SERIAL_CHECK = 0
 			<if test="serialNo != null and serialNo != ''">
 				AND SERIAL_NO = #{serialNo}
 			</if>

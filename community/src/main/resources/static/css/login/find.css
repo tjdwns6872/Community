@@ -1,0 +1,118 @@
+/* 컨테이너 스타일 */
+.find-account-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+/* 탭 내비게이션 스타일 */
+.tab-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ddd;
+}
+
+.tab-link {
+    flex: 1;
+    text-align: center;
+    padding: 10px 0;
+    cursor: pointer;
+    font-size: 16px;
+    background: none;
+    border: none;
+    color: #333;
+    border-bottom: 2px solid transparent;
+    transition: border-color 0.3s;
+}
+
+.tab-link:hover, .tab-link.active {
+    border-bottom: 2px solid #007bff;
+    color: #007bff;
+}
+
+/* 탭 콘텐츠 스타일 */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.find-account-form .form-group {
+    margin-bottom: 20px;
+}
+
+.find-account-form label {
+    font-size: 14px;
+    color: #333;
+}
+
+.find-account-form input[type="text"],
+.find-account-form input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.find-account-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    text-align: center;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.find-account-button:hover {
+    background-color: #0056b3;
+}
+
+/* 숨겨진 요소 */
+.hidden {
+    display: none;
+}
+
+/* 인증번호 전송 버튼 스타일 */
+.send-code-button {
+    width: 100%;
+    padding: 10px;
+    background-color: #28a745;
+    color: #fff;
+    text-align: center;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.send-code-button:hover {
+    background-color: #218838;
+}
+
+/* 인증번호 확인 버튼 스타일 */
+.verify-code-button {
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.verify-code-button:hover {
+    background-color: #0056b3;
+}
+

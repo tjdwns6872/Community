@@ -1,25 +1,60 @@
 $(function(){
 	$(".serial_btn").click(find);
 	
-	$("input[name=find_btn]").change(function(){
-		if($(this).data("find") == "pw"){
-			$("#id_input").show();
-		}else{
-			$("#id_input").hide();
-		}
-	});
+	//$("#check_btn").click(check);
 	
-	$("#check_btn").click(check);
+	$(".check_btn").click(serialCheck);
+	
+	// 초기화: 기본 선택된 박스에 스타일 적용
+    $('#select-id-box').addClass('selected');
+
+   $('.tab-link').on('click', function() {
+        const targetTab = $(this).data('tab');
+        $('.tab-link').removeClass('active');
+        $(this).addClass('active');
+
+        $('.tab-content').removeClass('active');
+        $('#' + targetTab).addClass('active');
+    });
+    
+    // 인증번호 전송 버튼 클릭 처리
+    $('.send-code-button').on('click', function() {
+        const formType = $(this).data('form');
+        $('#'+formType+'-code-group').removeClass('hidden');
+    });
 });
 
+function serialCheck(){
+	var type = $(".tab-link").filter(".active").data("find");
+	var tabId = "find-"+type+"-tab";
+	var serialNo = $("input[name=serialNo]").val();
+	var serial = $("#"+tabId).find($("input[name=serial]").val());
+	
+	var data = {
+		serialNo : serialNo,
+		serial : serial
+	}
+	
+	$.ajax({
+		url:"/rest/serial/checkSerial",
+		type:"GET",
+		contentType: 'application/json',
+		dataType: 'json',
+		data:data,
+		success:function(resp){
+			console.log(resp);
+		}
+	})
+}
+
 function check(){
+	var type = $(".tab-link").filter(".active").data("find");
+	var tabId = "find-"+type+"-tab";
 	var serial = $("input[name=serial]").val();
 	var serialNo = $("input[name=serialNo]").val();
-	var userEmail = $("#find").find('#userEmail').val();
-	var userId = $("#find").find('#userId').val();
-	var userName = $("#find").find('#userName').val();
-	
-	var type = $("input[name=find_btn]:checked").data("find");
+	var userEmail = $("#"+tabId).find('#userEmail').val();
+	var userId = $("#"+tabId).find('#userId').val();
+	var userName = $("#"+tabId).find('#userName').val();
 	
 	var data = {
 		"serialNo":serialNo,
@@ -46,13 +81,15 @@ function check(){
 }
 
 function find(){
+	var type = $(".tab-link").filter(".active").data("find");
+	var tabId = "find-"+type+"-tab";
 	var data = {
-		"userEmail":$("#find").find('#userEmail').val(),
-		"userName":$("#find").find('#userName').val(),
-		"type":$("input[name=find_btn]:checked").data("find")
+		"userEmail":$("#"+tabId).find('#userEmail').val(),
+		"userName":$("#"+tabId).find('#userName').val(),
+		"type":type
 	}
 	if(data.type != undefined && data.type != "id"){
-		data['userId']= $("#find").find('#userId').val();
+		data['userId']= $("#"+tabId).find('#userId').val();
 	}
 	var json = JSON.stringify(data);
 	$.ajax({

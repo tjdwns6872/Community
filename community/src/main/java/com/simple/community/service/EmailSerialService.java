@@ -90,7 +90,12 @@ public class EmailSerialService {
 	}
 	
 	public int checkSerial(EmailDto emailDto) {
-		return serialMapper.checkSerial(emailDto);
+		int cnt = serialMapper.checkSerial(emailDto);
+		log.info("\n{}\n", cnt);
+		if(cnt > 0) {
+			
+		}
+		return cnt;
 	}
 	
 	public int userCheck(EmailDto emailDto) {
