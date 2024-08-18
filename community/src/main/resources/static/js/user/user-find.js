@@ -1,7 +1,7 @@
 $(function(){
 	$(".serial_btn").click(find);
 	
-	$("#check_btn").click(check);
+	$(".find_btn").click(check);
 	
 	$(".check_btn").click(serialCheck);
 	
@@ -12,10 +12,10 @@ $(function(){
         const targetTab = $(this).data('tab');
         $('.tab-link').removeClass('active');
         $(this).addClass('active');
-        $("#check_btn").attr("disabled", true);
         $("#find-id-code-group").addClass("hidden");
         $("#find-password-code-group").addClass("hidden");
         $("#check_btn").addClass("hidden");
+        $(".check_btn").removeClass("hidden");
 
         $('.tab-content').removeClass('active');
         $('#' + targetTab).addClass('active');
@@ -46,7 +46,7 @@ function serialCheck(){
 		data:data,
 		success:function(resp){
 			if(resp > 0){
-				$(serial).attr("disabled", true);
+				$(".check_btn").addClass("hidden");
 				$("#check_btn").removeClass("hidden");
 			}
 		}
@@ -76,16 +76,29 @@ function check(){
 		contentType: 'application/json',
 		dataType: 'json',
 		data:data,
+		async: false,
 		success:function(resp){
-			if(type == "id"){				
-				$('.find-account-container').hide(); // 폼 숨김
-        		$('#result-id').removeClass('hidden'); // 결과 표시
-				$("#found-id").text(resp.userId);
-			}else if(type == "pw"){
-				console.log("초기비밀번호는"+resp.userPw);
-			}
+			resultData(type, resp);
 		}
 	});
+}
+
+function resultData(type, resp){
+	var html = "";
+	$('.find-account-container').hide(); // 폼 숨김
+  	$('#result-div').removeClass('hidden'); // 결과 표시
+	console.log(type);
+	if(type == "id"){				
+	  	html += "<h3>아이디 찾기 완료</h3>"
+	  	html += "<p>고객님의 아이디는 <strong>"+resp.userId+"</strong> 입니다.</p>"
+	  	html +="<button class='go-find-button' onclick=location.href='/user/find'>비밀번호 찾기</button><br>"
+	}else if(type == "pw"){
+		console.log("??");
+		html += "<h3>비밀번호 찾기 완료</h3>"
+		html += "<p>초기비밀번호는 <strong>"+resp.userPw+"</strong> 입니다.</p>"
+	}
+	html +="<button class='go-login-button' onclick=location.href='/user/login'>로그인</button>"
+	$("#result-div").html(html);
 }
 
 function find(){

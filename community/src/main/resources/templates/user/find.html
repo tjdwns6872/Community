@@ -61,13 +61,10 @@
 	                </div>
 	            </form>
 	        </div>
-	        <button type="button" id="check_btn" class="find-account-button hidden">확인</button>
+	        <button type="button" id="check_btn" class="find_btn find-account-button hidden">확인</button>
         </div>
         <!-- 인증 완료 후 아이디 출력 영역 (초기에는 숨김) -->
-        <div id="result-id" class="result-id hidden">
-            <h3>아이디 찾기 완료</h3>
-            <p>고객님의 아이디는 <strong id="found-id"></strong> 입니다.</p>
-            <button class="go-login-button" onclick="location.href='/user/login'">로그인 화면으로 이동</button>
+        <div id="result-div" class="result-div hidden">
         </div>
     </main>
 	<footer th:include="footer :: body"></footer>

@@ -30,9 +30,9 @@ public class EmailSerialService {
 		AuthCode authCode = new AuthCode();
 		String code = authCode.excuteGenerate();
 		emailDto.setSerial(code);
-		if(emailDto.getType() != "id") {
+		if(emailDto.getType().equals("id")) {
 			emailDto.setTitle("아이디 찾기 인증코드");
-		}else if(emailDto.getType() != "pw") {
+		}else if(emailDto.getType().equals("pw")) {
 			emailDto.setTitle("비밀번호 찾기 인증코드");
 		}
 		int userCheck = userCheck(emailDto);
