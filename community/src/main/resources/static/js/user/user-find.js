@@ -1,7 +1,7 @@
 $(function(){
 	$(".serial_btn").click(find);
 	
-	//$("#check_btn").click(check);
+	$("#check_btn").click(check);
 	
 	$(".check_btn").click(serialCheck);
 	
@@ -12,6 +12,9 @@ $(function(){
         const targetTab = $(this).data('tab');
         $('.tab-link').removeClass('active');
         $(this).addClass('active');
+        $("#check_btn").attr("disabled", true);
+        $("#find-id-code-group").addClass("hidden");
+        $("#find-password-code-group").addClass("hidden");
 
         $('.tab-content').removeClass('active');
         $('#' + targetTab).addClass('active');
@@ -27,14 +30,13 @@ $(function(){
 function serialCheck(){
 	var type = $(".tab-link").filter(".active").data("find");
 	var tabId = "find-"+type+"-tab";
-	var serialNo = $("input[name=serialNo]").val();
-	var serial = $("#"+tabId).find($("input[name=serial]").val());
+	var serialNo = $("#"+tabId+"-serialNo").val();
+	var serial = $("#"+tabId+"-serial").val();
 	
 	var data = {
 		serialNo : serialNo,
 		serial : serial
 	}
-	
 	$.ajax({
 		url:"/rest/serial/checkSerial",
 		type:"GET",
@@ -42,7 +44,9 @@ function serialCheck(){
 		dataType: 'json',
 		data:data,
 		success:function(resp){
-			console.log(resp);
+			if(resp > 0){
+				$("#check_btn").attr("disabled", false);
+			}
 		}
 	})
 }
@@ -50,8 +54,8 @@ function serialCheck(){
 function check(){
 	var type = $(".tab-link").filter(".active").data("find");
 	var tabId = "find-"+type+"-tab";
-	var serial = $("input[name=serial]").val();
-	var serialNo = $("input[name=serialNo]").val();
+	var serialNo = $("#"+tabId+"-serialNo").val();
+	var serial = $("#"+tabId+"-serial").val();
 	var userEmail = $("#"+tabId).find('#userEmail').val();
 	var userId = $("#"+tabId).find('#userId').val();
 	var userName = $("#"+tabId).find('#userName').val();

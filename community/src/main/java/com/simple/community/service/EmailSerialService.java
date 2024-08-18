@@ -65,21 +65,18 @@ public class EmailSerialService {
 	public UserDto findData(EmailDto emailDto) throws Exception {
 		UserDto userDto = new UserDto();
 		int cnt = checkSerial(emailDto);
-		if(cnt > 0) {
-			userDto.setUserEmail(emailDto.getUserEmail());
-			deleteSerial(emailDto);
-			if(emailDto.getType().equals("pw")) {
-				userDto.setUserId(emailDto.getUserId());
-				String change = userService.changePw(userDto);
-				if(change == null) {
-					throw new Exception("비밀번호 변경 실패");
-				}else {
-					userDto.setUserPw(change);
-				}
+		userDto.setUserEmail(emailDto.getUserEmail());
+		deleteSerial(emailDto);
+		if(emailDto.getType().equals("pw")) {
+			userDto.setUserId(emailDto.getUserId());
+			String change = userService.changePw(userDto);
+			if(change == null) {
+				throw new Exception("비밀번호 변경 실패");
 			}else {
-				userDto = (UserDto) userService.getOne(userDto, null, null).get("userData");
+				userDto.setUserPw(change);
 			}
-			return userDto;
+		}else {
+			userDto = (UserDto) userService.getOne(userDto, null, null).get("userData");
 		}
 		return userDto;
 	}
@@ -89,11 +86,13 @@ public class EmailSerialService {
 		return serialMapper.deleteSerial(emailDto);
 	}
 	
-	public int checkSerial(EmailDto emailDto) {
-		int cnt = serialMapper.checkSerial(emailDto);
+	public Integer checkSerial(EmailDto emailDto) {
+		Integer cnt = serialMapper.checkSerial(emailDto);
 		log.info("\n{}\n", cnt);
-		if(cnt > 0) {
-			
+		if(cnt != null && cnt != 0) {
+			serialMapper.UpdateSerial(cnt);
+		}else {
+			cnt = 0;
 		}
 		return cnt;
 	}

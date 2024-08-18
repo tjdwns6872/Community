@@ -26,6 +26,16 @@
 			</if>
 		</where>
 	</select>
+	
+	<update id="UpdateSerial">
+		UPDATE TP_EMAIL_SERIAL
+			<set>
+				SERIAL_CHECK = 1
+			</set>
+			<where>
+				SERIAL_NO = #{serialNo}
+			</where>
+	</update>
 
 	<update id="deleteSerial">
 		UPDATE TP_EMAIL_SERIAL
