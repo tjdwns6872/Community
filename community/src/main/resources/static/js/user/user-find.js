@@ -15,6 +15,7 @@ $(function(){
         $("#check_btn").attr("disabled", true);
         $("#find-id-code-group").addClass("hidden");
         $("#find-password-code-group").addClass("hidden");
+        $("#check_btn").addClass("hidden");
 
         $('.tab-content').removeClass('active');
         $('#' + targetTab).addClass('active');
@@ -45,7 +46,8 @@ function serialCheck(){
 		data:data,
 		success:function(resp){
 			if(resp > 0){
-				$("#check_btn").attr("disabled", false);
+				$(serial).attr("disabled", true);
+				$("#check_btn").removeClass("hidden");
 			}
 		}
 	})
@@ -76,7 +78,9 @@ function check(){
 		data:data,
 		success:function(resp){
 			if(type == "id"){				
-				console.log(resp.userId);
+				$('.find-account-container').hide(); // 폼 숨김
+        		$('#result-id').removeClass('hidden'); // 결과 표시
+				$("#found-id").text(resp.userId);
 			}else if(type == "pw"){
 				console.log("초기비밀번호는"+resp.userPw);
 			}
