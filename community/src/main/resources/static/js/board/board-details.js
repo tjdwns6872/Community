@@ -1,5 +1,32 @@
 $(function(){
 	
+	// 답글 버튼 클릭 시 답글 입력창 표시
+    $('.reply-button').on('click', function() {
+        $(this).siblings('.reply-form').toggleClass('hidden');
+    });
+
+    // 댓글 작성 버튼 클릭 처리 (여기에 서버로 전송 로직 추가 가능)
+    $('.submit-comment-button').on('click', function() {
+        // 댓글 작성 처리 로직
+        alert('댓글이 작성되었습니다.');
+    });
+
+    // 답글 작성 버튼 클릭 처리 (여기에 서버로 전송 로직 추가 가능)
+    $('.submit-reply-button').on('click', function() {
+        // 답글 작성 처리 로직
+        alert('답글이 작성되었습니다.');
+    });
+
+    // 목록으로 이동 버튼 클릭
+    $('.go-list-button').on('click', function() {
+        window.location.href = '/board'; // 목록 페이지로 이동
+    });
+
+    // 좋아요 버튼 클릭 처리
+    $('.like-button').on('click', function() {
+        alert('이 게시글을 좋아합니다.');
+    });
+	
 	var boardNo = $("#boardNo").text();
 	dataLoad(boardNo);
 	
@@ -76,21 +103,17 @@ function dataInfo(resp){
 	var reply = resp.reply;
 	
 	if(data.userNo == $("#userNo").text()){
-		$("#editBtn").show();
-		$("#deleteBtn").show();
+		$("#editBtn").removeClass('hidden');
+		$("#deleteBtn").removeClass('hidden');
 	}
 	
-	var html ="";
-	html += "<tr>";
-	html += "<td>"+data.boardTitle+"</td>";
-	html += "<td>"+data.categoryName+"</td>";
-	html += "<td>"+data.boardContent+"</td>";
+	$(".post-category").html("카테고리: <strong>"+data.categoryName+"</strong>");
+	$(".post-content").html(data.boardContent);
+	$(".post-author").html("작성자: <strong>작성자명</strong>");
+	
 	if(data.fileNo != null){		
-		html += "<td><a href='javascript:fileDownload("+data.fileNo+")'>"+data.fileName+"</a></td>";
+		$(".post-attachments").html("<p>첨부파일: <a href='javascript:fileDownload("+data.fileNo+")'>"+data.fileName+"</a></p>");
 	}
-	html += "</tr>";
-	
-	$("#boardDataDetails").html(html);
 	 replyList(reply);
 }
 

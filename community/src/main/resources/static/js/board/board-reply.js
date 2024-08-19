@@ -27,7 +27,6 @@ function replyUpdate(){
 		contentType: "application/json",
 		dataType: 'json',
 		success:function(resp){
-			console.log(resp);
 			dataLoad(boardNo);
 		}
 	});
@@ -81,7 +80,7 @@ function replyList(data){
 	$("#replyContent").val(" ");
 	var html ="";
 	var mainReply = [];
-	
+	console.log(data);
 	for(var i = 0; i < data.length; i++){
 		if(data[i].upperNo == 0){
 			mainReply.push(data[i]);
@@ -89,35 +88,38 @@ function replyList(data){
 			i--;
 		}
 	}
-	
 	$.each(mainReply, function(index, item){
-		html += "<tr id=reply1_"+item.replyNo+">";
-		html += "<td>"+item.userId+"</td>";
-		html += "<td>"+item.replyContent+"</td>";
-		html += "<td>"+item.modDate+"</td>";
-		html += "<td><a href=javascript:replyDelete("+item.replyNo+")>삭제</a></td>"; //아이콘 넣을 예정
-		html += "<td><a href=javascript:replyEdit("+item.replyNo+")>수정</a></td>"; //아이콘 넣을 예정
-		html += "<td><a href=javascript:reply2("+item.replyNo+")>답글</a></td>"; //아이콘 넣을 예정
-		html += "</tr>";
+		html += '<div class="comment" data-comment-id='+item.replyNo+'>'
+		html += '		<div class="comment-meta">'
+        html += '			<span class="comment-author">'+item.userId+'</span>'
+        html += '			<span class="comment-date">'+item.modDate+'</span>'
+        html += '		</div>'
+        html += '		<div class="comment-content">'
+        html += item.replyContent
+        html += '		</div>'
+        html += '<button class="reply-button">답글</button>'
+        html += ' <button class="reply-button">수정</button>'
+        html += ' <button class="reply-button" onclick=replyDelete('+item.replyNo+')>삭제</button>'
+        html += '	</div>'
 		$.each(data, function(index2, item2){
 			if(item2.upperNo == item.replyNo){
-				html += "<tr id=reply"+(item2.seatNo+1)+"_"+item2.replyNo+">";
-				html += "<td>"
-				for(var i = 0; i < item2.seatNo; i++){
-					html += "==="
-				}
-				html += item2.userId+"</td>";
-				html += "<td>"+item2.replyContent+"</td>";
-				html += "<td>"+item2.modDate+"</td>";
-				html += "<td><a href=javascript:replyDelete("+item2.replyNo+")>삭제</a></td>"; //아이콘 넣을 예정
-				html += "<td><a href=javascript:replyEdit("+item2.replyNo+")>수정</a></td>"; //아이콘 넣을 예정
-				html += "<td><a href=javascript:reply2("+item.replyNo+","+item2.replyNo+","+(item2.seatNo+1)+")>답글</a></td>"; //아이콘 넣을 예정
-				html += "</tr>";
+				html += '<div class="comment reply" data-comment-id='+item2.replyNo+' style="margin-left: '+30*(1+item2.seatNo)+'px;">'
+				html += '		<div class="comment-meta">'
+				html += '			<span class="comment-author">'+item2.userId+'</span>'
+				html +='			<span class="comment-date">'+item2.modDate+'</span>'
+				html += '		</div>'
+                html += '		<div class="comment-content">'
+                html += item2.replyContent
+                html += '		</div>'
+                html += '		<button class="reply-button">답글</button>'
+                html += ' <button class="reply-button">수정</button>'
+        		html += ' <button class="reply-button" onclick=replyDelete('+item2.replyNo+')>삭제</button>'
+				html += '</div>'
 			}
 		});
 	});
-	
-	$("#replyDataList").html(html);
+	$(".comments-section").empty();
+	$(".comments-section").html(html);
 }
 
 function replyEdit(replyNo){
@@ -133,7 +135,6 @@ function replyEdit(replyNo){
 		data:data,
 		success:function(resp){
 			//데이터 가져오기
-			console.log(resp);
 			$("#reply"+(resp.seatNo+1)+"_"+replyNo).empty();
 	
 			var html = "";
