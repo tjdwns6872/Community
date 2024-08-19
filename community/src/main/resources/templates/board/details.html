@@ -6,7 +6,7 @@
 	<script type="text/javascript" src="/js/board/board-details.js"></script>
 	<script type="text/javascript" src="/js/board/board-reply.js"></script>
 	<link href="/css/board/details.css" type="text/css" rel="stylesheet">
-	<main>
+	<!-- <main>
 		게시물 상세
 		<span id="boardNo"  th:text="${params.boardNo}" style="display: none;"></span>
 		<span id="likeBtn">하트</span>
@@ -26,99 +26,101 @@
 			<input id="replyContent" name="replyContent" />
 			<button type="button" id="addReplyBtn">작성</button>
 		</div>
-	</main>
-	<main class="post-detail-container">
-		<span id="boardNo"  th:text="${params.boardNo}" style="display: none;"></span>
-        <div class="post-header">
-            <h2 class="post-title">게시글 제목</h2>
-            <!-- 수정 및 삭제 버튼 -->
-            <div class="post-actions">
-                <button id="editBtn" class="edit-post-button hidden">수정</button>
-                <button id="deleteBtn" class="delete-post-button hidden">삭제</button>
-            </div>
-        </div>
-        <div class="post-meta">
-            <span class="post-category"></span>
-            <span class="post-author"></span>
-        </div>
-        <div class="post-content">
-            <p>게시글 내용이 여기에 들어갑니다. 상세한 게시글 내용...</p>
-        </div>
-
-        <!-- 첨부파일 영역 -->
-        <div class="post-attachments">
-        </div>
-
-        <!-- 목록/좋아요 버튼 -->
-        <div class="post-buttons">
-            <button class="go-list-button">목록으로</button>
-            <button class="like-button">좋아요</button>
-        </div>
-
-        <!-- 댓글 섹션 -->
-        <div class="comments-section">
-            <h3>댓글</h3>
-
-            <!-- 댓글 1 -->
-            <div class="comment" data-comment-id="1">
-                <div class="comment-meta">
-                    <span class="comment-author">user123</span>
-                    <span class="comment-date">2024-08-13</span>
-                </div>
-                <div class="comment-content">
-                    첫 번째 댓글 내용입니다.
-                </div>
-                <button class="reply-button">답글</button>
-
-                <!-- 대댓글 작성창 -->
-                <div class="reply-form hidden">
-                    <textarea placeholder="답글을 입력하세요..."></textarea>
-                    <button class="submit-reply-button">답글 작성</button>
-                </div>
-            </div>
-
-            <!-- 대댓글 1 -->
-            <div class="comment reply" data-comment-id="1-1">
-                <div class="comment-meta">
-                    <span class="comment-author">replyUser</span>
-                    <span class="comment-date">2024-08-13</span>
-                </div>
-                <div class="comment-content">
-                    첫 번째 댓글에 대한 첫 번째 대댓글입니다.
-                </div>
-                <button class="reply-button">답글</button>
-
-                <!-- 대댓글 작성창 -->
-                <div class="reply-form hidden">
-                    <textarea placeholder="답글을 입력하세요..."></textarea>
-                    <button class="submit-reply-button">답글 작성</button>
-                </div>
-            </div>
-
-            <!-- 댓글 2 -->
-            <div class="comment" data-comment-id="2">
-                <div class="comment-meta">
-                    <span class="comment-author">user456</span>
-                    <span class="comment-date">2024-08-13</span>
-                </div>
-                <div class="comment-content">
-                    두 번째 댓글 내용입니다.
-                </div>
-                <button class="reply-button">답글</button>
-
-                <!-- 대댓글 작성창 -->
-                <div class="reply-form hidden">
-                    <textarea placeholder="답글을 입력하세요..."></textarea>
-                    <button class="submit-reply-button">답글 작성</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- 댓글 작성 폼 -->
-        <div class="comment-form">
-            <textarea placeholder="댓글을 입력하세요..."></textarea>
-            <button class="submit-comment-button">댓글 작성</button>
-        </div>
+	</main>-->
+	<main>
+		<div class="post-detail-container">
+			<span id="boardNo"  th:text="${params.boardNo}" style="display: none;"></span>
+	        <div class="post-header">
+	            <h2 class="post-title">게시글 제목</h2>
+	            <!-- 수정 및 삭제 버튼 -->
+	            <div class="post-actions">
+	                <button id="editBtn" class="edit-post-button hidden">수정</button>
+	                <button id="deleteBtn" class="delete-post-button hidden">삭제</button>
+	            </div>
+	        </div>
+	        <div class="post-meta">
+	            <span class="post-category"></span>
+	            <span class="post-author"></span>
+	        </div>
+	        <div class="post-content">
+	            <p>게시글 내용이 여기에 들어갑니다. 상세한 게시글 내용...</p>
+	        </div>
+	
+	        <!-- 첨부파일 영역 -->
+	        <div class="post-attachments">
+	        </div>
+	
+	        <!-- 목록/좋아요 버튼 -->
+	        <div class="post-buttons">
+	            <button class="go-list-button">목록으로</button>
+	            <button class="like-button">좋아요</button>
+	        </div>
+	
+	        <!-- 댓글 섹션 -->
+	        <div class="comments-section">
+	            <h3>댓글</h3>
+	
+	            <!-- 댓글 1 -->
+	            <div class="comment" data-comment-id="1">
+	                <div class="comment-meta">
+	                    <span class="comment-author">user123</span>
+	                    <span class="comment-date">2024-08-13</span>
+	                </div>
+	                <div class="comment-content">
+	                    첫 번째 댓글 내용입니다.
+	                </div>
+	                <button class="reply-button">답글</button>
+	
+	                <!-- 대댓글 작성창 -->
+	                <div class="reply-form hidden">
+	                    <textarea placeholder="답글을 입력하세요..."></textarea>
+	                    <button class="submit-reply-button">답글 작성</button>
+	                </div>
+	            </div>
+	
+	            <!-- 대댓글 1 -->
+	            <div class="comment reply" data-comment-id="1-1">
+	                <div class="comment-meta">
+	                    <span class="comment-author">replyUser</span>
+	                    <span class="comment-date">2024-08-13</span>
+	                </div>
+	                <div class="comment-content">
+	                    첫 번째 댓글에 대한 첫 번째 대댓글입니다.
+	                </div>
+	                <button class="reply-button">답글</button>
+	
+	                <!-- 대댓글 작성창 -->
+	                <div class="reply-form hidden">
+	                    <textarea placeholder="답글을 입력하세요..."></textarea>
+	                    <button class="submit-reply-button">답글 작성</button>
+	                </div>
+	            </div>
+	
+	            <!-- 댓글 2 -->
+	            <div class="comment" data-comment-id="2">
+	                <div class="comment-meta">
+	                    <span class="comment-author">user456</span>
+	                    <span class="comment-date">2024-08-13</span>
+	                </div>
+	                <div class="comment-content">
+	                    두 번째 댓글 내용입니다.
+	                </div>
+	                <button class="reply-button">답글</button>
+	
+	                <!-- 대댓글 작성창 -->
+	                <div class="reply-form hidden">
+	                    <textarea placeholder="답글을 입력하세요..."></textarea>
+	                    <button class="submit-reply-button">답글 작성</button>
+	                </div>
+	            </div>
+	        </div>
+	
+	        <!-- 댓글 작성 폼 -->
+	        <div class="comment-form">
+	            <textarea placeholder="댓글을 입력하세요..."></textarea>
+	            <button class="submit-comment-button">댓글 작성</button>
+	        </div>
+		</div>
     </main>
 	<footer th:include="footer :: body"></footer>
 </body>

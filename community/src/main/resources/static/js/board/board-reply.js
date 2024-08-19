@@ -80,7 +80,6 @@ function replyList(data){
 	$("#replyContent").val(" ");
 	var html ="";
 	var mainReply = [];
-	console.log(data);
 	for(var i = 0; i < data.length; i++){
 		if(data[i].upperNo == 0){
 			mainReply.push(data[i]);
@@ -97,9 +96,13 @@ function replyList(data){
         html += '		<div class="comment-content">'
         html += item.replyContent
         html += '		</div>'
-        html += '<button class="reply-button">답글</button>'
-        html += ' <button class="reply-button">수정</button>'
-        html += ' <button class="reply-button" onclick=replyDelete('+item.replyNo+')>삭제</button>'
+        html += '		<button class="reply-button">답글</button>'
+        html += ' 	 <button class="reply-button">수정</button>'
+        html += ' 	 <button class="reply-button" onclick=replyDelete('+item.replyNo+')>삭제</button>'
+        html += '		<div class="reply-form hidden">'
+        html += '			<textarea placeholder="답글을 입력하세요..."></textarea>'
+        html += '			<button class="submit-reply-button" onclick=replyFunc('+item.upperNo+', '+item.subupperNo+', '+(item.seatNo+1)+')>답글 작성</button>'
+        html += '		</div>'
         html += '	</div>'
 		$.each(data, function(index2, item2){
 			if(item2.upperNo == item.replyNo){
@@ -112,13 +115,16 @@ function replyList(data){
                 html += item2.replyContent
                 html += '		</div>'
                 html += '		<button class="reply-button">답글</button>'
-                html += ' <button class="reply-button">수정</button>'
-        		html += ' <button class="reply-button" onclick=replyDelete('+item2.replyNo+')>삭제</button>'
+                html += ' 	 <button class="reply-button">수정</button>'
+        		html += ' 	 <button class="reply-button" onclick=replyDelete('+item2.replyNo+')>삭제</button>'
+        		html += '		<div class="reply-form hidden">'
+        		html += '			<textarea placeholder="답글을 입력하세요..."></textarea>'
+       			html += '			<button class="submit-reply-button" onclick=replyFunc('+item2.upperNo+', '+item2.subupperNo+', '+(item2.seatNo+1)+')>답글 작성</button>'
+        		html += '		</div>'
 				html += '</div>'
 			}
 		});
 	});
-	$(".comments-section").empty();
 	$(".comments-section").html(html);
 }
 
