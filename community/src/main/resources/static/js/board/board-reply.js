@@ -1,7 +1,5 @@
 $(function(){
 	
-	//$("#addReplyBtn").click(replyFunc(0));
-	
 	$("#addReplyBtn").click(function(){
 		replyFunc(0)
 	});
@@ -10,16 +8,13 @@ $(function(){
 });
 
 function replyUpdate(){
-	
 	var data = {}
 	var boardNo = $("#boardNo").text();
 	var replyContent = $("#editText").val();
-	var tr = $("#editText").parent().parent()[0];
-	var replyNo = tr.id.substring(tr.id.indexOf('_')+1, tr.id.length);
-
+	var div = $("#editText").parent()[0];
+	var replyNo = $(div).data('comment-id');
 	data['replyContent'] = replyContent;	
 	data['replyNo'] = replyNo;	
-	
 	$.ajax({
 		url:"/rest/reply/update",
 		type:"PUT",
@@ -39,22 +34,23 @@ function reply2(upperNo, subupperNo=0, seatNo=1){
 	}else{
 		no = subupperNo;
 	}
-	var tr = $("#reply"+seatNo+"_"+no);
-	
+	var div = $("#reply"+seatNo+"_"+no);
+	$(".reply-form").empty();
 	var html = "";
-	html += "<td><input type=text id=reply2Content value=''></td>";
-	html += "<td><button id=addReply2Btn onclick='replyFunc("+upperNo+", "+subupperNo+", "+seatNo+")'>등록</button></td>";
-	tr.append(html);
+	html += '	<textarea id=replyContent placeholder="답글을 입력하세요..."></textarea>'
+    html += '	<button class="submit-reply-button" onclick="replyFunc('+upperNo+', '+subupperNo+', '+seatNo+')">답글 작성</button>'
+	div.append(html);
+	
+	
 }
 
 function replyFunc(upperNo=0, subupperNo=0 ,seatNo=0){
 	
 	var data = {};
-	var content = $("input[name=replyContent]").val();
+	var content = $("#replyContent").val();
 	var boardNo = $("#boardNo").text();
 	if(upperNo != 0){
 		data["upperNo"] = upperNo;
-		data["replyContent2"] = $("#reply2Content").val();
 		data["seatNo"] = seatNo;
 		if(subupperNo != 0){
 			data["subupperNo"] = subupperNo;
@@ -63,6 +59,7 @@ function replyFunc(upperNo=0, subupperNo=0 ,seatNo=0){
 	
 	data["replyContent"] = content;
 	data["boardNo"] = boardNo;
+	console.log(data);
 	$.ajax({
 		url:"/rest/reply/reg",
 		type:"PUT",
@@ -70,7 +67,6 @@ function replyFunc(upperNo=0, subupperNo=0 ,seatNo=0){
 		contentType: "application/json",
 		dataType: 'json',
 		success:function(resp){
-			console.log(resp);
 			dataLoad(boardNo);
 		}
 	});
@@ -96,12 +92,10 @@ function replyList(data){
         html += '		<div class="comment-content">'
         html += item.replyContent
         html += '		</div>'
-        html += '		<button class="reply-button">답글</button>'
-        html += ' 	 <button class="reply-button">수정</button>'
+        html += '		<button class="reply-button" onclick="reply2('+item.replyNo+')">답글</button>'
+        html += ' 	 <button class="reply-button" onclick="replyEdit('+item.replyNo+')">수정</button>'
         html += ' 	 <button class="reply-button" onclick=replyDelete('+item.replyNo+')>삭제</button>'
-        html += '		<div class="reply-form hidden">'
-        html += '			<textarea placeholder="답글을 입력하세요..."></textarea>'
-        html += '			<button class="submit-reply-button" onclick=replyFunc('+item.upperNo+', '+item.subupperNo+', '+(item.seatNo+1)+')>답글 작성</button>'
+        html += '		<div class="reply-form" id=reply1_'+item.replyNo+'>'
         html += '		</div>'
         html += '	</div>'
 		$.each(data, function(index2, item2){
@@ -114,12 +108,10 @@ function replyList(data){
                 html += '		<div class="comment-content">'
                 html += item2.replyContent
                 html += '		</div>'
-                html += '		<button class="reply-button">답글</button>'
-                html += ' 	 <button class="reply-button">수정</button>'
+                html += '		<button class="reply-button" onclick="reply2('+item.replyNo+','+item2.replyNo+','+(item2.seatNo+1)+')">답글</button>'
+                html += ' 	 <button class="reply-button" onclick="replyEdit('+item2.replyNo+')">수정</button>'
         		html += ' 	 <button class="reply-button" onclick=replyDelete('+item2.replyNo+')>삭제</button>'
-        		html += '		<div class="reply-form hidden">'
-        		html += '			<textarea placeholder="답글을 입력하세요..."></textarea>'
-       			html += '			<button class="submit-reply-button" onclick=replyFunc('+item2.upperNo+', '+item2.subupperNo+', '+(item2.seatNo+1)+')>답글 작성</button>'
+        		html += '		<div class="reply-form" id=reply'+(item2.seatNo+1)+'_'+item2.replyNo+'>'
         		html += '		</div>'
 				html += '</div>'
 			}
@@ -141,13 +133,16 @@ function replyEdit(replyNo){
 		data:data,
 		success:function(resp){
 			//데이터 가져오기
-			$("#reply"+(resp.seatNo+1)+"_"+replyNo).empty();
+			var div = $("div[data-comment-id="+replyNo+"]");
+			div.empty();
 	
 			var html = "";
-			html += "<td><input type=text id=editText value='"+resp.replyContent+"'></td>";
-			html += "<td><button id=replyEditBtn>수정</button></td>";
+			html += "<div class=reply-form data-comment-id="+replyNo+">"
+			html += '	<textarea id=editText placeholder="답글을 입력하세요...">'+resp.replyContent+'</textarea>'
+    		html += '	<button class="submit-reply-button" id=replyEditBtn>답글 수정</button>'
+    		html += "</div>"
 	
-			$("#reply"+(resp.seatNo+1)+"_"+replyNo).html(html);
+			div.html(html);
 		}
 	});
 }

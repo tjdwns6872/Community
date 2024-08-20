@@ -59,66 +59,11 @@
 	        <!-- 댓글 섹션 -->
 	        <div class="comments-section">
 	            <h3>댓글</h3>
-	
-	            <!-- 댓글 1 -->
-	            <div class="comment" data-comment-id="1">
-	                <div class="comment-meta">
-	                    <span class="comment-author">user123</span>
-	                    <span class="comment-date">2024-08-13</span>
-	                </div>
-	                <div class="comment-content">
-	                    첫 번째 댓글 내용입니다.
-	                </div>
-	                <button class="reply-button">답글</button>
-	
-	                <!-- 대댓글 작성창 -->
-	                <div class="reply-form hidden">
-	                    <textarea placeholder="답글을 입력하세요..."></textarea>
-	                    <button class="submit-reply-button">답글 작성</button>
-	                </div>
-	            </div>
-	
-	            <!-- 대댓글 1 -->
-	            <div class="comment reply" data-comment-id="1-1">
-	                <div class="comment-meta">
-	                    <span class="comment-author">replyUser</span>
-	                    <span class="comment-date">2024-08-13</span>
-	                </div>
-	                <div class="comment-content">
-	                    첫 번째 댓글에 대한 첫 번째 대댓글입니다.
-	                </div>
-	                <button class="reply-button">답글</button>
-	
-	                <!-- 대댓글 작성창 -->
-	                <div class="reply-form hidden">
-	                    <textarea placeholder="답글을 입력하세요..."></textarea>
-	                    <button class="submit-reply-button">답글 작성</button>
-	                </div>
-	            </div>
-	
-	            <!-- 댓글 2 -->
-	            <div class="comment" data-comment-id="2">
-	                <div class="comment-meta">
-	                    <span class="comment-author">user456</span>
-	                    <span class="comment-date">2024-08-13</span>
-	                </div>
-	                <div class="comment-content">
-	                    두 번째 댓글 내용입니다.
-	                </div>
-	                <button class="reply-button">답글</button>
-	
-	                <!-- 대댓글 작성창 -->
-	                <div class="reply-form hidden">
-	                    <textarea placeholder="답글을 입력하세요..."></textarea>
-	                    <button class="submit-reply-button">답글 작성</button>
-	                </div>
-	            </div>
 	        </div>
 	
-	        <!-- 댓글 작성 폼 -->
 	        <div class="comment-form">
-	            <textarea placeholder="댓글을 입력하세요..."></textarea>
-	            <button class="submit-comment-button">댓글 작성</button>
+	            <textarea id=replyContent placeholder="댓글을 입력하세요..."></textarea>
+	            <button id="addReplyBtn" class="submit-comment-button">댓글 작성</button>
 	        </div>
 		</div>
     </main>

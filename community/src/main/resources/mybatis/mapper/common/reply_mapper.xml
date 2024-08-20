@@ -30,13 +30,12 @@
 			<choose>
 				<when test="upperNo != null and upperNo != ''">
 					,#{upperNo}
-					,#{replyContent2}
 				</when>
 				<otherwise>
 					,'0'
-					,#{replyContent}
 				</otherwise>
 			</choose>
+			,#{replyContent}
 			<choose>
 				<when test="subupperNo != null and subupperNo != ''">
 					,#{subupperNo}

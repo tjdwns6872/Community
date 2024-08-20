@@ -107,6 +107,7 @@ function dataInfo(resp){
 		$("#deleteBtn").removeClass('hidden');
 	}
 	
+	$(".post-title").text(data.boardTitle);
 	$(".post-category").html("카테고리: <strong>"+data.categoryName+"</strong>");
 	$(".post-content").html(data.boardContent);
 	$(".post-author").html("작성자: <strong>작성자명</strong>");
