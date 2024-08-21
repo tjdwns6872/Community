@@ -1,6 +1,8 @@
+var editor;
 $(function(){
 	
 	var boardNo = $("#boardNo").val();
+	editor = CKEDITOR.replace('editor');
 	dataLoad(boardNo);
 	
 	$("#updateBtn").click(boardUpdate);
@@ -56,7 +58,7 @@ function dataInfo(data){
 	var data = data.data;
 	$("#boardTitle").val(data.boardTitle);
 	$("#categoryName").val(data.categoryName);
-	$("#boardContent").html(data.boardContent);
+	editor.setData(data.boardContent);
 	
 	$("#categoryList").val(data.categoryNo).prop("selected", true);
 }
