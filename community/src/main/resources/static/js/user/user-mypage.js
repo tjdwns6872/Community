@@ -5,12 +5,19 @@ $(function(){
 		contentType: 'application/json',
 		dataType: 'json',
 		success:function(resp){
-			console.log(resp);
+			dataInfo(resp);
 		}
 	});
 	
 	$("#deleteUser").click(deleteUser);
 });
+
+function dataInfo(resp){
+	console.log(resp);
+	$("#userId").text(resp.userId);
+	$("#userName").text(resp.userName);
+	$("#userEmail").text(resp.userEmail);
+}
 
 function deleteUser(){
 	var data = {

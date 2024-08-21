@@ -1,0 +1,68 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    margin: 20px;
+}
+
+/* 사이드바 */
+.sidebar {
+    width: 200px;
+    background-color: #343a40;
+    padding: 20px;
+    color: #fff;
+    border-radius: 8px;
+    margin-right: 20px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin-bottom: 15px;
+}
+
+.sidebar ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+}
+
+.sidebar ul li a:hover {
+    text-decoration: underline;
+}
+
+/* 본문 */
+.content {
+    flex: 1;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.content h2 {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.info-group {
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+.info-group label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.info-group span {
+    color: #495057;
+}
