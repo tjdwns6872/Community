@@ -5,17 +5,45 @@
 	<header th:include="header :: body"></header>
 	<script type="text/javascript" src="/js/board/board-reg.js"></script>
 	<script type="text/javascript" src="/js/commons/file.js"></script>
+	<script type="text/javascript" src="/library/ckeditor/ckeditor.js"></script>
+	<link href="/css/board/reg.css" type="text/css" rel="stylesheet">
 	<main>
-		게시물 등록
-		<form id="insertForm"  name="insertForm" entype="multipart/form-data">
-			제목<input type="text" id="boardTitle" name="boardTitle">
-			카테고리<select id="categoryList" name=categoryNo></select>
-			내용<textarea id="boardContent" name="boardContent"></textarea>
-			<input type="file" name="boardFile">
-		</form>
-		<button id="insertBtn">등록</button>
-		<button id="listBtn">목록</button>
-	</main>
+		<div class="create-post-container">
+	        <h2>게시글 작성하기</h2>
+	        <form id="insertForm"  name="insertForm" enctype="multipart/form-data">
+	
+	            <!-- 카테고리 선택 -->
+	            <div class="form-group">
+	                <label for="category">카테고리</label>
+	                <select id="categoryList" name=categoryNo></select>
+	            </div>
+	
+	            <!-- 제목 입력 -->
+	            <div class="form-group">
+	                <label for="title">제목</label>
+	                <input type="text" id="boardTitle" name="boardTitle" placeholder="제목을 입력하세요" required>
+	            </div>
+	
+	            <!-- 게시글 내용 -->
+	            <div class="form-group">
+	                <label for="content">내용</label>
+	                <textarea id="editor"></textarea>
+	            </div>
+	
+	            <!-- 파일 첨부 -->
+	            <div class="form-group">
+	                <label for="file">파일 첨부</label>
+	                <input type="file" id="file" name="boardFile" multiple>
+	            </div>
+	
+	            <!-- 작성/취소 버튼 -->
+	            <div class="form-buttons">
+	                <button type="button" id="insertBtn" class="submit-button">작성하기</button>
+	                <button type="button" id="listBtn" class="cancel-button">취소</button>
+	            </div>
+	        </form>
+		</div>
+    </main>
 </body>
 <footer th:include="footer :: body"></footer>
 </html>

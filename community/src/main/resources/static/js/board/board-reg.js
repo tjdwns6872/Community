@@ -1,11 +1,16 @@
+var editor;
 $(function(){
 	listLoad();
+	
+	editor = CKEDITOR.replace('editor');
 	
 	$("#insertBtn").click(boardInsert);
 });
 
 function boardInsert(){
 	var data = {};
+	$("#insertForm").append("<input type=hidden name=boardContent>");
+	$("input[name=boardContent]").val(editor.getData());
 	var form = $("#insertForm").serializeArray();
 	var inputFile = $("input[name=boardFile]");
 	if(inputFile.val()!=''){
@@ -25,7 +30,6 @@ function boardInsert(){
 	$.each(form, function(){
 		data[this.name]= this.value;
 	});
-	
 	setTimeout(function() {
 		insertAjax(data);
 	}, 200);

@@ -19,7 +19,7 @@ $(function(){
 
     // 목록으로 이동 버튼 클릭
     $('.go-list-button').on('click', function() {
-        window.location.href = '/board'; // 목록 페이지로 이동
+        window.location.href = '/board/list'; // 목록 페이지로 이동
     });
 
     // 좋아요 버튼 클릭 처리
