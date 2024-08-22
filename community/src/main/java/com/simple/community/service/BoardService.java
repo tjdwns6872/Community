@@ -89,7 +89,19 @@ public class BoardService {
 	public int boardUpdate(Map<String, Object> params, HttpSession session) {
 		params.put("userNo", session.getAttribute("user_no"));
 		int cnt = boardMapper.boardUpdate(params);
+		if(params.containsKey("uploadFile")) {			
+			String base64File = params.get("uploadFile").toString();
+			String fileName = params.get("fileName").toString();
+			
+			int fileNo = fileUtil.fileChange(base64File, fileName, 1);
+			params.put("fileNo", fileNo);
+			boardFileMapper.boardFileInsert(params);
+		}
 		return cnt;
+	}
+	
+	public void boardFileDelete(Map<String, Object> params) {
+		boardFileMapper.boardFileDelete(params);
 	}
 }
 

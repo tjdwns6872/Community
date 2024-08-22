@@ -8,4 +8,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface BoardFileMapper {
 
 	Integer boardFileInsert(Map<String, Object> params);
+	int boardFileDelete(Map<String, Object> params);
 }

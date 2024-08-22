@@ -8,10 +8,10 @@
 	<script type="text/javascript" src="/library/ckeditor/ckeditor.js"></script>
 	<link href="/css/board/reg.css" type="text/css" rel="stylesheet">
 	<main>
-		<input type="hidden" id="boardNo" name="boardNo"  th:value="${params.boardNo}" >
 		<div class="create-post-container">
 	        <h2>게시글 수정하기</h2>
 	        <form id="updateForm" enctype="multipart/form-data">
+				<input type="hidden" id="boardNo" name="boardNo"  th:value="${params.boardNo}" >
 	
 	            <!-- 카테고리 선택 -->
 	            <div class="form-group">
@@ -36,6 +36,13 @@
 	                <label for="file">파일 첨부</label>
 	                <input type="file" id="file" name="boardFile" multiple>
 	            </div>
+	            <!-- 등록된 파일 표시 -->
+                <div class="attached-files">
+                    <h3>등록된 파일</h3>
+                    <ul id="fileList">
+                    	<li>등록된 파일이 없습니다.</li>
+                    </ul>
+                </div>
 	
 	            <!-- 작성/취소 버튼 -->
 	            <div class="form-buttons">

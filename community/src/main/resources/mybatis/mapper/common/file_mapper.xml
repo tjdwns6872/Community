@@ -26,7 +26,7 @@
        			SELECT FILE_SEQ.CURRVAL FROM DUAL
   			</selectKey>
 	</insert>
-
+	
 	<select id="selectFile" resultType="com.simple.community.entity.FileDto" parameterType="map">
 		SELECT
 			FILE_NO

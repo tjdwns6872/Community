@@ -55,6 +55,11 @@ public class RestBoardController {
 	public int likeUpdate(@RequestBody Map<String, Object> params, HttpSession session) {
 		return likeService.likeUpdate(params, session);
 	}
+	
+	@GetMapping("/file/delete")
+	public void boardFileDelete(@RequestParam Map<String, Object> params) {
+		boardService.boardFileDelete(params);
+	}
 }
 
 

@@ -86,3 +86,54 @@ form {
 .cancel-button:hover {
     background-color: #5a6268;
 }
+
+/* 등록된 파일 표시 */
+.attached-files {
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+}
+
+.attached-files h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.attached-files ul {
+    list-style: none;
+    padding-left: 0;
+}
+
+.attached-files ul li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 10px;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    margin-bottom: 8px;
+}
+
+.attached-files ul li span {
+    font-size: 16px;
+    color: #495057;
+}
+
+.delete-file {
+    background-color: #dc3545;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 4px 8px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.delete-file:hover {
+    background-color: #c82333;
+}
+
