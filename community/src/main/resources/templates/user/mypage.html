@@ -11,7 +11,7 @@
         <aside class="sidebar">
             <ul>
                 <li><a href="#change-password">비밀번호 변경</a></li>
-                <li><a href="#update-info">개인정보 수정</a></li>
+                <li><a href="#update-info" id="changeUser">개인정보 수정</a></li>
                 <li><a href="#" id="deleteUser">회원 탈퇴</a></li>
             </ul>
         </aside>
@@ -33,6 +33,7 @@
             </div>
         </section>
     </main>
+    <div th:include="popup :: popup"></div>
 	<footer th:include="footer :: body"></footer>
 </body>
 </html>
