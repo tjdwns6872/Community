@@ -1,6 +1,8 @@
 $(function(){
 	
 	$("#logout").click(logout);
+
+	$(".openPopup").click(popup);
 });
 
 function logout(){
