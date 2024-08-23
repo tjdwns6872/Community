@@ -290,4 +290,34 @@ button:hover {
     background-color: #218838;
 }
 
+/* 팝업 input 필드 스타일 */
+.popup-input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+.popup-input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 16px;
+    color: #333;
+}
+
+.popup-input-group input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #333;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.popup-input-group input[type="text"]:focus {
+    border-color: #007bff;
+    outline: none;
+}
+
 

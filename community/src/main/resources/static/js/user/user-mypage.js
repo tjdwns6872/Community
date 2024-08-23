@@ -10,7 +10,16 @@ $(function(){
 	});
 	
 	$("#deleteUser").click(deleteUser);
+	$("#changeUser").click(changeUser);
 });
+
+function changeUser(){
+	var title = "개인정보 수정";
+	var inputList = [];
+	var inputitem = {"title":"비밀번호 확인", "name":"password_check"};
+	inputList[0] = inputitem;
+	popup.openPopup(title, null, inputList);
+}
 
 function dataInfo(resp){
 	console.log(resp);
