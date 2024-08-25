@@ -34,7 +34,12 @@ const popup = {
         html += '<input type="text" id="popup-input-'+index+'" name='+name+' placeholder="입력하세요">'
         html += '</div>'
         return html;
-    },buttonTransaction(){
-        
+    },buttonTransaction(type, url, data){
+        if(type == "api"){
+            $.ajax({
+                url:url,
+                data:data,
+            })
+        }
     }
 }
