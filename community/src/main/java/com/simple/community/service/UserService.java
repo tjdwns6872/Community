@@ -102,6 +102,7 @@ public class UserService {
 	@Transactional
 	public int userJoin(UserDto userDto){
 		try {
+			log.info("\n\nuserDto===>{}", userDto);
 			String password = ShaUtil.sha256Encode(userDto.getUserPw());
 			userDto.setUserPw(password);
 			int check = userMapper.userJoin(userDto);

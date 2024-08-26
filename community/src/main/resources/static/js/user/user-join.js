@@ -111,7 +111,7 @@ function phoneCheck(){
 	return result;
 }
 function emailCheck(){
-	var reg = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+	var reg = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]$/;
 	var email = "";
 	var result = 1;
 	$("#userEmail-error").fadeOut();
