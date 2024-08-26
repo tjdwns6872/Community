@@ -102,16 +102,18 @@ function phoneCheck(){
 	phone += $("#phone1").val()
 	phone += $("#phone2").val();
 	phone += $("#phone3").val();
-	console.log(reg.test(phone))
+
 	if(!reg.test(phone)){
 		$("#userPhone-error").text("잘못된 형식의 전화번호입니다.").fadeIn();
 	}else{
 		result = 0;
+		$("#join-form").append("<input type=hidden name=userPhone>");
+		$("input[name=userPhone]").val(phone);
 	}
 	return result;
 }
 function emailCheck(){
-	var reg = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]$/;
+	var reg = /^[a-zA-Z0-9._-]+@+[a-zA-Z0-9.-]+\.[a-zA-Z]$/;
 	var email = "";
 	var result = 1;
 	$("#userEmail-error").fadeOut();
@@ -122,6 +124,8 @@ function emailCheck(){
 		$("#userEmail-error").text("잘못된 형식의 이메일입니다.").fadeIn();
 	}else{
 		result = 0;
+		$("#join-form").append("<input type=hidden name=userEmail>");
+		$("input[name=userEmail]").val(email);
 	}
 	return result;
 }
@@ -151,7 +155,7 @@ function join(){
 		$("#gender-agreement").attr("tabindex", -1).focus();
 		return;
 	}
-	if(emailCheck() == 0){
+	if(emailCheck() == 1){
 		$("#email-input-group").attr("tabindex", -1).focus();
 		return;
 	}
@@ -167,7 +171,7 @@ function join(){
 	}
 	
 	var json = JSON.stringify(object);
-		
+
 	$.ajax({
 		url:"/rest/user/join",
 		type:"PUT",
