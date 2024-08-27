@@ -44,7 +44,6 @@ function listData(data){
 	if(list.length > 0 && list != undefined){
 		$("#boardDataList").empty();		
 	}
-	console.log(list);
 	var html = "";
 	$.each(list, function(index, item){
 		html += "<tr>";
@@ -53,6 +52,7 @@ function listData(data){
 		html += "<td><a href='#' id='moveDetails' data-no="+item.boardNo+">"+item.boardTitle+"</a></td>";
 		html += "<td>"+item.userId+"</td>";
 		html += "<td>"+item.modDate+"</td>";
+		html += "<td>"+item.boardView+"</td>";
 		html += "</tr>";
 	});
 	$("#boardDataList").html(html);

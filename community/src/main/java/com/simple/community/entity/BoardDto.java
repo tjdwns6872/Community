@@ -24,6 +24,9 @@ public class BoardDto {
 	
 	//좋아요 수
 	private Integer likeCnt;
+
+	//조회수
+	private Integer boardView;
 	
 	//카테고리
 	private String categoryName;

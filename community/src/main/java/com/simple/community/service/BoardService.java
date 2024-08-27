@@ -13,6 +13,7 @@ import com.simple.community.commons.PagingInfo;
 import com.simple.community.entity.BoardDto;
 import com.simple.community.mapper.BoardFileMapper;
 import com.simple.community.mapper.BoardMapper;
+import com.simple.community.mapper.BoardViewMapper;
 import com.simple.community.mapper.ReplyMapper;
 
 import jakarta.servlet.http.HttpSession;
@@ -33,6 +34,9 @@ public class BoardService {
 	
 	@Autowired
 	private BoardFileMapper boardFileMapper;
+
+	@Autowired
+	private BoardViewMapper boardViewMapper;
 	
 	public Map<String, Object> boardList(Map<String, Object> params){
 		Map<String, Object> result = new HashMap<>();
@@ -71,8 +75,13 @@ public class BoardService {
 		return cnt;
 	}
 	
-	public Map<String, Object> boardDetiles(Map<String, Object> params) {
+	public Map<String, Object> boardDetiles(Map<String, Object> params, HttpSession session) {
 		Map<String, Object> result = new HashMap<>();
+		params.put("userNo", session.getAttribute("user_no"));
+		Integer cnt = boardViewMapper.viewUserCheck(params);
+		if(cnt == null || cnt == 0){
+			boardViewMapper.boardViewInsert(params);
+		}
 		result.put("data", boardMapper.boardDetiles(params));
 		result.put("reply", replyMapper.replyList(params));
 		

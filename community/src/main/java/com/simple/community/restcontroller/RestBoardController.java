@@ -3,6 +3,7 @@ package com.simple.community.restcontroller;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.actuate.autoconfigure.observation.ObservationProperties.Http;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -37,8 +38,8 @@ public class RestBoardController {
 	}
 	
 	@GetMapping("/details")
-	public Map<String, Object> details(@RequestParam Map<String, Object> params) {
-		return boardService.boardDetiles(params);
+	public Map<String, Object> details(@RequestParam Map<String, Object> params, HttpSession session) {
+		return boardService.boardDetiles(params, session);
 	}
 	
 	@DeleteMapping("/delete")
