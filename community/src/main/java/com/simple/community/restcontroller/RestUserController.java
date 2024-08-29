@@ -53,5 +53,11 @@ public class RestUserController {
 	public int deleteUser(@RequestParam Integer userNo, HttpSession session) {
 		return userService.deleteUser(userNo, session);
 	}
+
+	@GetMapping("/password/check")
+	public boolean passwordCheck(@RequestParam Map<String, Object> params, HttpSession session) {
+		return userService.passwordCheck(params, session);
+	}
+	
 }
 

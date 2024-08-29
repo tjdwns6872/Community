@@ -8,21 +8,23 @@ $(function(){
 			dataInfo(resp);
 		}
 	});
-	
+
 	$("#deleteUser").click(deleteUser);
 	$("#changeUser").click(changeUser);
 });
 
 function changeUser(){
 	var title = "개인정보 수정";
-	var inputList = [];
-	var inputitem = {"title":"비밀번호 확인", "name":"password_check"};
-	inputList[0] = inputitem;
-	popup.openPopup(title, null, inputList);
+	var inputList = [
+		{
+			"title":"비밀번호 확인", "type":"password", "name":"userPw"
+		}
+	];
+	var buttonItem = {"type":"get", "url":"/rest/user/password/check", "afUrl":"/"}
+	popup.openPopup(title=title, context=null, inputList=inputList, buttonItem=buttonItem);
 }
 
 function dataInfo(resp){
-	console.log(resp);
 	$("#userId").text(resp.userId);
 	$("#userName").text(resp.userName);
 	$("#userEmail").text(resp.userEmail);

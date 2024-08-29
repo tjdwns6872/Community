@@ -98,6 +98,19 @@ public class UserService {
 	public int userCheck(UserDto userDto) {
 		return userMapper.userCheck(userDto);
 	}
+
+	public boolean passwordCheck(Map<String, Object> params, HttpSession session){
+		UserDto userDto = new UserDto();
+		UserDto result = new UserDto();
+
+		result.setUserNo((int) session.getAttribute("user_no"));
+		result = userMapper.getOne(userDto);
+		userDto.setUserPw(params.get("userPw").toString());
+		userDto.setUserId(result.getUserId());
+
+		boolean check = login(userDto, result.getUserPw(), result.getUserId());
+		return check;
+	}
 	
 	@Transactional
 	public int userJoin(UserDto userDto){
