@@ -12,4 +12,5 @@ public interface UserMapper {
 	int userCheck(UserDto userDto);
 	int changePw(UserDto userDto);
 	int deleteUser(Integer UserNo);
+	int userDataChange(UserDto userDto);
 }

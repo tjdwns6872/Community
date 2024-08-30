@@ -99,6 +99,12 @@ public class UserService {
 		return userMapper.userCheck(userDto);
 	}
 
+	public int userDataChange(UserDto userDto, HttpSession session){
+		userDto.setUserNo((int) session.getAttribute("user_no"));
+		log.info("\n\n{}", userDto.toString());
+		return userMapper.userDataChange(userDto);
+	}
+
 	public boolean passwordCheck(Map<String, Object> params, HttpSession session){
 		UserDto userDto = new UserDto();
 		UserDto result = new UserDto();

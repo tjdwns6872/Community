@@ -21,7 +21,7 @@
 	</nav>
 	<div class="login">
 		<th:block th:if="${session.user_no}">
-			<a href="/user/mypage">마이페이지</a>
+			<a href="/user/mypage/info">마이페이지</a>
 			<a href="#" id="logout">로그아웃</a>
 		</th:block>
 		<th:block th:unless = "${session.user_no}">

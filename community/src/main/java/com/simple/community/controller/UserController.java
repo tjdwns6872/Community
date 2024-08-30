@@ -25,7 +25,7 @@ public class UserController {
 		return "user/find";
 	}
 	
-	@RequestMapping("/mypage")
+	@RequestMapping("/mypage/{type}")
 	public String mypage(HttpSession session, Model model) {
 		model.addAttribute("user_no", session.getAttribute("user_no"));
 		return "user/mypage";

@@ -80,6 +80,24 @@
 			,0
 		)
 	</insert>
+
+	<update id="userDataChange">
+		UPDATE TP_USER
+		<set>
+			<if test="userName != ''">
+				,USER_NAME = #{userName}
+			</if>
+			<if test="userEmail != ''">
+				,USER_EMAIL = #{userEmail}
+			</if>
+		</set>
+		<where>
+			<if test="userId != null">
+				USER_NO = (SELECT USER_NO FROM TP_USER WHERE USER_ID = #{userId})
+			</if>
+			OR USER_NO = #{userNo}
+		</where>
+	</update>
 	
 	<update id="deleteUser">
 		UPDATE TP_USER

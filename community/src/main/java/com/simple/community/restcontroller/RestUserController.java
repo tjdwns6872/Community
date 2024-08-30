@@ -16,6 +16,8 @@ import com.simple.community.entity.UserDto;
 import com.simple.community.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.PathVariable;
+
 
 @RestController
 @RequestMapping("/rest/user")
@@ -57,6 +59,11 @@ public class RestUserController {
 	@GetMapping("/password/check")
 	public boolean passwordCheck(@RequestParam Map<String, Object> params, HttpSession session) {
 		return userService.passwordCheck(params, session);
+	}
+
+	@PutMapping("/edit")
+	public int userDataChange(@RequestBody UserDto userDto, HttpSession session) {
+		return userService.userDataChange(userDto, session);
 	}
 	
 }
