@@ -115,8 +115,12 @@
 				USER_PW = #{userPw}
 			</set>
 			<where>
-				AND USER_NO = (SELECT USER_NO FROM TP_USER WHERE USER_ID = #{userId})
-				AND USER_ID = #{userId}
+				<if test="userId != null">
+					USER_ID = #{userId}
+				</if>
+				<if test="userNo != null">
+					USER_NO = #{userNo}
+				</if>
 			</where>
 	</update>
 </mapper>

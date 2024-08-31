@@ -60,11 +60,17 @@ public class RestUserController {
 	public boolean passwordCheck(@RequestParam Map<String, Object> params, HttpSession session) {
 		return userService.passwordCheck(params, session);
 	}
+	@PutMapping("/password/change")
+	public String passwordChange(@RequestBody UserDto userDto, HttpSession session) {
+		return userService.changePw(userDto, "pwedit", session);
+	}
 
 	@PutMapping("/edit")
 	public int userDataChange(@RequestBody UserDto userDto, HttpSession session) {
 		return userService.userDataChange(userDto, session);
 	}
+
+	
 	
 }
 

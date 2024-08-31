@@ -69,7 +69,7 @@ public class EmailSerialService {
 		deleteSerial(emailDto);
 		if(emailDto.getType().equals("pw")) {
 			userDto.setUserId(emailDto.getUserId());
-			String change = userService.changePw(userDto);
+			String change = userService.changePw(userDto, null, null);
 			if(change == null) {
 				throw new Exception("비밀번호 변경 실패");
 			}else {

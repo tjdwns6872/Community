@@ -52,13 +52,20 @@ public class UserService {
 		return map;
 	}
 	
-	public String changePw(UserDto userDto) {
-		String changePw = ShaUtil.randomString();
+	public String changePw(UserDto userDto, String type, HttpSession session) {
+		String changePw;
+		if(type.equals("pwedit")){
+			userDto.setUserNo((int) session.getAttribute("user_no"));
+			changePw = userDto.getUserPw();
+		}else{
+			changePw = ShaUtil.randomString();
+		}
 		log.info("\n\n{}\n\n", changePw);
 		String pw = ShaUtil.sha256Encode(changePw);
 		userDto.setUserPw(pw);
 		int cnt = userMapper.changePw(userDto);
-		if(cnt > 0) {			
+		if(cnt > 0) {		
+			session.invalidate();	
 			return changePw;
 		}else {
 			return null;
@@ -68,7 +75,8 @@ public class UserService {
 	public int deleteUser(Integer userNo, HttpSession session) {
 		int cnt = userMapper.deleteUser(userNo);
 		if(cnt > 0) {
-			session.removeAttribute("user_no");
+			session.invalidate();
+			// session.removeAttribute("user_no");
 		}
 		return cnt;
 	}

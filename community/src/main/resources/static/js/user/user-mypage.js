@@ -9,6 +9,8 @@ $(function(){
 		success:function(resp){
 			if(path == "edit"){
 				dataEdit(resp);
+			}else if(path == "pwedit"){
+				pwEdit();
 			}else{
 				dataInfo(resp);
 			}
@@ -17,15 +19,20 @@ $(function(){
 
 
 	$("#deleteUser").click(deleteUser);
-	$("#changeUser").click(changeUser);
+	$("#changeUser").click(function(){
+		changeUser('data');
+	});
+	$("#changePw").click(function(){
+		changeUser('pw');
+	});
 	$(document).on("click", "#dataChange", dataChange);
+	$(document).on("click", "#pwChange", pwChange);
 });
 
 function dataChange(){
 	var data = {};
 	$.each($(".content input"), function(index, item){
 		data[$(this).attr('id')] = $(this).val();
-		console.log(data);
 	});
 
 	$.ajax({
@@ -42,14 +49,46 @@ function dataChange(){
 	});
 }
 
-function changeUser(){
-	var title = "개인정보 수정";
+function pwChange(){
+
+	var data = {};
+	$.each($(".content input"), function(index, item){
+		data[$(this).attr('id')] = $(this).val();
+	});
+	if(data['userPwCheck'] != data['userPw']){
+		return;
+	}
+
+	$.ajax({
+		url:"/rest/user/password/change",
+		type:"PUT",
+		contentType: 'application/json',
+		dataType: 'json',
+		data:JSON.stringify(data),
+		success:function(resp){
+			if(resp == 1){
+				window.location.reload();
+			}
+		}
+	});
+}
+
+function changeUser(type){
+	var title;
+	var afUrl;
+	if(type == 'data'){
+		title = '개인정보 수정';
+		afUrl = '/user/mypage/edit';
+	}if(type == 'pw'){
+		title = '비밀번호 변경'
+		afUrl = '/user/mypage/pwedit';
+	}
 	var inputList = [
 		{
 			"title":"비밀번호 확인", "type":"password", "name":"userPw"
 		}
 	];
-	var buttonItem = {"type":"get", "url":"/rest/user/password/check", "afUrl":"/user/mypage/edit"}
+	var buttonItem = {"type":"get", "url":"/rest/user/password/check", "afUrl":afUrl}
 	popup.openPopup(title=title, context=null, inputList=inputList, buttonItem=buttonItem);
 }
 
@@ -68,6 +107,23 @@ function dataInfo(resp){
     html += "<span id='userEmail'>"+resp.userEmail+"</span>"            
     html += "</div>";
 
+	$(".content").append(html);
+}
+
+function pwEdit(){
+	var html = "";
+	html += "<div class='info-group'>";
+	html += "<label>새 비밀번호</label>";
+    html += "<input type=password id='userPw'>"            
+    html += "</div>";
+	html += "<div class='info-group'>";
+	html += "<label>새 비밀번호 확인</label>";
+    html += "<input type=password id='userPwCheck'>"            
+    html += "</div>";
+	html += "<div class='edit-buttons'>";
+	html += "<button type='button' id='pwChange' class='submit-button'>비밀번호 수정</button>"
+	html += "</div>"
+	
 	$(".content").append(html);
 }
 
