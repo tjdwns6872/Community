@@ -30,10 +30,18 @@ $(function(){
 });
 
 function dataChange(){
+	var regEmail = /^[a-zA-Z0-9._-]+@+[a-zA-Z0-9.-]+\.[a-zA-Z]$/;
+	var regName = /[ㄱ-힣]/;
 	var data = {};
 	$.each($(".content input"), function(index, item){
 		data[$(this).attr('id')] = $(this).val();
 	});
+	if(!regEmail.test(data['userEmail'])){
+		return;
+	}
+	if(!regName.test(data['userName'])){
+		return;
+	}
 
 	$.ajax({
 		url:"/rest/user/edit",
@@ -50,11 +58,14 @@ function dataChange(){
 }
 
 function pwChange(){
-
+	var reg = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
 	var data = {};
 	$.each($(".content input"), function(index, item){
 		data[$(this).attr('id')] = $(this).val();
 	});
+	if(!reg.test(data['userPw'])){
+		return;
+	}
 	if(data['userPwCheck'] != data['userPw']){
 		return;
 	}
