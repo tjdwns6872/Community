@@ -1,5 +1,5 @@
 $(function(){
-    $(".popup-close-button").click(function(){
+    $(document).on("click", ".popup-close-button", function(){
         popup.closePopup();
     });
 
@@ -27,6 +27,8 @@ const popup = {
         }
         if(buttonItem != null){
             popup.buttonTransaction(buttonItem.type, buttonItem.url, buttonItem.afUrl);
+        }else{
+            popup.buttonTransaction(null, '', '');
         }
     },resetPopup(){
         $("#popup-title").text("");
@@ -42,7 +44,11 @@ const popup = {
         return html;
     },buttonTransaction(type=null, url, afUrl){
         var html = "";
-        html += "<button class='popup-action' data-type="+type+" data-url='"+url+"' data-afurl='"+afUrl+"'>확인</button>";
+        if(type != null){
+            html += "<button class='popup-action' data-type="+type+" data-url='"+url+"' data-afurl='"+afUrl+"'>확인</button>";
+        }else{
+            html += "<button class='popup-close-button'>닫기</button>";
+        }
         $("#popup-btn").append(html);
     },buttonClick(type, url, afUrl){
         if(type != null){

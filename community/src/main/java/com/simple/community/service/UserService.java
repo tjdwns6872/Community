@@ -3,10 +3,13 @@ package com.simple.community.service;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.ibatis.javassist.NotFoundException;
+import org.mybatis.spring.MyBatisSystemException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.simple.community.commons.AjaxResult;
 import com.simple.community.commons.EmailSendMessage;
 import com.simple.community.commons.ShaUtil;
 import com.simple.community.entity.UserDto;
@@ -24,23 +27,36 @@ public class UserService {
 	
 	@Autowired
 	private EmailSendMessage SendMessage;
+
+	private AjaxResult ajaxResult = new AjaxResult();
 	
 	public Map<String, Object> getOne(UserDto userDto, String type, HttpSession session){
 		log.info("\n\n\n{}\n\n\n", userDto.toString());
 		UserDto map = userMapper.getOne(userDto);
 		Map<String, Object> params = new HashMap<>();
-		if(type == null || type.isBlank()) {
-			params.put("userData", map);
-		}else if(type.equals("login")) {
-			boolean result = login(userDto, map.getUserPw(), map.getUserId());
-			params.put("result", 0);
-			if(result) {
-				params.put("result", 1);
-				session.setAttribute("user_no", map.getUserNo());
-				session.setAttribute("user_rank", map.getUserRank());
+		try{
+			if(type == null || type.isBlank() || type.equals("check")) {
+				params.put("userData", map);
+			}else if(type.equals("login")) {
+				boolean result = login(userDto, map.getUserPw(), map.getUserId());
+				if(result) {
+					session.setAttribute("user_no", map.getUserNo());
+					session.setAttribute("user_rank", map.getUserRank());
+					ajaxResult.createSuccessWithNoContent();
+				}else{
+					throw new MyBatisSystemException(null);
+				}
+			}else{
+				throw new NotFoundException(null);
 			}
-		}else if(type.equals("check")) {
-			params.put("userData", map);
+		}catch(MyBatisSystemException e){
+			ajaxResult.createError("아이디 혹은 비밀번호가 틀렸습니다.");
+		}catch (NotFoundException e){
+			ajaxResult.createError("잘못된 접근입니다.");
+		}catch(Exception e) {
+			ajaxResult.createFail(e);
+		}finally{
+			params.put("result", ajaxResult.getResult());
 		}
 		return params;
 	}

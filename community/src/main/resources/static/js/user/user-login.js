@@ -4,13 +4,11 @@ $(function(){
 
 function idCheck(){
 	if($("input[name=userId]").val() == ""){
-		//수정 예정
-		console.log("아이디 입력");
+		toastMessage("아이디를 입력하세요.", "#CD0C22", "#FFFFFF");
 		return;
 	}
 	if($("input[name=userPw]").val() == ""){
-		//수정 예정
-		console.log("비밀번호 입력");
+		toastMessage("비밀번호를 입력하세요.", "#CD0C22", "#FFFFFF");
 		return;
 	}
 	var data = {
@@ -26,10 +24,11 @@ function idCheck(){
 		data:data,
 		success:function(resp){
 			result = resp.result;
-			if(result.code == 400){
-				console.log(result.status);
-			}else{
+			console.log(resp);
+			if(result.code == 200){
 				location.href="/";
+			}else{
+				toastMessage("아이디 혹은 비밀번호가 틀렸습니다.", "#CD0C22", "#FFFFFF");
 			}
 		}
 	});
