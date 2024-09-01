@@ -24,8 +24,13 @@ function idCheck(){
 		contentType: 'application/json',
 		dataType: 'json',
 		data:data,
-		success:function(){
-			location.href="/";
+		success:function(resp){
+			result = resp.result;
+			if(result.code == 400){
+				console.log(result.status);
+			}else{
+				location.href="/";
+			}
 		}
 	});
 }

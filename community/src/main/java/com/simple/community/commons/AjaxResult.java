@@ -72,6 +72,7 @@ public class AjaxResult {
     
     public Map<String, Object> getResult() {
     	Map<String, Object> result = new HashMap<>();
+        result.put("code", this.code);
     	result.put("status", this.status);
     	result.put("data", this.data);
     	result.put("message", this.message);
