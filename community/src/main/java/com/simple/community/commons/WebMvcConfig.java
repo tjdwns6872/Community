@@ -2,7 +2,9 @@ package com.simple.community.commons;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.CacheControl;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.simple.community.interceptor.CommInterceptor;
@@ -30,4 +32,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
 				.addPathPatterns("/rest/user/edit")
 				.addPathPatterns("/user/mypage/*");
 	}
+
+	@Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/**")
+                .addResourceLocations("classpath:/templates/", "classpath:/static/");
+    }
 }
