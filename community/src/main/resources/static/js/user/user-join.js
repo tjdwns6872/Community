@@ -1,11 +1,30 @@
 $(function(){
 	$("#join_btn").click(join);
 	
-	$("input[name=userId]").blur(idCheck);
+	$("input[name=userId]").focusout(idCheck);
 	
-	$("input[name=userPw]").blur(pwCheck);
+	$("input[name=userPw]").focusout(pwCheck);
 	
-	$("input[name=user_pw_check]").blur(pwComCheck);
+	$("input[name=user_pw_check]").focusout(pwComCheck);
+
+	$("input[name=userName]").focusout(nameCheck);
+
+	$("#phone1, #phone2, #phone3").keyup(function(){
+		var regex = /[^0-9]/g;
+		var idNum = 2;
+		var n = 3;
+		if($(this).attr("id") != "phone1"){
+			var result = $(this).attr("id").replace(regex, "");
+			idNum = parseInt(result)+1;
+			n = 4;
+		}
+		if($(this).val().length == n){
+			if(idNum == 4){
+				return;
+			}
+			$("#phone"+idNum).focus();
+		}
+	});
 	
 });
 
@@ -113,7 +132,7 @@ function phoneCheck(){
 	return result;
 }
 function emailCheck(){
-	var reg = /^[a-zA-Z0-9._-]+@+[a-zA-Z0-9.-]+\.[a-zA-Z]$/;
+	var reg = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
 	var email = "";
 	var result = 1;
 	$("#userEmail-error").fadeOut();

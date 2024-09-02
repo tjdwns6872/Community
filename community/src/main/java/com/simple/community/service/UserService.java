@@ -36,7 +36,7 @@ public class UserService {
 		Map<String, Object> params = new HashMap<>();
 		try{
 			if(type == null || type.isBlank() || type.equals("check")) {
-				params.put("userData", map);
+				ajaxResult.createSuccess(map);
 			}else if(type.equals("login")) {
 				boolean result = login(userDto, map.getUserPw(), map.getUserId());
 				if(result) {
@@ -143,15 +143,26 @@ public class UserService {
 	}
 	
 	@Transactional
-	public int userJoin(UserDto userDto){
+	public Map<String, Object> userJoin(UserDto userDto){
+		Map<String, Object> params = new HashMap<>();
 		try {
 			log.info("\n\nuserDto===>{}", userDto);
 			String password = ShaUtil.sha256Encode(userDto.getUserPw());
 			userDto.setUserPw(password);
 			int check = userMapper.userJoin(userDto);
-			return check;
+			log.info("\n\n{}\n\n", check);
+			if(check > 0){
+				ajaxResult.createSuccessWithNoContent();
+			}else{
+				throw new MyBatisSystemException(null);
+			}
+		} catch(MyBatisSystemException e){
+			ajaxResult.createError("입력하신 정보를 확인해주세요.");
 		} catch (Exception e) {
-			return -1;
+			ajaxResult.createFail(e);
+		} finally{
+			params.put("result", ajaxResult.getData());
 		}
+		return params;
 	}
 }

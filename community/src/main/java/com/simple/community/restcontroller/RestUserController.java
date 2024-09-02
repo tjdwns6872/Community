@@ -37,7 +37,7 @@ public class RestUserController {
 	}
 	
 	@PutMapping("/join")
-	public int userJoin(@RequestBody UserDto userDto) {
+	public Map<String, Object> userJoin(@RequestBody UserDto userDto) {
 		return userService.userJoin(userDto);
 	}
 	
