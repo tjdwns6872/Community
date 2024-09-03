@@ -60,6 +60,31 @@ public class UserService {
 		}
 		return params;
 	}
+
+	@Transactional
+	public Map<String, Object> userJoin(UserDto userDto){
+		Map<String, Object> params = new HashMap<>();
+		try {
+			log.info("\n\nuserDto===>{}", userDto);
+			String password = ShaUtil.sha256Encode(userDto.getUserPw());
+			userDto.setUserPw(password);
+			int check = userMapper.userJoin(userDto);
+			log.info("\n\n{}\n\n", check);
+			if(check > 0){
+				ajaxResult.createSuccessWithNoContent();
+			}else{
+				throw new MyBatisSystemException(null);
+			}
+		} catch(MyBatisSystemException e){
+			log.error("{}", e);
+			ajaxResult.createError("입력하신 정보를 확인해주세요.");
+		} catch (Exception e) {
+			log.error("{}", e);
+			ajaxResult.createFail(e);
+		}
+		params.put("result", ajaxResult.getResult());
+		return params;
+	}
 	
 	public UserDto getOne(HttpSession session){
 		UserDto userDto = new UserDto();
@@ -140,29 +165,5 @@ public class UserService {
 
 		boolean check = login(userDto, result.getUserPw(), result.getUserId());
 		return check;
-	}
-	
-	@Transactional
-	public Map<String, Object> userJoin(UserDto userDto){
-		Map<String, Object> params = new HashMap<>();
-		try {
-			log.info("\n\nuserDto===>{}", userDto);
-			String password = ShaUtil.sha256Encode(userDto.getUserPw());
-			userDto.setUserPw(password);
-			int check = userMapper.userJoin(userDto);
-			log.info("\n\n{}\n\n", check);
-			if(check > 0){
-				ajaxResult.createSuccessWithNoContent();
-			}else{
-				throw new MyBatisSystemException(null);
-			}
-		} catch(MyBatisSystemException e){
-			ajaxResult.createError("입력하신 정보를 확인해주세요.");
-		} catch (Exception e) {
-			ajaxResult.createFail(e);
-		} finally{
-			params.put("result", ajaxResult.getData());
-		}
-		return params;
 	}
 }

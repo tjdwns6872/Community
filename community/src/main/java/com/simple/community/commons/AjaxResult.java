@@ -11,6 +11,7 @@ import org.springframework.validation.ObjectError;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Data @NoArgsConstructor
 public class AjaxResult {
@@ -30,11 +31,11 @@ public class AjaxResult {
 	private String message;
 	
 	public void createSuccess(Object data) {
-        AjaxResult(SUCCESS_CODE, SUCCESS_STATUS, data, null);
+        setResult(SUCCESS_CODE, SUCCESS_STATUS, data, null);
     }
 
 	public void createSuccessWithNoContent() {
-        AjaxResult(SUCCESS_CODE, SUCCESS_STATUS, null, null);
+        setResult(SUCCESS_CODE, SUCCESS_STATUS, null, null);
     }
 	
     // Hibernate Validator에 의해 유효하지 않은 데이터로 인해 API 호출이 거부될때 반환
@@ -49,22 +50,22 @@ public class AjaxResult {
                 errors.put( error.getObjectName(), error.getDefaultMessage());
             }
         }
-        AjaxResult(FAIL_CODE, FAIL_STATUS, errors, null);
+        setResult(FAIL_CODE, FAIL_STATUS, errors, null);
     }
     
     public void createFail(Exception e) {
         Map<String, String> errors = new HashMap<>();
         
-        AjaxResult(FAIL_CODE, FAIL_STATUS, e, e.getMessage());
+        setResult(FAIL_CODE, FAIL_STATUS, e, e.getMessage());
     }
     
 	// 예외 발생으로 API 호출 실패시 반환
     public void createError(String message) {
-        AjaxResult(ERROR_CODE, ERROR_STATUS, null, message);
+        setResult(ERROR_CODE, ERROR_STATUS, null, message);
     }
 
-    private void AjaxResult(Integer code, String status, Object data, String message) {
-    	this.code = code;
+    private void setResult(Integer code, String status, Object data, String message) {
+        this.code = code;
     	this.status = status;
         this.data = data;
         this.message = message;

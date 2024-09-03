@@ -198,7 +198,12 @@ function join(){
 		dataType: 'json',
 		data:json,
 		success:function(resp){
-			console.log(resp);
+			result = resp.result;
+			if(resp.result.code == 200){
+				location.href="/user/login";
+			}else{
+				toastMessage("입력하신 정보를 확인해주세요.", "#CD0C22", "#FFFFFF");
+			}
 		}
 	});
 }
