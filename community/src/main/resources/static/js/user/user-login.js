@@ -1,5 +1,11 @@
 $(function(){
 	$("#login_btn").click(idCheck);
+
+	$(document).keyup(function(key){
+		if(key.keyCode==13) {
+			idCheck();
+		}
+	});
 });
 
 function idCheck(){

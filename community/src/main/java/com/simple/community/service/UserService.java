@@ -148,10 +148,25 @@ public class UserService {
 		return userMapper.userCheck(userDto);
 	}
 
-	public int userDataChange(UserDto userDto, HttpSession session){
-		userDto.setUserNo((int) session.getAttribute("user_no"));
+	public Map<String, Object> userDataChange(UserDto userDto, HttpSession session){
 		log.info("\n\n{}", userDto.toString());
-		return userMapper.userDataChange(userDto);
+		Map<String, Object> params = new HashMap<>();
+		userDto.setUserNo((int) session.getAttribute("user_no"));
+		try{
+			int check = userMapper.userDataChange(userDto);
+			if(check > 0){
+				ajaxResult.createSuccessWithNoContent();
+			}else{
+				throw new MyBatisSystemException(null);
+			}
+		}catch(MyBatisSystemException e){
+			ajaxResult.createError(null);
+		}catch(Exception e){
+			ajaxResult.createFail(e);
+		}finally{
+			params.put("result", ajaxResult.getResult());
+		}
+		return params;
 	}
 
 	public boolean passwordCheck(Map<String, Object> params, HttpSession session){
@@ -159,7 +174,7 @@ public class UserService {
 		UserDto result = new UserDto();
 
 		result.setUserNo((int) session.getAttribute("user_no"));
-		result = userMapper.getOne(userDto);
+		result = userMapper.getOne(result);
 		userDto.setUserPw(params.get("userPw").toString());
 		userDto.setUserId(result.getUserId());
 

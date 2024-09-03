@@ -30,16 +30,18 @@ $(function(){
 });
 
 function dataChange(){
-	var regEmail = /^[a-zA-Z0-9._-]+@+[a-zA-Z0-9.-]+\.[a-zA-Z]$/;
-	var regName = /[ㄱ-힣]/;
+	var regEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/;
+	var regName = /^[가-힣]+$/;
 	var data = {};
 	$.each($(".content input"), function(index, item){
 		data[$(this).attr('id')] = $(this).val();
 	});
 	if(!regEmail.test(data['userEmail'])){
+		toastMessage("잘못된 이메일 형식입니다.", "#CD0C22", "#FFFFFF");
 		return;
 	}
 	if(!regName.test(data['userName'])){
+		toastMessage("잘못된 이름 형식입니다.", "#CD0C22", "#FFFFFF");
 		return;
 	}
 
@@ -50,7 +52,9 @@ function dataChange(){
 		dataType: 'json',
 		data:JSON.stringify(data),
 		success:function(resp){
-			if(resp == 1){
+			var result = resp.result
+			console.log(result);
+			if(result.code == 200){
 				window.location.reload();
 			}
 		}

@@ -89,7 +89,7 @@ function idCheck(){
 	return result;
 }
 function nameCheck(){
-	var reg = /[ㄱ-힣]/;
+	var reg = /^[가-힣]+$/;
 	var result = 1;
 	$('#userName-error').fadeOut();
 	if($("input[name=userName]").val() == ""){

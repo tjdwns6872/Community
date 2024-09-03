@@ -66,7 +66,7 @@ public class RestUserController {
 	}
 
 	@PutMapping("/edit")
-	public int userDataChange(@RequestBody UserDto userDto, HttpSession session) {
+	public Map<String, Object> userDataChange(@RequestBody UserDto userDto, HttpSession session) {
 		return userService.userDataChange(userDto, session);
 	}
 
