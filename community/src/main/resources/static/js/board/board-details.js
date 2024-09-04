@@ -93,14 +93,16 @@ function dataLoad(boardNo){
 		data:data,
 		async:false,
 		success:function(resp){
-			dataInfo(resp);
+			var result = resp.result;
+			console.log(resp);
+			dataInfo(result.data);
 		}
 	});
 }
 
 function dataInfo(resp){
-	var data = resp.data;
-	var reply = resp.reply;
+	var data = data.data;
+	var reply = data.reply;
 	
 	if(data.userNo == $("#userNo").text()){
 		$("#editBtn").removeClass('hidden');

@@ -33,7 +33,7 @@ public class RestBoardController {
 	}
 	
 	@PutMapping("/reg")
-	public int boardReg(@RequestBody Map<String, Object> params, HttpSession session) {
+	public Map<String, Object> boardReg(@RequestBody Map<String, Object> params, HttpSession session) {
 		return boardService.boardReg(params, session);
 	}
 	

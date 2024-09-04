@@ -33,8 +33,10 @@ function listLoad(page=1, keyword="", category=""){
 		dataType: 'json',
 		data:data,
 		success:function(resp){
-			paging(resp.paging, "listLoad");
-			listData(resp);
+			var result = resp.result;
+			console.log(resp);
+			paging(result.data.paging, "listLoad");
+			listData(result.data);
 		}
 	});
 }

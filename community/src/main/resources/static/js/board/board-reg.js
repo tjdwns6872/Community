@@ -44,8 +44,12 @@ function insertAjax(data){
 		dataType: 'json',
 		async:false,
 		success:function(resp){
-			if(resp > 0){
-				location.href="/board/list";
+			var result = resp.result;
+			console.log(result);
+			if(result.code == 200){
+				location.href="/board/details?boardNo="+result.data;
+			}else{
+				toastMessage(result.message, "#CD0C22", "#FFFFFF");
 			}
 		}
 	});

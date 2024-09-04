@@ -14,6 +14,7 @@
 				,FILE_TIME
 				,FILE_ID
 				,FILE_PATH
+				,DEL_FG
 			)VALUES(
 				FILE_SEQ.NEXTVAL
 				,#{fileName}
@@ -21,6 +22,7 @@
 				,SYSDATE
 				,#{fileId}
 				,#{filePath}
+				,0
 			)
 			<selectKey keyProperty="fileNo" resultType="int" order="AFTER">
        			SELECT FILE_SEQ.CURRVAL FROM DUAL

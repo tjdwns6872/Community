@@ -3,11 +3,14 @@ package com.simple.community.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.io.FileNotFoundException;
 
+import org.mybatis.spring.MyBatisSystemException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.simple.community.commons.AjaxResult;
 import com.simple.community.commons.FileUtil;
 import com.simple.community.commons.PagingInfo;
 import com.simple.community.entity.BoardDto;
@@ -37,54 +40,102 @@ public class BoardService {
 
 	@Autowired
 	private BoardViewMapper boardViewMapper;
+
+	private AjaxResult ajaxResult = new AjaxResult();
 	
 	public Map<String, Object> boardList(Map<String, Object> params){
 		Map<String, Object> result = new HashMap<>();
-		
-		Integer cnt = boardMapper.boardListCnt(params);
-		PagingInfo pagination = new PagingInfo(Integer.parseInt(params.get("page").toString()));
-		pagination.setTotalRecordCount(cnt);
-		
-		params.put("firstRecordIndex", pagination.getFirstRecordIndex());
-		params.put("lastRecordIndex", pagination.getLastRecordIndex());
-		log.info("\n\n{}\n\n", params.toString());
-		List<BoardDto> boardList = boardMapper.boardList(params);
-		
-		result.put("cnt", cnt);
-		result.put("boardList", boardList);
-		result.put("paging", pagination);
-		
+		try{
+			Map<String, Object> data = new HashMap<>();
+			Integer cnt = boardMapper.boardListCnt(params);
+			PagingInfo pagination = new PagingInfo(Integer.parseInt(params.get("page").toString()));
+			pagination.setTotalRecordCount(cnt);
+			
+			params.put("firstRecordIndex", pagination.getFirstRecordIndex());
+			params.put("lastRecordIndex", pagination.getLastRecordIndex());
+			log.info("\n\n{}\n\n", params.toString());
+
+			List<BoardDto> boardList = boardMapper.boardList(params);
+			if(boardList.size() > 0){
+				ajaxResult.createSuccess(data);
+			}else{
+				throw new MyBatisSystemException(null);
+			}
+			data.put("cnt", cnt);
+			data.put("boardList", boardList);
+			data.put("paging", pagination);
+		}catch(MyBatisSystemException e){
+			ajaxResult.createError("불러올 데이터가 없습니다.");
+		}catch(Exception e){
+			ajaxResult.createFail(e);
+		}finally{
+			result.put("result", ajaxResult.getResult());
+		}
 		return result;
 	}
 	
 	@Transactional
-	public int boardReg(Map<String, Object> params, HttpSession session) {
+	public Map<String, Object> boardReg(Map<String, Object> params, HttpSession session) {
 		log.info("\n\n\n{}", params.toString());
-		params.put("userNo", session.getAttribute("user_no"));
-		int cnt = boardMapper.boardInsert(params);
-
-		if(params.containsKey("uploadFile")) {			
-			String base64File = params.get("uploadFile").toString();
-			String fileName = params.get("fileName").toString();
+		Map<String, Object> result = new HashMap<>();
+		try{
+			params.put("userNo", session.getAttribute("user_no"));
+			int cnt = 0;
+			int cnt1 = 1;
+			cnt = boardMapper.boardInsert(params);
+			if(params.containsKey("uploadFile")) {			
+				String base64File = params.get("uploadFile").toString();
+				String fileName = params.get("fileName").toString();
+				
+				int fileNo = fileUtil.fileChange(base64File, fileName, 1);
+				params.put("fileNo", fileNo);
+				cnt1 = boardFileMapper.boardFileInsert(params);
+				if(cnt1 < 1){
+					throw new FileNotFoundException();
+				}
+			}
+			if(cnt > 0 && cnt1 > 0){
+				ajaxResult.createSuccess(params.get("boardNo"));
+			}else{
+				throw new MyBatisSystemException(null);
+			}
 			
-			int fileNo = fileUtil.fileChange(base64File, fileName, 1);
-			params.put("fileNo", fileNo);
-			boardFileMapper.boardFileInsert(params);
+		}catch(MyBatisSystemException e){
+			ajaxResult.createError("게시물 등록에 실패했습니다.");
+		}catch(FileNotFoundException e){
+			ajaxResult.createError("첨부파일 등록에 실패했습니다.");
+		}catch(Exception e){
+			ajaxResult.createFail(e);
+		}finally{
+			result.put("result", ajaxResult.getResult());
 		}
-		
-		return cnt;
+		return result;		
 	}
 	
 	public Map<String, Object> boardDetiles(Map<String, Object> params, HttpSession session) {
 		Map<String, Object> result = new HashMap<>();
-		params.put("userNo", session.getAttribute("user_no"));
-		Integer cnt = boardViewMapper.viewUserCheck(params);
-		if(cnt == null || cnt == 0){
-			boardViewMapper.boardViewInsert(params);
+		try{
+			Map<String, Object> data = new HashMap<>();
+			params.put("userNo", session.getAttribute("user_no"));
+			Integer cnt = boardViewMapper.viewUserCheck(params);
+			if(cnt == null || cnt == 0){
+				boardViewMapper.boardViewInsert(params);
+			}
+			BoardDto dto = boardMapper.boardDetiles(params);
+			if(dto.getBoardNo() != null){
+				data.put("data", dto);
+				data.put("reply", replyMapper.replyList(params));
+				ajaxResult.createSuccess(data);
+			}else{
+				throw new MyBatisSystemException(null);
+			}
+		}catch(MyBatisSystemException e){
+			ajaxResult.createError("불러올 정보가 없습니다.");
+		}catch(Exception e){
+			ajaxResult.createFail(e);
+		}finally{
+			result.put("result", ajaxResult.getResult());
 		}
-		result.put("data", boardMapper.boardDetiles(params));
-		result.put("reply", replyMapper.replyList(params));
-		
 		return result;
 	}
 	
