@@ -95,12 +95,14 @@ function dataLoad(boardNo){
 		success:function(resp){
 			var result = resp.result;
 			console.log(resp);
-			dataInfo(result.data);
+			if(result.code == 200){
+				dataInfo(result.data);
+			}
 		}
 	});
 }
 
-function dataInfo(resp){
+function dataInfo(data){
 	var data = data.data;
 	var reply = data.reply;
 	

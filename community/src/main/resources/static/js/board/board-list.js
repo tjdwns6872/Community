@@ -34,9 +34,10 @@ function listLoad(page=1, keyword="", category=""){
 		data:data,
 		success:function(resp){
 			var result = resp.result;
-			console.log(resp);
-			paging(result.data.paging, "listLoad");
-			listData(result.data);
+			if(result.code == 200){
+				paging(result.data.paging, "listLoad");
+				listData(result.data);
+			}			
 		}
 	});
 }

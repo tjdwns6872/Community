@@ -116,10 +116,13 @@ public class BoardService {
 		Map<String, Object> result = new HashMap<>();
 		try{
 			Map<String, Object> data = new HashMap<>();
-			params.put("userNo", session.getAttribute("user_no"));
-			Integer cnt = boardViewMapper.viewUserCheck(params);
-			if(cnt == null || cnt == 0){
-				boardViewMapper.boardViewInsert(params);
+			Integer userNo = (Integer) session.getAttribute("user_no");
+			if(userNo != null){
+				params.put("userNo", userNo);
+				Integer cnt = boardViewMapper.viewUserCheck(params);
+				if(cnt == null || cnt == 0){
+					boardViewMapper.boardViewInsert(params);
+				}
 			}
 			BoardDto dto = boardMapper.boardDetiles(params);
 			if(dto.getBoardNo() != null){
@@ -130,8 +133,10 @@ public class BoardService {
 				throw new MyBatisSystemException(null);
 			}
 		}catch(MyBatisSystemException e){
+			log.error("{}", e);
 			ajaxResult.createError("불러올 정보가 없습니다.");
 		}catch(Exception e){
+			log.error("{}", e);
 			ajaxResult.createFail(e);
 		}finally{
 			result.put("result", ajaxResult.getResult());

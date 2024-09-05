@@ -19,7 +19,7 @@
 	</insert>
 
 	<select id="viewUserCheck" resultType="int" parameterType="map">
-		SELECT COUNT(USER_NO) FROM TP_BOARD_VIEW
+		SELECT COUNT(USER_NO) AS cnt FROM TP_BOARD_VIEW
 		<where>
 			AND BOARD_NO = #{boardNo}
 			AND USER_NO = #{userNo}
