@@ -145,24 +145,55 @@ public class BoardService {
 	}
 	
 	@Transactional
-	public int boardDelete(Map<String, Object> params, HttpSession session) {
+	public Map<String, Object> boardDelete(Map<String, Object> params, HttpSession session) {
 		params.put("userNo", session.getAttribute("user_no"));
-		return boardMapper.boardDelete(params);
+		Map<String, Object> result = new HashMap<>();
+		try{
+			//파일 삭제 코드도 추가해야됨
+			int check = boardMapper.boardDelete(params);
+			if(check > 0){
+				ajaxResult.createSuccessWithNoContent();
+			}else{
+				throw new MyBatisSystemException(null);
+			}
+		}catch(MyBatisSystemException e){
+			ajaxResult.createError("삭제할 수 없는 게시물입니다.");
+		}catch(Exception e){
+			ajaxResult.createFail(e);
+		}finally{
+			result.put("result", ajaxResult.getResult());
+		}
+		return result;
 	}
 	
 	@Transactional
-	public int boardUpdate(Map<String, Object> params, HttpSession session) {
-		params.put("userNo", session.getAttribute("user_no"));
-		int cnt = boardMapper.boardUpdate(params);
-		if(params.containsKey("uploadFile")) {			
-			String base64File = params.get("uploadFile").toString();
-			String fileName = params.get("fileName").toString();
-			
-			int fileNo = fileUtil.fileChange(base64File, fileName, 1);
-			params.put("fileNo", fileNo);
-			boardFileMapper.boardFileInsert(params);
+	public Map<String, Object> boardUpdate(Map<String, Object> params, HttpSession session) {
+		Map<String, Object> result = new HashMap<>();
+		try{
+			params.put("userNo", session.getAttribute("user_no"));
+			int cnt1 = 1;
+			if(params.containsKey("uploadFile")) {			
+				String base64File = params.get("uploadFile").toString();
+				String fileName = params.get("fileName").toString();
+				
+				int fileNo = fileUtil.fileChange(base64File, fileName, 1);
+				params.put("fileNo", fileNo);
+				cnt1 = boardFileMapper.boardFileInsert(params);
+			}
+			int cnt = boardMapper.boardUpdate(params);
+			if(cnt > 0 && cnt1 > 0){
+				ajaxResult.createSuccessWithNoContent();
+			}else{
+				throw new MyBatisSystemException(null);
+			}
+		}catch(MyBatisSystemException e){
+			ajaxResult.createError("");
+		}catch(Exception e){
+			ajaxResult.createFail(e);
+		}finally{
+			result.put("result", ajaxResult.getResult());
 		}
-		return cnt;
+		return result;
 	}
 	
 	public void boardFileDelete(Map<String, Object> params) {

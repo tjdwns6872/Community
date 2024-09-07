@@ -72,7 +72,8 @@ function dataLoad(boardNo){
 		dataType: 'json',
 		data:data,
 		success:function(resp){
-			dataInfo(resp);
+			var result = resp.result;
+			dataInfo(result.data);
 		}
 	});
 }

@@ -43,12 +43,12 @@ public class RestBoardController {
 	}
 	
 	@DeleteMapping("/delete")
-	public int delete(@RequestBody Map<String, Object> params, HttpSession session) {
+	public Map<String, Object> delete(@RequestBody Map<String, Object> params, HttpSession session) {
 		return boardService.boardDelete(params, session);
 	}
 	
 	@PutMapping("/update")
-	public int update(@RequestBody Map<String, Object> params, HttpSession session) {
+	public Map<String, Object> update(@RequestBody Map<String, Object> params, HttpSession session) {
 		return boardService.boardUpdate(params, session);
 	}
 	

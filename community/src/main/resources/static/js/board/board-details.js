@@ -105,6 +105,7 @@ function dataLoad(boardNo){
 function dataInfo(data){
 	var data = data.data;
 	var reply = data.reply;
+	console.log(reply)
 	
 	if(data.userNo == $("#userNo").text()){
 		$("#editBtn").removeClass('hidden');
@@ -114,12 +115,14 @@ function dataInfo(data){
 	$(".post-title").text(data.boardTitle);
 	$(".post-category").html("카테고리: <strong>"+data.categoryName+"</strong>");
 	$(".post-content").html(data.boardContent);
-	$(".post-author").html("작성자: <strong>작성자명</strong>");
+	$(".post-author").html("작성자: <strong>"+data.userId+"</strong>");
 	
 	if(data.fileNo != null){		
 		$(".post-attachments").html("<p>첨부파일: <a href='javascript:fileDownload("+data.fileNo+")'>"+data.fileName+"</a></p>");
 	}
-	 replyList(reply);
+	if(reply != undefined){
+		replyList(reply);
+	}
 }
 
 function fileDownload(fileNo){
