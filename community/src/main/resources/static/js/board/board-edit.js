@@ -6,13 +6,36 @@ $(function(){
 	dataLoad(boardNo);
 	
 	$("#updateBtn").click(boardUpdate);
+
+	$("#listBtn").click(backMove);
 	
 });
+
+function backMove(){
+	history.back(1);
+}
 
 function boardUpdate(){
 	var data = {};
 	$("#updateForm").append("<input type=hidden name=boardContent>");
 	$("input[name=boardContent]").val(editor.getData());
+
+	console.log($("#categoryList").val());
+	if($("#categoryList").val() == undefined || $("#categoryList").val() == '선택'){
+		toastMessage("카테고리를 선택하세요.", "#CD0C22", "#FFFFFF");
+		return;
+	}
+
+	if($("input[name=boardTitle").val().length == 0){
+		toastMessage("제목을 입력하세요.", "#CD0C22", "#FFFFFF");
+		return;
+	}
+
+	if($("input[name=boardContent").val().length == 0){
+		toastMessage("내용을 입력하세요.", "#CD0C22", "#FFFFFF");
+		return;
+	}
+
 	var form = $("#updateForm").serializeArray();
 	var inputFile = $("input[name=boardFile]");
 	if(inputFile.val()!=''){
@@ -45,8 +68,11 @@ function updateAjax(data){
 		contentType: 'application/json',
 		dataType: 'json',
 		success:function(resp){
-			if(resp > 0){
+			var result = resp.result;
+			if(result.code == 200){
 				location.href="/board/details?boardNo="+$("#boardNo").val();
+			}else{
+				toastMessage(result.message, "#CD0C22", "#FFFFFF");
 			}
 		}
 	});

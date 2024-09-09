@@ -41,27 +41,25 @@ $(function(){
 	$("#likeBtn").click(likeFunc);
 	
 	$("#deleteBtn").click(function(){
-		
-		var data = {"boardNo":boardNo}
-		
-		$.ajax({
-			url:"/rest/board/delete",
-			type:"DELETE",
-			contentType: 'application/json',
-			dataType: 'json',
-			data:JSON.stringify(data),
-			success:function(resp){
-				if(resp > 0){
-					console.log("삭제 완료");
-					location.href="/board/list";
-				}else{
-					console.log("실패");
-				}
-			}
-		});
+		confirmDelete(boardNo);
 	});
 	
 });
+
+function confirmDelete(boardNo){
+	var title;
+	var afUrl;
+	title = '게시물 삭제';
+	afUrl = '/board/list';
+	var context = "정말 삭제하시겠습니까?"
+	var inputList = [
+		{
+			"title":"", "type":"hidden", "name":"boardNo", "value":boardNo
+		}
+	];
+	var buttonItem = {"type":"DELETE", "url":"/rest/board/delete", "afUrl":afUrl}
+	popup.openPopup(title=title, context=context, inputList=inputList, buttonItem=buttonItem);
+}
 
 function likeFunc(){
 	var data = {}
