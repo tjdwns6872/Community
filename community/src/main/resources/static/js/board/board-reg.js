@@ -5,7 +5,13 @@ $(function(){
 	editor = CKEDITOR.replace('editor');
 	
 	$("#insertBtn").click(boardInsert);
+
+	$("#listBtn").click(backMove);
 });
+
+function backMove(){
+	history.back(1);
+}
 
 function boardInsert(){
 	var data = {};

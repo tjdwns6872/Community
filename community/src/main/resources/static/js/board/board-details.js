@@ -1,5 +1,9 @@
 $(function(){
 	
+	var urlParams = new URL(location.href).searchParams;
+
+	var page = urlParams.get('page');
+
 	// 답글 버튼 클릭 시 답글 입력창 표시
     $('.reply-button').on('click', function() {
         $(this).siblings('.reply-form').toggleClass('hidden');
@@ -19,7 +23,7 @@ $(function(){
 
     // 목록으로 이동 버튼 클릭
     $('.go-list-button').on('click', function() {
-        window.location.href = '/board/list'; // 목록 페이지로 이동
+        window.location.href = '/board/list?page='+page; // 목록 페이지로 이동
     });
 
     // 좋아요 버튼 클릭 처리

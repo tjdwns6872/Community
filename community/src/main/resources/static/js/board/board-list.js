@@ -1,5 +1,8 @@
 $(function(){
-	listLoad();
+
+	var urlParams = new URL(location.href).searchParams;
+	var page = urlParams.get('page');
+	listLoad(page);
 	
 	$.ajax({
 		url:"/rest/category/list",
@@ -18,8 +21,8 @@ $(function(){
 });
 
 $(document).on("click", "#moveDetails", function(){
-	
-	location.href="/board/details?boardNo="+$(this).data("no");
+	var page = $("#currentPage").val();
+	location.href="/board/details?boardNo="+$(this).data("no")+"&page="+page;
 });
 
 function listLoad(page=1, keyword="", category=""){
@@ -33,6 +36,7 @@ function listLoad(page=1, keyword="", category=""){
 		dataType: 'json',
 		data:data,
 		success:function(resp){
+			history.replaceState({}, null, location.pathname);
 			var result = resp.result;
 			if(result.code == 200){
 				paging(result.data.paging, "listLoad");
@@ -44,10 +48,13 @@ function listLoad(page=1, keyword="", category=""){
 
 function listData(data){
 	var list = data.boardList;
+	var paging = data.paging;
+
 	if(list.length > 0 && list != undefined){
 		$("#boardDataList").empty();		
 	}
 	var html = "";
+	html += "<input type=hidden id=currentPage value="+paging.currentPage+">"
 	$.each(list, function(index, item){
 		html += "<tr>";
 		html += "<td>"+item.rowNum+"</td>";
