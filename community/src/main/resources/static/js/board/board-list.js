@@ -26,7 +26,9 @@ $(document).on("click", "#moveDetails", function(){
 });
 
 function listLoad(page=1, keyword="", category=""){
-	
+	if(page == undefined){
+		page = 1;
+	}
 	var data = {"page":page, "keyword":keyword, "category":category}
 	
 	$.ajax({
