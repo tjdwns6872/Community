@@ -18,6 +18,7 @@ public class CommInterceptor implements HandlerInterceptor{
             throws Exception {
         HttpSession session = request.getSession(true);
         if(session.getAttribute("user_no") == null){
+            response.sendRedirect("/user/login");
             return false;
         }
         return true;

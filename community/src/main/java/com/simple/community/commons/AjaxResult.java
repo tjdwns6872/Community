@@ -56,7 +56,7 @@ public class AjaxResult {
     public void createFail(Exception e) {
         Map<String, String> errors = new HashMap<>();
         
-        setResult(FAIL_CODE, FAIL_STATUS, e, e.getMessage());
+        setResult(FAIL_CODE, FAIL_STATUS, e, "Unknown Error");
     }
     
 	// 예외 발생으로 API 호출 실패시 반환
